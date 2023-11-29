@@ -1,3 +1,27 @@
+<script>
+	import { onMount } from 'svelte';
+	// var output = document.getElementById("demo");
+	// output.innerHTML = slider.value;
+
+	// slider.oninput = function() {
+		// 	output.innerHTML = this.value;
+	// }
+
+	// console.log("Hallo test" + slider.value);
+
+	onMount(() => {
+		const slider = document.getElementById("myRange");
+		const submitButton = document.getElementById('submit');
+		const initialContent = document.getElementById('initialContent');
+		const otherContent = document.getElementById('otherContent');
+
+		submitButton.addEventListener('click', (event) => {
+			initialContent.style.display = 'none';
+			otherContent.style.display = 'block';
+		});
+	});
+</script>
+
 <div class="min-h-screen bg-sky flex flex-col items-center">
 	<a href="/"> <img class="w-5 h-5 absolute top-4 left-3" src=".//back.png" alt="back logo" /> </a>
 	<div class="h-2" />
@@ -128,23 +152,4 @@
 			cursor: pointer;
 		}
 	</style>
-
-	<script>
-		var slider = document.getElementById("myRange");
-		var output = document.getElementById("demo");
-		output.innerHTML = slider.value;
-
-		slider.oninput = function() {
-  			output.innerHTML = this.value;
-		}
-
-		const submitButton = document.getElementById('submit');
-		const initialContent = document.getElementById('initialContent');
-		const otherContent = document.getElementById('otherContent');
-
-		submitButton.addEventListener('click', (event) => {
-			initialContent.style.display = 'none';
-			otherContent.style.display = 'block';
-		});
-	</script>
 </div>
