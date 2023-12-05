@@ -15,7 +15,6 @@
 			currentYear++;
 		}
 
-		// Update currentDate based on the new month and year
 		currentDate = new Date(currentYear, currentMonth, 1);
 	}
 
@@ -23,15 +22,12 @@
 		return new Date(year, month + 1, 0).getDate();
 	}
 
-	// Function to get an array of numbers from 1 to n
 	function range(n) {
 		return Array.from({ length: n }, (_, i) => i + 1);
 	}
 
 	function handleDateClick(day) {
-		// Set the selected date when a date is clicked
 		selectedDate = new Date(currentYear, currentMonth, day);
-		// You can add logic here to display more information based on the selected date
 
 		console.log('Selected date:', selectedDate);
 	}
@@ -63,7 +59,7 @@
 		grid-template-columns: repeat(7, 1fr);
 		gap: 8px;
 		margin-bottom: 20px;
-		max-width: 400px; /* Limit the width for small screens */
+		max-width: 400px;
 		width: 100%;
 	}
 
@@ -88,28 +84,25 @@
 		border-radius: 4px;
 		font-size: 14px;
 		transition: background-color 0.3s ease;
-		width: 48%; /* Adjust button width for small screens */
+		width: 48%;
 	}
 
 	button:hover {
 		background-color: #45a049;
 	}
 
-	@media only screen and (max-width: 600px) {
-		/* Adjust styles for screens with a maximum width of 600px (typical for phones) */
-		.calendar {
-			grid-template-columns: repeat(7, 1fr);
-			gap: 4px;
-			max-width: 100%;
-		}
+	.calendar {
+		grid-template-columns: repeat(7, 1fr);
+		gap: 4px;
+		max-width: 100%;
+	}
 
-		.nav-buttons {
-			align-items: center;
-			justify-content: space-between;
-		}
+	.nav-buttons {
+		align-items: center;
+		justify-content: space-between;
+	}
 
-		button {
-			margin-bottom: 8px;
-		}
+	button {
+		margin-bottom: 8px;
 	}
 </style>
