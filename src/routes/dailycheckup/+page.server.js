@@ -1,5 +1,34 @@
 import { redirect } from '@sveltejs/kit';
 
+function now() {
+    const date = new Date();
+    let seconds = date.getSeconds();
+    let minutes = date.getMinutes();
+    let hours = date.getHours();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    if(seconds < 10) {
+        seconds = `0${seconds}`;
+    }
+    if(minutes < 10) {
+        minutes = `0${minutes}`;
+    }
+    if(hours < 10) {
+        hours = `0${hours}`;
+    }
+    if(day < 10) {
+        day = `0${day}`;
+    }
+    if(month < 10) {
+        month = `0${month}`;
+    }
+    // This arrangement can be altered based on how we want the date's format to appear.
+    let currentDate = `${year}${month}${day}${hours}${minutes}${seconds}`; // 20231206125300
+    return currentDate;
+}
+
 // Example POST method implementation:
 async function postData(url, data) {
     // Default options are marked with *
@@ -17,8 +46,7 @@ async function postData(url, data) {
     });
     return response.json(); // parses JSON response into native JavaScript objects
 }
-  
-  
+
 export const actions = {
     default: async ({ request }) => {
         const formData = await request.formData();
@@ -27,7 +55,7 @@ export const actions = {
 
         const dataForPost = {
             user_id: 1, 
-            date: "20231206000000", 
+            date: now(), 
             result: sliderValue, 
             description: description
         }
