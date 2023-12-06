@@ -29,11 +29,17 @@
 	function handleDateClick(day) {
 		selectedDate = new Date(currentYear, currentMonth, day);
 
-		console.log('Selected date:', selectedDate);
+		document.getElementById('initialContent').style.display = 'none';
+		document.getElementById('information-section').style.display = 'block';
+	}
+
+	function refreshPage() {
+		document.getElementById('initialContent').style.display = 'block';
+		document.getElementById('information-section').style.display = 'none';
 	}
 </script>
 
-<div>
+<div id="initialContent">
 	<div class="nav-buttons">
 		<button class="flex-none" on:click={() => updateMonth(-1)}>Previous Month</button>
 
@@ -51,6 +57,15 @@
 			</a>
 		{/each}
 	</div>
+</div>
+
+<div class="h-20 mt-8 space-y-6" id="information-section" style="display: none;">
+	<h3 class="text-white text">Selected Date:</h3>
+	<p class="text-white">{selectedDate ? selectedDate.toDateString() : 'No date selected'}</p>
+	<button
+		class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white button-color hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+		on:click={() => refreshPage()}>Back</button
+	>
 </div>
 
 <style>
