@@ -44,10 +44,10 @@
 <form method="POST" use:enhance>
 	<div class="min-h-screen bg-sky flex flex-col items-center">
 		<a href="/">
-			<img class="w-5 h-5 absolute top-4 left-3" src=".//back.png" alt="back logo" />
+			<img class="w-5 h-5 absolute top-4 left-3" src="/back.png" alt="back logo" />
 		</a>
 		<div class="h-2" />
-		<img class="w-40 h-100" src=".//dailycheckup.png" alt="Anxiety Ally Logo" />
+		<img class="w-40 h-100" src="/dailycheckup.png" alt="Anxiety Ally Logo" />
 
 		<div id="initialContent">
 			<div class="h-20 mt-8 space-y-6">
@@ -73,7 +73,7 @@
 
 			<div class=" flex justify-center">
 				<div class="w-2/3 md:w-1/2 lg:w-1/3 rounded-md shadow bg-gray-200 bg-opacity-25 mt-4">
-					<img class="w-auto h-20 mx-auto p-0" src=".//Emotion-scale.png" alt="Emotion scale" />
+					<img class="w-auto h-20 mx-auto p-0" src="/Emotion-scale.png" alt="Emotion scale" />
 				</div>
 			</div>
 
