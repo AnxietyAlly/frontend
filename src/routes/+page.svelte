@@ -1,5 +1,5 @@
 <div class="min-h-screen bg-sky flex flex-col items-center">
-	<img class="w-40 h-100 mt-5" src=".//anxietyAllyLogo.png" alt="Anxiety Ally Logo">
+	<img class="w-40 h-100 mt-5" src="/anxietyAllyLogo.png" alt="Anxiety Ally Logo">
 	<h1 class="hidden">AnxietyAlly</h1>
 	<div class="h-20 mt-8 ml-6 grid grid-cols-3 gap-2">
 	  <div class="rounded-md shadow col-span-2">
@@ -18,15 +18,15 @@
 	  <div class="grid grid-cols-3 gap-4 mb-5 mx-5">
   
 		<div class="place-self-auto">
-		  <a href="/"> <img class="w-40 h-100" src=".//help-wanted-button.png" alt="Anxiety Ally Logo"> </a>
+		  <a href="/"> <img class="w-40 h-100" src="/help-wanted-button.png" alt="Help wanted icon"> </a>
 		</div>
   
 		<div class="place-self-auto">
-		  <a href="/"> <img class="w-40 h-100" src=".//start-journey.png" alt="Anxiety Ally Logo"> </a>
+		  <a href="/"> <img class="w-40 h-100" src="/start-journey.png" alt="Start journey icon"> </a>
 		</div>
   
 		<div class="place-self-auto">
-		  <a href="/"> <img class="w-40 h-100" src=".//venting-button.png" alt="Anxiety Ally Logo"> </a>
+		  <a href="/"> <img class="w-40 h-100" src="/venting-button.png" alt="Venting icon"> </a>
 		</div>
 	  </div>
 	</div>
