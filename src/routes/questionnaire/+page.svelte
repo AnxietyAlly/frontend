@@ -1,6 +1,9 @@
 <script>
 	import { browser } from '$app/environment';
-
+	import { onMount } from 'svelte';
+	
+	let allQuestionsFromDB = [];
+    
 	/**
 	 * Async function to get the data from the SWAPI api
 	 * @returns - returns a promise
@@ -14,7 +17,6 @@
 			console.error('Error: ', err);
 		}
 	}
-
 	async function getQuestions() {
 		let questionsFromDatabase = [];
 		if (browser) {
@@ -38,20 +40,32 @@
 			// );
 			return allQuestionsPromise;
 		}
-		
 	}
 	// const questionTest = getQuestions();
 	// console.log(questionTest);
-	async function getQuestionData() {
 
-		const allQuestions = getQuestions();
-		for(let i = 0; i < allQuestions.length; i++) {
-			console.log(allQuestions[i]);
-		}
-		// return allQuestions;
-	}
+	// async function getQuestionData() {
+	// 	const allQuestions = await getQuestions();
+	// 	// for(let i = 0; i < allQuestions.length; i++) {
+	// 	// 	console.log(allQuestions[i]);
+	// 	// }
+	// 	console.log(allQuestions);
+	// 	return allQuestions;
+	// }
 	
-	getQuestionData();
+	onMount(async () => {
+		allQuestionsFromDB = await getQuestions();
+		console.log(allQuestionsFromDB);
+	})
+	// onMount(() => {
+	// 	getQuestions().then((questions) => {
+	// 		console.log(questions);
+	// 		document.getElementById('questionTest').innerHTML = questions[3].data.question;
+	// 	});
+	// });
+
+	console.log(getQuestions());
+	// console.log(getQuestionData());
 
 	// let answers = new Array(questionsFromDatabase.length);
 	// console.log(answers);
@@ -81,7 +95,11 @@
 				questionnaire. Identify your anxiety, vent to our AI doctor, and connect with local
 				psychologists. Take the first steps toward a calmer, more serene you
 			</div>
-			<!-- <p>{getQuestionData()}</p> -->
+			<p id="questionTest" />
+			{#each allQuestionsFromDB as question}
+				<p>{question.data.question}</p>
+			{/each}
+			<!-- <p>{getSpecificQuestion(2)}</p> -->
 			<button
 				class="bg-blue-500 text-white rounded-full focus:outline-none w-45 border-radius-20 ml-36 h-14 w-24 mt-36"
 				on:click={() => {
@@ -106,7 +124,7 @@
 						class="options flex justify-between flex-wrap w-45 border-radius-20 my-10 bg-blue-400 text-black"
 					>
 						<!-- {#each questions[questionPointer].options as opt, i} -->
-							<!-- <button
+						<!-- <button
 								class="{answers[questionPointer] == i
 									? 'selected'
 									: ''} px-10 py-2 bg-blue-500 text-black rounded-full focus:outline-none w-45 border-radius-20 my-10"
