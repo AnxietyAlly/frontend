@@ -15,96 +15,46 @@
 		}
 	}
 
-	let questionsFromDatabase = [];
-	if (browser) {
-		getApiData('http://localhost:3010/questionnaireApi/questionnaire/questions') //
-			.then((questionLinksJSON) => {
-				const questionLinks = questionLinksJSON.data;
+	async function getQuestions() {
+		let questionsFromDatabase = [];
+		if (browser) {
+			const questionLinksJSON = await getApiData(
+				'http://localhost:3010/questionnaireApi/questionnaire/questions'
+			);
 
-				for (let i = 0; i < questionLinks.length; i++) {
-					getApiData(`http://localhost:3010/questionnaireApi${questionLinks[i]}`) //
-						.then((question) => {
-							questionsFromDatabase.push(question);
-						});
-				}
-				const questionPromises = questionLinks.map((link) =>
-					getApiData(`http://localhost:3010/questionnaireApi${link}`)
+			const questionLinks = questionLinksJSON.data;
+
+			for (let i = 0; i < questionLinks.length; i++) {
+				const question = await getApiData(
+					`http://localhost:3010/questionnaireApi${questionLinks[i]}`
 				);
 
-				Promise.all(questionPromises)
-					.then((questions) => {
-						questionsFromDatabase = questions;
-
-						//		Display questions in the 'questionposition' element
-						const questionPositionElement = document.getElementById('questionposition');
-						// questionsFromDatabase.forEach((question) => {
-						// 	const li = document.createElement('li');
-						// 	console.log(question.data.question);
-						// 	li.textContent = question.data.question;
-						// 	questionPositionElement.appendChild(li);
-						// });
-						const li2 = document.createElement('li');
-						li2.textContent = questionsFromDatabase[3].data.question;
-						questionPositionElement.appendChild(li2);
-					})
-					.catch((error) => console.error('Error fetching questions:', error));
-			});
-	}
-
-	let questions = [
-		{
-			question:
-				'Question 1: How often do you feel a sense of excessive worry or fear without a specific cause.',
-			options: ['Frequently', 'Never', 'Not Often', 'Sometimes'],
-			correctIndex: 3
-		},
-		{
-			question:
-				"Question 2: Do you often feel tense or anxious? For example, during a specific situation or when you're about to go to sleep.",
-			options: ['Frequently', 'Never', 'Not often', 'Sometimes'],
-			correctIndex: 3
-		},
-		{
-			question: 'Question 3: Do you avoid certain situations because of your fears? ',
-			options: ['Frequently', 'Never', 'Not often', 'Sometimes'],
-			correctIndex: 1
-		},
-		{
-			question:
-				'Question 4: Do you worry? For example, about what others think of you in certain situations?',
-			options: ['Frequently', 'Never', 'Not often', 'Sometimes'],
-			correctIndex: 1
-		},
-		{
-			question:
-				'Question 5: Do you avoid social gatherings because of fear, anxiety, or nervousness?',
-			options: ['Frequently', 'Never', 'Not often', 'Sometimes'],
-			correctIndex: 2
-		},
-		{
-			question: 'Question 6: How often have you had a panic attack in the past month?',
-			options: ['Frequently', 'Never', 'Not often', 'Sometimes'],
-			correctIndex: 1
-		},
-		{
-			question: 'Question 7: How often have you had a panic attack in the past month?',
-			options: ['Frequently', 'Never', 'Not often', 'Sometimes'],
-			correctIndex: 3
-		},
-		{
-			question:
-				'Question 8: Do you experience physical symptoms such as shortness of breath, sweating, restlessness, tingling, or nausea?',
-			options: ['Frequently', 'Never', 'Not often', 'Sometimes'],
-			correctIndex: 1
-		},
-		{
-			question:
-				"Question 9: Do you have episodes of anxiety and fear that you can't seem to control?",
-			options: ['Frequently', 'Never', 'Not often', 'Sometimes'],
-			correctIndex: 0
+				questionsFromDatabase.push(question);
+			}
+			const allQuestionsPromise = await Promise.all(questionsFromDatabase);
+			console.log(allQuestionsPromise);
+			// const questionPromises = questionLinks.map((link) =>
+			// 	getApiData(`http://localhost:3010/questionnaireApi${link}`)
+			// );
+			return allQuestionsPromise;
 		}
-	];
-	let answers = new Array(questions.length).fill(null);
+		
+	}
+	// const questionTest = getQuestions();
+	// console.log(questionTest);
+	async function getQuestionData() {
+
+		const allQuestions = getQuestions();
+		for(let i = 0; i < allQuestions.length; i++) {
+			console.log(allQuestions[i]);
+		}
+		// return allQuestions;
+	}
+	
+	getQuestionData();
+
+	// let answers = new Array(questionsFromDatabase.length);
+	// console.log(answers);
 	let questionPointer = -1;
 	function getScore() {
 		let score = answers.reduce((acc, val, index) => {
@@ -131,8 +81,7 @@
 				questionnaire. Identify your anxiety, vent to our AI doctor, and connect with local
 				psychologists. Take the first steps toward a calmer, more serene you
 			</div>
-			<ul id="questionposition" />
-			<ul id="singleQuestionTest" />
+			<!-- <p>{getQuestionData()}</p> -->
 			<button
 				class="bg-blue-500 text-white rounded-full focus:outline-none w-45 border-radius-20 ml-36 h-14 w-24 mt-36"
 				on:click={() => {
@@ -143,7 +92,7 @@
 			</button>
 
 			<!--These are the quiz screens with the questions-->
-		{:else if !(questionPointer > answers.length - 1)}
+		{:else if !(questionPointer > 10 - 1)}
 			<div
 				class="quiz-screen p-50 bg-sky flex-wrap w-45 border-radius-20 my-10 bg-blue-400 text-black fixed bottom-0 left-0 w-full flex justify-between items-center w-150 h-10 rounded-10 overflow-hidden"
 			>
@@ -151,13 +100,13 @@
 					class="main p-4 flex justify-between flex-wrap mx-auto rounded-lg mt-12 bg-blue-400 text-black h-56 absolute"
 				>
 					<h2>
-						{questions[questionPointer].question}
+						<!-- {questions[questionPointer].question} -->
 					</h2>
 					<div
 						class="options flex justify-between flex-wrap w-45 border-radius-20 my-10 bg-blue-400 text-black"
 					>
-						{#each questions[questionPointer].options as opt, i}
-							<button
+						<!-- {#each questions[questionPointer].options as opt, i} -->
+							<!-- <button
 								class="{answers[questionPointer] == i
 									? 'selected'
 									: ''} px-10 py-2 bg-blue-500 text-black rounded-full focus:outline-none w-45 border-radius-20 my-10"
@@ -166,8 +115,8 @@
 								}}
 							>
 								{opt}
-							</button>
-						{/each}
+							</button> -->
+						<!-- {/each} -->
 					</div>
 					<h1>More information on this topic?</h1>
 				</div>
@@ -177,7 +126,7 @@
 					class="footer bg-blue-400 fixed bottom-0 left-0 w-full h-16 flex justify-between items-center w-150 rounded-10 overflow-hidden"
 				>
 					<div class="progress-bar w-150 bg--400 rounded-10 overflow-hidden h-full bg-purple-200">
-						<div style="width:{(questionPointer / questions.length) * 100}%" />
+						<div style="width:{(questionPointer / 10) * 100}%" />
 					</div>
 					<div class="buttons">
 						<button
