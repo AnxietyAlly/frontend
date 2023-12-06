@@ -11,13 +11,31 @@
 
 	onMount(() => {
 		const slider = document.getElementById("myRange");
+		const descriptionInput = document.getElementById("description");
+		const submitLink = document.getElementById("submit-link");
+
+		const continueButton = document.getElementById('continue');
 		const submitButton = document.getElementById('submit');
+
 		const initialContent = document.getElementById('initialContent');
 		const otherContent = document.getElementById('otherContent');
 
-		submitButton.addEventListener('click', (event) => {
+		continueButton.addEventListener('click', (event) => {
 			initialContent.style.display = 'none';
 			otherContent.style.display = 'block';
+		});
+
+		submitButton.addEventListener('click', (event) => {
+			const user = "test";
+			const timestamp = "test";
+			const result = slider.value;
+			const description = descriptionInput.value;
+
+			if (result > 50) {
+				submitLink.href="/dailycheckup-positive";
+			}
+
+			
 		});
 	});
 </script>
@@ -59,10 +77,10 @@
 		<div class="h-20 mt-8 space-y-6">
 			<div class="flex justify-center">
 				<button
-					id="submit"
+					id="continue"
 					class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white button-color hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
 				>
-					Submit
+					Continue
 				</button>
 			</div>
 		</div>
@@ -91,6 +109,7 @@
 
 		<div class="flex justify-center">
 			<input
+				id="description"
 				type="text"
 				class="opacity-75 h-44 w-80 rounded-md bg-opacity-50 text-left text-xs vertical-align: text-top"
 				placeholder="Type here..."
@@ -103,22 +122,14 @@
 			</div>
 		</div>
 
-		<div class="grid grid-cols-2 gap-4 mb-5 mx-5 grid-rows-2">
+		<div class="grid grid-cols-1 gap-4 mb-5 mx-5 grid-rows-2" id="submit">
 			<div class="place-self-auto">
 				<a
-					href="/dailycheckup-positive"
-					class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white button-color hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
-				>
-					Good
-				</a>
-			</div>
-
-			<div class="place-self-auto">
-				<a
+					id="submit-link"
 					href="/dailycheckup-negative"
 					class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white button-color hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
 				>
-					Bad
+					Submit
 				</a>
 			</div>
 		</div>
