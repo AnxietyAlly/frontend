@@ -53,7 +53,7 @@
     
     <style>
       .bg-sky {
-        background-image: url(".//background-sky.png");
+        background-image: url("/background-sky.png");
         background-position: center;
       }
   
