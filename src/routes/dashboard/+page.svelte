@@ -7,7 +7,7 @@
 			<a href="/dailycheckup" class="col-span-3 bg-white max-h-32 w-80 rounded-md shadow relative">
 				<img
 					class="h-full w-full object-cover opacity-50"
-					src=".//medical-checkup-vector-illustration_677179-53.avif"
+					src="/medical-checkup-vector-illustration_677179-53.avif"
 					alt="Artwork about a woman crying"
 				/>
 				<div class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center">
@@ -23,7 +23,7 @@
 			<a href="/progress" class="col-span-3 bg-white max-h-32 w-80 rounded-md shadow relative">
 				<img
 					class="h-full w-full object-cover opacity-50"
-					src=".//in-progress-man-run-to-their-goal-illustration-flat-vector.jpg"
+					src="/in-progress-man-run-to-their-goal-illustration-flat-vector.jpg"
 					alt="Artwork about a woman crying"
 				/>
 				<div class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center">
