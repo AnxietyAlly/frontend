@@ -39,8 +39,8 @@
 </div>
 
 <style>
-	.bg-sky {
-		background-image: url('.//background-sky.png');
+	  .bg-sky {
+		background-image: url("/background-sky.png");
 		background-position: center;
 	}
 
