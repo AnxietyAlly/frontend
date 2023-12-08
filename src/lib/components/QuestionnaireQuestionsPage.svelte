@@ -30,7 +30,7 @@
 					<input type="radio" id="answer1" name="answers" value="answer1" class="hidden peer" required>
 					<label
 						for="answer1"
-						class="bg-green-400 inline-flex items-center justify-between cursor-pointer border peer-checked:border-red-700"
+						class="bg-blue-600 inline-flex items-center w-full p-2 m-2 justify-between cursor-pointer border-2 rounded-lg peer-checked:border-red-700"
 					>
 						<div class="block">
 							<div class="w-full">Answer 1</div>
@@ -41,7 +41,7 @@
                     <input type="radio" id="answer2" name="answers" value="answer2" class="hidden peer">
 					<label
 						for="answer2"
-						class="bg-green-400 inline-flex items-center justify-between cursor-pointer border peer-checked:border-red-700"
+						class="bg-blue-600 inline-flex items-center w-full p-2 m-2 justify-between cursor-pointer border-2 rounded-lg peer-checked:border-red-700"
 					>
 						<div class="block">
 							<div class="w-full">Answer 2</div>
@@ -52,7 +52,7 @@
                     <input type="radio" id="answer3" name="answers" value="answer3" class="hidden peer" required>
 					<label
 						for="answer3"
-						class="bg-green-400 inline-flex items-center justify-between cursor-pointer border peer-checked:border-red-700"
+						class="bg-blue-600 inline-flex items-center w-full p-2 m-2 justify-between cursor-pointer border-2 rounded-lg peer-checked:border-red-700"
 					>
 						<div class="block">
 							<div class="w-full">Answer 3</div>
@@ -63,7 +63,7 @@
                     <input type="radio" id="answer4" name="answers" value="answer4" class="hidden peer" required>
 					<label
 						for="answer4"
-						class="bg-green-400 inline-flex items-center justify-between cursor-pointer border peer-checked:border-red-700"
+						class="bg-blue-600 inline-flex items-center w-full p-2 m-2 justify-between cursor-pointer border-2 rounded-lg peer-checked:border-red-700"
 					>
 						<div class="block">
 							<div class="w-full">Answer 4</div>
@@ -75,8 +75,8 @@
 	</div>
 	<div>
 		{#if currentQuestionNumber > 1}
-			<button on:click={() => goToPreviousQuestion()}>Previous</button>
+			<button class="btn bg-blue-600 order-2" on:click={() => goToPreviousQuestion()}>Previous</button>
 		{/if}
-		<button on:click={() => goToNextQuestion()}>Next</button>
+		<button class="btn bg-blue-600 border-2" on:click={() => goToNextQuestion()}>Next</button>
 	</div>
 </div>

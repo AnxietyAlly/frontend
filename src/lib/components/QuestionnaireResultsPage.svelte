@@ -25,8 +25,8 @@
 		<ul>Answers you gave</ul>
 	</div>
     <div>
-        <button on:click={() => restartQuestionnaire()}>Restart questionnaire</button>
-        <a class="btn" href="/dashboard">Continue</a>
+        <button class="btn bg-blue-600 border-2" on:click={() => restartQuestionnaire()}>Restart questionnaire</button>
+        <a class="btn bg-blue-600 border-2" href="/dashboard">Continue</a>
 
     </div>
 	
