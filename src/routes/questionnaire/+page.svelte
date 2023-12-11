@@ -43,17 +43,6 @@
 			return allQuestionsPromise;
 		}
 	}
-	// const questionTest = getQuestions();
-	// console.log(questionTest);
-
-	// async function getQuestionData() {
-	// 	const allQuestions = await getQuestions();
-	// 	// for(let i = 0; i < allQuestions.length; i++) {
-	// 	// 	console.log(allQuestions[i]);
-	// 	// }
-	// 	console.log(allQuestions);
-	// 	return allQuestions;
-	// }
 
 	onMount(async () => {
 		allQuestionsFromDB = await getQuestions();
