@@ -4,7 +4,10 @@
 	import QuestionnaireQuestionsPage from '$lib/components/QuestionnaireQuestionsPage.svelte';
 	import QuestionnaireStartPage from '../../lib/components/QuestionnaireStartPage.svelte';
 	import QuestionnaireResultsPage from '../../lib/components/QuestionnaireResultsPage.svelte';
-	let allQuestionsFromDB = [];
+	let mentalProblemsFromDB = [];
+	let questionsForQuestionnaireFromDB = [];
+	let correctAnswersForQuestions = [];
+	
 
 	/**
 	 * Async function to get the data from the SWAPI api
@@ -19,6 +22,7 @@
 			console.error('Error: ', err);
 		}
 	}
+
 	async function getQuestions() {
 		let questionsFromDatabase = [];
 		if (browser) {
@@ -36,19 +40,139 @@
 				questionsFromDatabase.push(question);
 			}
 			const allQuestionsPromise = await Promise.all(questionsFromDatabase);
-			console.log(allQuestionsPromise);
+
 			// const questionPromises = questionLinks.map((link) =>
 			// 	getApiData(`http://localhost:3010/questionnaireApi${link}`)
 			// );
+
 			return allQuestionsPromise;
 		}
 	}
 
+	async function getMentalProblems() {
+		let mentalProblemsFromDatabase = [];
+		if (browser) {
+			const mentalProblemLinksJSON = await getApiData(
+				'http://localhost:3010/questionnaireApi/mentalProblems'
+			);
+
+			const mentalProblemLinks = mentalProblemLinksJSON.data;
+
+			for (let i = 0; i < mentalProblemLinks.length; i++) {
+				const mentalProblem = await getApiData(
+					`http://localhost:3010/questionnaireApi${mentalProblemLinks[i]}`
+				);
+
+				mentalProblemsFromDatabase.push(mentalProblem);
+			}
+			const allMentalProblemsPromise = await Promise.all(mentalProblemsFromDatabase);
+
+			// const questionPromises = questionLinks.map((link) =>
+			// 	getApiData(`http://localhost:3010/questionnaireApi${link}`)
+			// );
+
+			return allMentalProblemsPromise;
+		}
+	}
+
+	async function getCorrectAnswers(questions, mentalProblems) {
+		let correctAnswersFromDatabase = [];
+		if (browser) {
+			for (let i = 0; i < questions.length; i++) {
+				const correctAnswers = await getApiData(
+					`http://localhost:3010/questionnaireApi/questions/${questions[i].data.id}/correctAnswers`
+				);
+
+				correctAnswersFromDatabase.push(correctAnswers);
+			}
+
+			const allCorrectAnswersPromise = await Promise.all(correctAnswersFromDatabase);
+
+			const allCorrectAnswersToReturn = [];
+			for (let i = 0; i < questions.length; i++) {
+				allCorrectAnswersToReturn.push(
+					{
+						questionId: questions[i].data.id,
+						mentalProblems: []
+					}
+				);
+				for (let j = 0; j < mentalProblems.length; j++) {
+					allCorrectAnswersToReturn[i].mentalProblems.push(
+						{
+							mentalProblemId: mentalProblems[j].data.id,
+							values: undefined,
+							ranges: undefined
+						}
+					)
+				}
+				
+			}
+			for (let j = 0; j < allCorrectAnswersPromise.length; j++) {
+					for (let k = 0; k < allCorrectAnswersPromise[j].data.length; k++) {
+						allCorrectAnswersToReturn.find(element => {
+							return element.questionId == allCorrectAnswersPromise[j].data[k].question_id
+						}).mentalProblems.find(element => {
+							return element.mentalProblemId == allCorrectAnswersPromise[j].data[k].mental_problem_id
+						}).values = allCorrectAnswersPromise[j].data[k].values;
+						allCorrectAnswersToReturn.find(element => {
+							return element.questionId == allCorrectAnswersPromise[j].data[k].question_id
+						}).mentalProblems.find(element => {
+							return element.mentalProblemId == allCorrectAnswersPromise[j].data[k].mental_problem_id
+						}).ranges = allCorrectAnswersPromise[j].data[k].ranges;
+					}
+				}
+			console.log(allCorrectAnswersToReturn);
+
+			// [
+			//  {
+			//   questionId: 1
+			//   mentalProblems: [
+			//    {
+			//     mentalProblemId: 1
+			//     values: 4
+			//     ranges: 1,0
+			//    },
+			//    {
+			//     mentalProblemId: 2
+			//     values: 4
+			//     ranges: 2,0
+			//    }
+			//   ]
+			//  }
+			//  {
+			//   questionId: 2
+			//   mentalProblems: [
+			//    {
+			//     mentalProblemId: 1
+			//     values: 2|4
+			//     ranges: 0,1|0,0
+			//    },
+			//    {
+			//     mentalProblemId: 2
+			//     values: undefined
+			//     ranges: undefined
+			//    }
+			//   ]
+			//  }
+			// ]
+			//
+			//
+			//
+			//
+
+			// const questionPromises = questionLinks.map((link) =>
+			// 	getApiData(`http://localhost:3010/questionnaireApi${link}`)
+			// );
+
+			return allCorrectAnswersPromise;
+		}
+	}
+
 	onMount(async () => {
-		allQuestionsFromDB = await getQuestions();
-		console.log(allQuestionsFromDB);
-		let answers = new Array(allQuestionsFromDB.length);
-		console.log(answers);
+		questionsForQuestionnaireFromDB = await getQuestions();
+		mentalProblemsFromDB = await getMentalProblems();
+		correctAnswersForQuestions = await getCorrectAnswers(questionsForQuestionnaireFromDB, mentalProblemsFromDB);
+		let answers = new Array(questionsForQuestionnaireFromDB.length);
 	});
 
 	let currentPageNumber = 1;
@@ -66,7 +190,7 @@
 				<QuestionnaireQuestionsPage
 					bind:currentPageNumber
 					bind:currentQuestionNumber
-					allQuestions={allQuestionsFromDB}
+					allQuestions={questionsForQuestionnaireFromDB}
 				/>
 			{/key}
 		{:else if currentPageNumber == 3}
@@ -75,7 +199,7 @@
 			<QuestionnaireStartPage />
 		{/if}
 	{/key}
-	<!-- {#each allQuestionsFromDB as question}
+	<!-- {#each questionsForQuestionnaireFromDB as question}
 			<p>{question.data.question}</p>
 		{/each} -->
 </div>
