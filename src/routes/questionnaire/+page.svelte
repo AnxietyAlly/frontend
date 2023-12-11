@@ -108,20 +108,20 @@
 				
 			}
 			for (let i = 0; i < allCorrectAnswersPromise.length; i++) {
-					for (let j = 0; j < allCorrectAnswersPromise[i].data.length; j++) {
-						allCorrectAnswersToReturn.find(element => {
-							return element.questionId == allCorrectAnswersPromise[i].data[j].question_id
-						}).mentalProblems.find(element => {
-							return element.mentalProblemId == allCorrectAnswersPromise[i].data[j].mental_problem_id
-						}).values = allCorrectAnswersPromise[i].data[j].values;
+				for (let j = 0; j < allCorrectAnswersPromise[i].data.length; j++) {
+					allCorrectAnswersToReturn.find(element => {
+						return element.questionId == allCorrectAnswersPromise[i].data[j].question_id
+					}).mentalProblems.find(element => {
+						return element.mentalProblemId == allCorrectAnswersPromise[i].data[j].mental_problem_id
+					}).values = allCorrectAnswersPromise[i].data[j].values;
 
-						allCorrectAnswersToReturn.find(element => {
-							return element.questionId == allCorrectAnswersPromise[i].data[j].question_id
-						}).mentalProblems.find(element => {
-							return element.mentalProblemId == allCorrectAnswersPromise[i].data[j].mental_problem_id
-						}).ranges = allCorrectAnswersPromise[i].data[j].ranges;
-					}
+					allCorrectAnswersToReturn.find(element => {
+						return element.questionId == allCorrectAnswersPromise[i].data[j].question_id
+					}).mentalProblems.find(element => {
+						return element.mentalProblemId == allCorrectAnswersPromise[i].data[j].mental_problem_id
+					}).ranges = allCorrectAnswersPromise[i].data[j].ranges;
 				}
+			}
 			console.log(allCorrectAnswersToReturn);
 
 			// [
