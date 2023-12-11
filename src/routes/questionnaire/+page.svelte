@@ -66,8 +66,9 @@
 	let currentQuestionNumber = 1;
 </script>
 
-<div class="min-h-screen bg-sky flex flex-col items-center">
-	<img class="w-40 h-100 z-10" src=".//anxietyAllyLogo.png" alt="Anxiety Ally Logo" />
+<div class="flex flex-col items-center">
+	<img class="w-40 h-100 mt-4" src=".//anxietyally.png" alt="Anxiety Ally Logo" />
+</div>
 
 	{#key currentPageNumber}
 		{#if currentPageNumber == 1}
@@ -89,7 +90,6 @@
 	<!-- {#each allQuestionsFromDB as question}
 			<p>{question.data.question}</p>
 		{/each} -->
-</div>
 
 <style>
 	.bg-sky {

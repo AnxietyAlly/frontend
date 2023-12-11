@@ -132,15 +132,19 @@
 </script>
 
 <div id="initialContent">
-	<div class="nav-buttons">
-		<button class="flex-none" on:click={() => updateMonth(-1)}>Previous Month</button>
+	<div class="nav-buttons mt-2">
+		<button class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium mr-3 rounded-3xl shadow col-span-2 bg-red-400 bg-opacity-70 text-white md:py-4 md:text-lg md:px-10" 
+		on:click={() => updateMonth(-1)}>Previous Month</button>
 
-		<button class="flex-none" on:click={() => updateMonth(1)}>Next Month</button>
+		<button class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-3xl shadow col-span-2 bg-red-400 bg-opacity-70 text-white md:py-4 md:text-lg md:px-10" 
+		on:click={() => updateMonth(1)}>Next Month</button>
 	</div>
 	<div>
-		<h2 class="text-white">
+		<div class="flex justify-center">
+		<h2 class="text-l font-semibold text-stone-600">
 			{new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(currentDate)}
 		</h2>
+		</div>
 	</div>
 	<div class="calendar">
 		{#each range(getDaysInMonth(currentYear, currentMonth)) as day (day)}
@@ -193,14 +197,22 @@
 					<p class="text-white">We haven't found a description. You might not have left a description.</p>
 				{/if}
 			{:else}
-				<p class="text-white">We weren't able to find any data for this date. You might not have done the daily description that day.</p>
+			<div class="flex justify-center">
+				<div class="m-4  bg-white bg-opacity-50 p-6">
+				<p class="text-stone-600">We weren't able to find any data for this date. You might not have done the daily description that day.</p>
+				</div>
+				</div>
 			{/if}
 		{/if}
 	{/each}
+	<div class="h-20 mt-12 space-y-6">
+        <div class="flex justify-center">
 	<button
-		class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white button-color hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+		class="btn w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-3xl mr-3 shadow col-span-2 bg-red-400 bg-opacity-70 text-white md:py-4 md:text-lg md:px-10"
 		on:click={() => refreshPage()}>Back</button
 	>
+</div>
+</div>
 </div>
 
 <style>
@@ -215,7 +227,7 @@
 
 	.calendar-day {
 		padding: 8px;
-		border: 1px solid #ddd;
+		border: 1px solid #f87171;
 		text-align: center;
 	}
 
@@ -225,34 +237,10 @@
 		margin-bottom: 10px;
 	}
 
-	button {
-		padding: 10px;
-		cursor: pointer;
-		background-color: #4caf50;
-		color: white;
-		border: none;
-		border-radius: 4px;
-		font-size: 14px;
-		transition: background-color 0.3s ease;
-		width: 48%;
-	}
-
-	button:hover {
-		background-color: #45a049;
-	}
-
 	.calendar {
 		grid-template-columns: repeat(7, 1fr);
 		gap: 4px;
 		max-width: 100%;
 	}
 
-	.nav-buttons {
-		align-items: center;
-		justify-content: space-between;
-	}
-
-	button {
-		margin-bottom: 8px;
-	}
 </style>
