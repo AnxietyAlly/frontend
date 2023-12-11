@@ -23,7 +23,7 @@
 		let questionsFromDatabase = [];
 		if (browser) {
 			const questionLinksJSON = await getApiData(
-				'http://localhost:3010/questionnaireApi/questionnaire/questions'
+				'http://localhost:3010/questionnaireApi/questionnaires/1/questions'
 			);
 
 			const questionLinks = questionLinksJSON.data;
