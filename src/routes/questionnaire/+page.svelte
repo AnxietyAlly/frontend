@@ -107,18 +107,19 @@
 				}
 				
 			}
-			for (let j = 0; j < allCorrectAnswersPromise.length; j++) {
-					for (let k = 0; k < allCorrectAnswersPromise[j].data.length; k++) {
+			for (let i = 0; i < allCorrectAnswersPromise.length; i++) {
+					for (let j = 0; j < allCorrectAnswersPromise[i].data.length; j++) {
 						allCorrectAnswersToReturn.find(element => {
-							return element.questionId == allCorrectAnswersPromise[j].data[k].question_id
+							return element.questionId == allCorrectAnswersPromise[i].data[j].question_id
 						}).mentalProblems.find(element => {
-							return element.mentalProblemId == allCorrectAnswersPromise[j].data[k].mental_problem_id
-						}).values = allCorrectAnswersPromise[j].data[k].values;
+							return element.mentalProblemId == allCorrectAnswersPromise[i].data[j].mental_problem_id
+						}).values = allCorrectAnswersPromise[i].data[j].values;
+
 						allCorrectAnswersToReturn.find(element => {
-							return element.questionId == allCorrectAnswersPromise[j].data[k].question_id
+							return element.questionId == allCorrectAnswersPromise[i].data[j].question_id
 						}).mentalProblems.find(element => {
-							return element.mentalProblemId == allCorrectAnswersPromise[j].data[k].mental_problem_id
-						}).ranges = allCorrectAnswersPromise[j].data[k].ranges;
+							return element.mentalProblemId == allCorrectAnswersPromise[i].data[j].mental_problem_id
+						}).ranges = allCorrectAnswersPromise[i].data[j].ranges;
 					}
 				}
 			console.log(allCorrectAnswersToReturn);
@@ -155,10 +156,6 @@
 			//   ]
 			//  }
 			// ]
-			//
-			//
-			//
-			//
 
 			// const questionPromises = questionLinks.map((link) =>
 			// 	getApiData(`http://localhost:3010/questionnaireApi${link}`)
