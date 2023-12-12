@@ -4,10 +4,11 @@
 	import QuestionnaireQuestionsPage from '$lib/components/QuestionnaireQuestionsPage.svelte';
 	import QuestionnaireStartPage from '../../lib/components/QuestionnaireStartPage.svelte';
 	import QuestionnaireResultsPage from '../../lib/components/QuestionnaireResultsPage.svelte';
+	let questionAnswerTemplatesFromDB = [];
 	let mentalProblemsFromDB = [];
 	let questionsForQuestionnaireFromDB = [];
 	let correctAndPossibleAnswersForQuestions = [];
-	
+	let selectedAnswers = [];
 
 	/**
 	 * Async function to get the data from the SWAPI api
@@ -46,6 +47,31 @@
 			// );
 
 			return allQuestionsPromise;
+		}
+	}
+
+	async function getRelevantQuestionAnwerTemplates(questions) {
+		let relevantQuestionAnswerTemplateIDsFromDB = [];
+		let relevantQuestionAnswerTemplatesFromDB = [];
+		if (browser) {
+			for (let i = 0; i < questions.length; i++) {
+				if (relevantQuestionAnswerTemplateIDsFromDB.find(element => {
+					return element == questions[i].data.question_answer_template_id
+				}) == undefined) {
+					relevantQuestionAnswerTemplateIDsFromDB.push(questions[i].data.question_answer_template_id);
+				}
+			}
+
+			for (let i = 0; i < relevantQuestionAnswerTemplateIDsFromDB.length; i++) {
+				const questionAnswerTemplate = await getApiData(
+					`http://localhost:3010/questionnaireApi/questionAnswerTemplates/${relevantQuestionAnswerTemplateIDsFromDB[i]}`
+				);
+
+				relevantQuestionAnswerTemplatesFromDB.push(questionAnswerTemplate);
+			}
+			const relevantQuestionAnswerTemplatesPromise = await Promise.all(relevantQuestionAnswerTemplatesFromDB);
+
+			return relevantQuestionAnswerTemplatesPromise;
 		}
 	}
 
@@ -254,8 +280,23 @@
 		questionsForQuestionnaireFromDB = await getQuestions();
 		mentalProblemsFromDB = await getMentalProblems();
 		correctAndPossibleAnswersForQuestions = await getCorrectAndPossibleAnswers(questionsForQuestionnaireFromDB, mentalProblemsFromDB);
-		console.log(correctAndPossibleAnswersForQuestions);
-		let answers = new Array(questionsForQuestionnaireFromDB.length);
+		for (let i = 0; i < questionsForQuestionnaireFromDB.length; i++) {
+			selectedAnswers.push({
+				questionId: questionsForQuestionnaireFromDB[i].data.id,
+				selectedAnswerValue: undefined
+			})
+		}
+		questionAnswerTemplatesFromDB = await getRelevantQuestionAnwerTemplates(questionsForQuestionnaireFromDB);
+		// [
+		//  {
+		//   questionId: 1
+		//   selectedAnswerValue: 3
+		//  }
+		//  {
+		//   questionId: 2
+		//   selectedAnswerValue: 4
+		//  }
+		// ]
 	});
 
 	let currentPageNumber = 1;
@@ -267,19 +308,22 @@
 
 	{#key currentPageNumber}
 		{#if currentPageNumber == 1}
-			<QuestionnaireStartPage bind:currentPageNumber />
+			<QuestionnaireStartPage bind:currentPageNumber correctAndPossibleAnswersForQuestions={correctAndPossibleAnswersForQuestions} questionAnswerTemplates={questionAnswerTemplatesFromDB} />
 		{:else if currentPageNumber == 2}
 			{#key currentQuestionNumber}
 				<QuestionnaireQuestionsPage
 					bind:currentPageNumber
 					bind:currentQuestionNumber
+					bind:selectedAnswers
 					allQuestions={questionsForQuestionnaireFromDB}
+					correctAndPossibleAnswersForQuestions={correctAndPossibleAnswersForQuestions}
+					questionAnswerTemplates={questionAnswerTemplatesFromDB}
 				/>
 			{/key}
 		{:else if currentPageNumber == 3}
 			<QuestionnaireResultsPage bind:currentPageNumber bind:currentQuestionNumber />
 		{:else}
-			<QuestionnaireStartPage />
+			<QuestionnaireStartPage correctAndPossibleAnswersForQuestions={correctAndPossibleAnswersForQuestions} questionAnswerTemplates={questionAnswerTemplatesFromDB} />
 		{/if}
 	{/key}
 	<!-- {#each questionsForQuestionnaireFromDB as question}
