@@ -5,8 +5,6 @@
 	export let correctAndPossibleAnswersForQuestions;
 	export let questionAnswerTemplates;
 	let questionAmount = allQuestions.length;
-	console.log(questionAnswerTemplates);
-	console.log(allQuestions);
 
 	export let currentPageNumber;
 
@@ -25,7 +23,9 @@
 	}
 
 	function selectAnswer(answerId) {
-		console.log('test');
+		selectedAnswers.find(element => {
+			return element.questionId == allQuestions[currentQuestionNumber - 1].data.id
+		}).selectedAnswerValue = Number(document.getElementById(answerId).value);
 	}
 </script>
 
