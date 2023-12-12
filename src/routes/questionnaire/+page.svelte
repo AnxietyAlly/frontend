@@ -6,7 +6,7 @@
 	import QuestionnaireResultsPage from '../../lib/components/QuestionnaireResultsPage.svelte';
 	let mentalProblemsFromDB = [];
 	let questionsForQuestionnaireFromDB = [];
-	let correctAnswersForQuestions = [];
+	let correctAndPossibleAnswersForQuestions = [];
 	
 
 	/**
@@ -75,7 +75,7 @@
 		}
 	}
 
-	async function getCorrectAnswers(questions, mentalProblems) {
+	async function getCorrectAndPossibleAnswers(questions, mentalProblems) {
 		let correctAnswersFromDatabase = [];
 		if (browser) {
 			for (let i = 0; i < questions.length; i++) {
@@ -88,16 +88,17 @@
 
 			const allCorrectAnswersPromise = await Promise.all(correctAnswersFromDatabase);
 
-			const allCorrectAnswersToReturn = [];
+			const allCorrectAndPossibleAnswersToReturn = [];
 			for (let i = 0; i < questions.length; i++) {
-				allCorrectAnswersToReturn.push(
+				allCorrectAndPossibleAnswersToReturn.push(
 					{
 						questionId: questions[i].data.id,
-						mentalProblems: []
+						mentalProblems: [],
+						answers: []
 					}
 				);
 				for (let j = 0; j < mentalProblems.length; j++) {
-					allCorrectAnswersToReturn[i].mentalProblems.push(
+					allCorrectAndPossibleAnswersToReturn[i].mentalProblems.push(
 						{
 							mentalProblemId: mentalProblems[j].data.id,
 							values: undefined,
@@ -109,20 +110,52 @@
 			}
 			for (let i = 0; i < allCorrectAnswersPromise.length; i++) {
 				for (let j = 0; j < allCorrectAnswersPromise[i].data.length; j++) {
-					allCorrectAnswersToReturn.find(element => {
+					allCorrectAndPossibleAnswersToReturn.find(element => {
 						return element.questionId == allCorrectAnswersPromise[i].data[j].question_id
 					}).mentalProblems.find(element => {
 						return element.mentalProblemId == allCorrectAnswersPromise[i].data[j].mental_problem_id
 					}).values = allCorrectAnswersPromise[i].data[j].values;
 
-					allCorrectAnswersToReturn.find(element => {
+					allCorrectAndPossibleAnswersToReturn.find(element => {
 						return element.questionId == allCorrectAnswersPromise[i].data[j].question_id
 					}).mentalProblems.find(element => {
 						return element.mentalProblemId == allCorrectAnswersPromise[i].data[j].mental_problem_id
 					}).ranges = allCorrectAnswersPromise[i].data[j].ranges;
 				}
 			}
-			console.log(allCorrectAnswersToReturn);
+
+			for (let i = 0; i < questions.length; i++) {
+				const possibleAnswerLinksJSON = await getApiData(
+					`http://localhost:3010/questionnaireApi/questions/${questions[i].data.id}/possibleAnswers`
+				);
+
+				const possibleAnswerLinks = possibleAnswerLinksJSON.data;
+
+				let possibleAnswersForQuestionPromises = [];
+				for (let j = 0; j < possibleAnswerLinks.length; j++) {
+					const possibleAnswer = await getApiData(
+						`http://localhost:3010/questionnaireApi${possibleAnswerLinks[j]}`
+					);
+					possibleAnswersForQuestionPromises.push(possibleAnswer);
+				}
+
+				const possibleAnswersForQuestion = await Promise.all(possibleAnswersForQuestionPromises);
+
+				for (let j = 0; j < possibleAnswersForQuestion.length; j++) {
+					allCorrectAndPossibleAnswersToReturn.find(element => {
+						return element.questionId == questions[i].data.id
+					}).answers.push(
+						{
+							answerId: possibleAnswersForQuestion[j].data.id,
+							questionAnswerTemplateId: possibleAnswersForQuestion[j].data.question_answer_template_id,
+							value: possibleAnswersForQuestion[j].data.value,
+							text: possibleAnswersForQuestion[j].data.text
+						}
+					)
+				}
+			}
+
+			const allCorrectAndPossibleAnswersToReturnPromise = await Promise.all(allCorrectAndPossibleAnswersToReturn);
 
 			// [
 			//  {
@@ -138,6 +171,32 @@
 			//     values: 4
 			//     ranges: 2,0
 			//    }
+			//   ],
+			//   answers: [
+			//	  {
+			//	   id: 1
+			//	   question_answer_template_id: 1
+			//     value: 1
+			//     text: "Never"
+			//    },
+			//	  {
+			//	   id: 2
+			//	   question_answer_template_id: 1
+			//     value: 2
+			//     text: "Sometimes"   
+			//    },
+			//	  {
+			//	   id: 3
+			//	   question_answer_template_id: 1
+			//     value: 3
+			//     text: "Regularly"  
+			//    },
+			//	  {
+			//	   id: 4
+			//	   question_answer_template_id: 1
+			//     value: 4
+			//     text: "Very often"  
+			//    },
 			//   ]
 			//  }
 			//  {
@@ -153,6 +212,32 @@
 			//     values: undefined
 			//     ranges: undefined
 			//    }
+			//   ],
+			//   answers: [
+			//	  {
+			//	   id: 1
+			//	   question_answer_template_id: 1
+			//     value: 1
+			//     text: "Never"
+			//    },
+			//	  {
+			//	   id: 2
+			//	   question_answer_template_id: 1
+			//     value: 2
+			//     text: "Sometimes"   
+			//    },
+			//	  {
+			//	   id: 3
+			//	   question_answer_template_id: 1
+			//     value: 3
+			//     text: "Regularly"  
+			//    },
+			//	  {
+			//	   id: 4
+			//	   question_answer_template_id: 1
+			//     value: 4
+			//     text: "Very often"  
+			//    },
 			//   ]
 			//  }
 			// ]
@@ -161,14 +246,15 @@
 			// 	getApiData(`http://localhost:3010/questionnaireApi${link}`)
 			// );
 
-			return allCorrectAnswersPromise;
+			return allCorrectAndPossibleAnswersToReturnPromise;
 		}
 	}
 
 	onMount(async () => {
 		questionsForQuestionnaireFromDB = await getQuestions();
 		mentalProblemsFromDB = await getMentalProblems();
-		correctAnswersForQuestions = await getCorrectAnswers(questionsForQuestionnaireFromDB, mentalProblemsFromDB);
+		correctAndPossibleAnswersForQuestions = await getCorrectAndPossibleAnswers(questionsForQuestionnaireFromDB, mentalProblemsFromDB);
+		console.log(correctAndPossibleAnswersForQuestions);
 		let answers = new Array(questionsForQuestionnaireFromDB.length);
 	});
 
