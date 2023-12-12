@@ -3,7 +3,7 @@
 </div>
 
 <div class="h-10 mt-2 flex justify-center">
-		<h1 class="text-3xl font-bold text-red-400 text-opacity-90">Anxiety Ally</h1>
+	<h1 class="text-3xl font-bold text-red-400 text-opacity-90">Anxiety Ally</h1>
 </div>
 
 <div class="h-12 mt-2 space-y-6">
@@ -19,9 +19,14 @@
 
 <h1 class="hidden">AnxietyAlly</h1>
 <!-- <div class="h-20 mt-8 ml-6 grid grid-cols-3 gap-2"> -->
-	<div class="rounded-3xl shadow col-span-2 bg-red-400 bg-opacity-70 flex items-center justify-center h-14 m-6">
-		<a href="/questionnaire" class="text-white text-xl font-medium rounded-3xl px-8 py-4 border border-transparent hover:bg-opacity-90">
-		  Take the first steps!
-		</a>
-	  </div>
+<div
+	class="rounded-3xl shadow col-span-2 bg-red-400 bg-opacity-70 flex items-center justify-center h-14 m-6"
+>
+	<a
+		href="/questionnaire"
+		class="text-white text-xl font-medium rounded-3xl px-8 py-4 border border-transparent hover:bg-opacity-90"
+	>
+		Take the first steps!
+	</a>
+</div>
 <!-- </div> -->

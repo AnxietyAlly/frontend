@@ -7,7 +7,6 @@
 
 	<div class="h-10 mt-2 flex justify-center">
 		<h1 class="text-3xl font-bold text-red-400 text-opacity-90">Progress</h1>
-</div>
+	</div>
 	<Calendar />
 </div>
-

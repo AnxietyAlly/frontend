@@ -23,7 +23,9 @@
 <div>
 	<div>
 		<div class="flex justify-center">
-			<div class="m-4 grid grid-rows-2 gap-4 w-3/4 md:w-1/2 lg:w-1/4 bg-white bg-opacity-50 p-6">
+			<div
+				class="rounded-md m-4 grid grid-rows-2 gap-4 w-3/4 md:w-1/2 lg:w-1/4 bg-white bg-opacity-50 p-6"
+			>
 				<p class="text-l font-semibold text-stone-600">
 					{allQuestions[currentQuestionNumber - 1].data.question}
 				</p>
@@ -95,11 +97,10 @@
 					</li>
 				</ul>
 				<div class="flex justify-center">
-					<p class="text-xs">More information on this topic?</p> 
+					<p class="text-xs">More information on this topic?</p>
 				</div>
 			</div>
 		</div>
-
 	</div>
 	<div>
 		<div class="h-20 mt-4 space-y-6">
