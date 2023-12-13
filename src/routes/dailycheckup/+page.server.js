@@ -60,7 +60,7 @@ export const actions = {
             description: description
         }
 
-        postData("http://127.0.0.1:3013/dailyCheckupResults", dataForPost).then((data) => {
+        postData("http://127.0.0.1:3010/progressApi/dailyCheckupResults", dataForPost).then((data) => {
             console.log(data);
         });
 
