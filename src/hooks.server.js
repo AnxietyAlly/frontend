@@ -1,5 +1,4 @@
-import { getSession } from '../backend/accounts/code/lib/server/sessionStore';
-
+import { getSession } from '/src/lib/server/sessionStore';
 
 export const handle = (async ({ event, resolve }) => {
     const { cookies } = event;
@@ -7,8 +6,7 @@ export const handle = (async ({ event, resolve }) => {
     if (sid) {
       const session = getSession(sid);
       if (session) {
-        event.locals.username = session.username;
-        event.locals.roles = session.roles;
+        event.locals.name = session.name;
       } else {
         // remove invalid/expired/unknown cookie
         cookies.delete('sid');

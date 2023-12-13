@@ -1,6 +1,6 @@
 // import { checkUserCredentials } from '../backend/accounts/code/controllers/accountsController.js';
 import bcrypt from "bcrypt";
-import { createSession } from '../backend/accounts/code/lib/server/sessionStore';
+import { createSession } from '/src/lib/server/sessionStore';
 import { fail, redirect } from '@sveltejs/kit';
 
 /**
