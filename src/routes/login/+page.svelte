@@ -1,12 +1,13 @@
 <script>
+	import { enhance } from '$app/forms';
 	export let form;
 </script>
 
 <div class="container">
 	<h1 class="is-size-3 has-text-weight-semibold my-4">Login or Register</h1>
-	<form method="post">
+	<form method="post" use:enhance>
 		<input class="input my-2" type="text" placeholder="Username" name="name" required />
-        <input class="input my-2" type="text" placeholder="Email" name="email" required />
+		<input class="input my-2" type="text" placeholder="Email" name="email" required />
 		<input class="input my-2" type="password" placeholder="Password" name="password" required />
 
 		{#if form?.errorMessage}

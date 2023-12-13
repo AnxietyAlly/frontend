@@ -1,4 +1,4 @@
-import { checkUserCredentials, createUser } from '../backend/accounts/code/lib/server/db';
+import { checkUserCredentials, createAccount } from '../backend/accounts/code/controllers/accountsController.js';
 import { createSession } from '../backend/accounts/code/lib/server/sessionStore';
 import { fail, redirect } from '@sveltejs/kit';
 
@@ -18,7 +18,7 @@ export const actions = {
         if (name && email && password) {
             try {
                 
-                createUser(name, email, password);
+                createAccount(name, email, password);
             } catch (err) {
                 return fail(400, { errorMessage: 'Internal Server Error' });
             }
