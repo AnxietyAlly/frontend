@@ -17,6 +17,7 @@ export const actions = {
 
         if (name && email && password) {
             try {
+                
                 createUser(name, email, password);
             } catch (err) {
                 return fail(400, { errorMessage: 'Internal Server Error' });
