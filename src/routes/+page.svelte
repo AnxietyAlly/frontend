@@ -1,11 +1,20 @@
+<script>
+	export let data;
+</script>
+
 <div class="min-h-screen bg-sky flex flex-col items-center">
 	<img class="w-40 h-100 mt-5" src="/anxietyAllyLogo.png" alt="Anxiety Ally Logo">
 	<h1 class="hidden">AnxietyAlly</h1>
 	<div class="h-20 mt-8 ml-6 grid grid-cols-3 gap-2">
 	  <div class="rounded-md shadow col-span-2">
-		<a href="/questionnaire" class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white button-color hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
-		  Take the first steps!
-		</a>
+		{#if data?.name}
+			<a href="/questionnaire" class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white button-color hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+				Take the first steps {data.name}!
+			</a>
+        {:else}
+            <a href="/login" class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white button-color hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">Log in</a>
+        {/if}
+		
 	  </div>
 	  <div class="rounded-md shadow">
 		<!-- <a href="/" class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white button-color hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
