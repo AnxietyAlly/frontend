@@ -67,38 +67,29 @@
 	
 </script>
 
-<div class="min-h-screen bg-sky flex flex-col items-center">
-	<img class="w-40 h-100 z-10" src=".//anxietyAllyLogo.png" alt="Anxiety Ally Logo" />
-
-	{#key currentPageNumber}
-		{#if currentPageNumber == 1}
-			<QuestionnaireStartPage bind:currentPageNumber />
-		{:else if currentPageNumber == 2}
-			{#key currentQuestionNumber}
-				<QuestionnaireQuestionsPage
-					bind:currentPageNumber
-					bind:currentQuestionNumber
-					allQuestions={allQuestionsFromDB}
-				/>
-			{/key}
-		{:else if currentPageNumber == 3}
-			<QuestionnaireResultsPage bind:currentPageNumber bind:currentQuestionNumber />
-		{:else}
-			<QuestionnaireStartPage />
-		{/if}
-	{/key}
-	<!-- {#each allQuestionsFromDB as question}
-			<p>{question.data.question}</p>
-		{/each} -->
+<div class="flex flex-col items-center">
+	<img class="w-40 h-100 mt-4" src=".//anxietyally.png" alt="Anxiety Ally Logo" />
 </div>
 
-<style>
-	.bg-sky {
-		background-image: url('.//background-sky.png');
-		background-position: center;
-	}
+{#key currentPageNumber}
+	{#if currentPageNumber == 1}
+		<QuestionnaireStartPage bind:currentPageNumber />
+	{:else if currentPageNumber == 2}
+		{#key currentQuestionNumber}
+			<QuestionnaireQuestionsPage
+				bind:currentPageNumber
+				bind:currentQuestionNumber
+				allQuestions={allQuestionsFromDB}
+			/>
+		{/key}
+	{:else if currentPageNumber == 3}
+		<QuestionnaireResultsPage bind:currentPageNumber bind:currentQuestionNumber />
+	{:else}
+		<QuestionnaireStartPage />
+	{/if}
+{/key}
 
-	/* .app .quiz-screen .footer > div {
-		margin:0px 10px;
-	} */
-</style>
+<!-- {#each allQuestionsFromDB as question}
+			<p>{question.data.question}</p>
+		{/each} -->
+
