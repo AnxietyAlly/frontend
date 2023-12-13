@@ -6,7 +6,6 @@
         currentPageNumber = 2;
     }
 </script>
-
 <div>
 	<div class="bg-blue-400 text-black rounded-lg">
 		Begin your journey to anxiety management and inner peace by answering questions in our

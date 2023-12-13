@@ -19,7 +19,6 @@
 		}
 	}
 </script>
-
 <div>
 	<div>
 		<h1>{allQuestions[currentQuestionNumber - 1].data.question}</h1>
