@@ -1,5 +1,9 @@
+<script>
+	export let data;
+</script>
+                       
 <div class="flex flex-col items-center">
-	<img class="w-60 h-100 mt-24" src=".//anxietyally.png" alt="Anxiety Ally Logo" />
+	<img class="w-60 h-100 mt-24" src="/anxietyally.png" alt="Anxiety Ally Logo" />
 </div>
 
 <div class="h-10 mt-2 flex justify-center">
@@ -13,20 +17,20 @@
 				"AnxietyAlly: Your Complete Anxiety Companion. Identify and track your daily progress. Your
 				trusted ally on the path to serenity."
 			</p>
-		</div>
-	</div>
-</div>
+      </div>
+    </div>
+  </div>
 
 <h1 class="hidden">AnxietyAlly</h1>
-<!-- <div class="h-20 mt-8 ml-6 grid grid-cols-3 gap-2"> -->
 <div
 	class="rounded-3xl shadow col-span-2 bg-red-400 bg-opacity-70 flex items-center justify-center h-14 m-6"
 >
-	<a
-		href="/questionnaire"
-		class="text-white text-xl font-medium rounded-3xl px-8 py-4 border border-transparent hover:bg-opacity-90"
-	>
-		Take the first steps!
-	</a>
+	{#if data?.name}
+			<a href="/questionnaire" class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white button-color hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+			    Take the first steps {data.name}!
+			</a>
+  {:else}
+       <a href="/login" class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white button-color hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">Log in</a>
+  {/if}
 </div>
 <!-- </div> -->

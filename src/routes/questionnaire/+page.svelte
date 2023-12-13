@@ -64,6 +64,7 @@
 
 	let currentPageNumber = 1;
 	let currentQuestionNumber = 1;
+	
 </script>
 
 <div class="flex flex-col items-center">
