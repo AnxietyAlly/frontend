@@ -1,6 +1,37 @@
 // import { checkUserCredentials } from '../backend/accounts/code/controllers/accountsController.js';
+import bcrypt from "bcrypt";
 import { createSession } from '../backend/accounts/code/lib/server/sessionStore';
 import { fail, redirect } from '@sveltejs/kit';
+
+/**
+	 * Async function to get the data from the SWAPI api
+	 * @returns - returns a promise
+	 */
+async function getApiData(url) {
+    try {
+        let response = await fetch(url);
+        let returnedResponse = await response.json();
+        return returnedResponse;
+    } catch (err) {
+        console.error('Error: ', err);
+    }
+}
+
+async function checkUserCredentials(name, email, password) {
+    const account = await getApiData(
+        `http://localhost:3011/accounts/email/${email}`
+    );
+
+    if (account && account.data !== undefined && account.data !== null) {
+      return bcrypt.compare(password, account.data.password);
+    } else {
+      // spend some time to "waste" some time
+      // this makes brute forcing harder
+      // could also do a timeout here
+      await bcrypt.hash(password, 12);
+      return false;
+    }
+}
 
 function performLogin(cookies, name) {
     const maxAge = 1000 * 60 * 60 * 24 * 30; // 30 days
@@ -51,10 +82,10 @@ export const actions = {
         }
     },
     login: async ({ request, cookies }) => {
-        const data = await request.formData();
-        const name = data.get('name')?.toString();
-        const email = data.get('email')?.toString();
-        const password = data.get('password')?.toString();
+        const formData = await request.formData();
+        const name = formData.get('name')?.toString();
+        const email = formData.get('email')?.toString();
+        const password = formData.get('password')?.toString();
 
         if (name && email && password) {
             const res = await checkUserCredentials(name, email, password);
