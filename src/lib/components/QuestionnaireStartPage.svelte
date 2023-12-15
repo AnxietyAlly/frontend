@@ -1,35 +1,38 @@
 <script>
-	import { onMount } from "svelte";
+	import { onMount } from 'svelte';
 
+	export let currentPageNumber;
+	export let correctAndPossibleAnswersForQuestions;
+	export let questionAnswerTemplates;
+	let amountOfLoops = 0;
 
-    export let currentPageNumber;
-    export let correctAndPossibleAnswersForQuestions;
-    export let questionAnswerTemplates;
-    let amountOfLoops = 0;
+	let startBtnLabel = undefined;
 
-    let startBtnLabel = undefined;
-    
-    onMount( () => {
-        startBtnLabel = document.getElementById("startBtnLabel");
-    });
+	onMount(() => {
+		startBtnLabel = document.getElementById('startBtnLabel');
+	});
 
-    function startQuestionnaire() {
-        if (startBtnLabel !== undefined) {
-            if (!(correctAndPossibleAnswersForQuestions.length == 0) && !(questionAnswerTemplates.length == 0)) {
-                currentPageNumber = 2;
-            } else if (amountOfLoops <= 100) {
-                startBtnLabel.innerHTML = "Loading...";
-                startBtnLabel.classList = "";
-                amountOfLoops += 1;
-                setTimeout(() => {
-                    startQuestionnaire()
-                }, 50);
-            } else {
-                startBtnLabel.innerHTML = "Loading failed, the server took too long to respond. Try reloading the page and waiting for 10 seconds before clicking the button";
-                startBtnLabel.classList = "bg-red-500";
-            }
-        }
-    }
+	function startQuestionnaire() {
+		if (startBtnLabel !== undefined) {
+			if (
+				!(correctAndPossibleAnswersForQuestions.length == 0) &&
+				!(questionAnswerTemplates.length == 0)
+			) {
+				currentPageNumber = 2;
+			} else if (amountOfLoops <= 100) {
+				startBtnLabel.innerHTML = 'Loading...';
+				startBtnLabel.classList = '';
+				amountOfLoops += 1;
+				setTimeout(() => {
+					startQuestionnaire();
+				}, 50);
+			} else {
+				startBtnLabel.innerHTML =
+					'Loading failed, the server took too long to respond. Try reloading the page and waiting for 10 seconds before clicking the button';
+				startBtnLabel.classList = 'bg-red-500';
+			}
+		}
+	}
 </script>
 
 <div class="h-20 mt-4 space-y-6">
@@ -45,7 +48,8 @@
 		</div>
 	</div>
 </div>
-    <label for="startBtn" class="hidden" id="startBtnLabel"></label>
-    <button name="startBtn" class="btn bg-blue-600 border-2" on:click={() => startQuestionnaire()}>Start quiz</button>
-</div>
+<label for="startBtn" class="hidden" id="startBtnLabel" />
+<button name="startBtn" class="btn bg-blue-600 border-2" on:click={() => startQuestionnaire()}
+	>Start quiz</button
+>
 <!-- <button class="btn bg-blue-600 border-2" on:click={() => startQuestionnaire()}>Start quiz</button> -->
