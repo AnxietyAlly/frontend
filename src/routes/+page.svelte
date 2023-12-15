@@ -26,11 +26,11 @@
 	class="rounded-3xl shadow col-span-2 bg-red-400 bg-opacity-70 flex items-center justify-center h-14 m-6"
 >
 	{#if data?.name}
-			<a href="/questionnaire" class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white button-color hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+			<a href="/questionnaire" class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white button-color md:py-4 md:text-lg md:px-10">
 			    Take the first steps {data.name}!
 			</a>
-  {:else}
-       <a href="/login" class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white button-color hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">Log in</a>
-  {/if}
+	{:else}
+		<a href="/login" class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white button-color md:py-4 md:text-lg md:px-10">Log in</a>
+	{/if}
 </div>
 <!-- </div> -->
