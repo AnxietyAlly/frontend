@@ -41,7 +41,7 @@
 	function handleDateClick(day) {
 		selectedDate = new Date(currentYear, currentMonth, day);
 		selectedDateNumber = selectedDate.getDate();
-		selectedResult = allDailyCheckupResultsFromDB.find(result => {
+		selectedResult = allDailyCheckupResultsFromDB.find((result) => {
 			if (currentMonth + 1 < 10) {
 				if (day < 10) {
 					return result.data.date.substr(0, 8) == `${currentYear}0${currentMonth + 1}0${day}`;
@@ -89,7 +89,9 @@
 		let dailyCheckupResultsFromDatabase = [];
 		if (browser) {
 			const dailyCheckupResultLinksJSON = await getApiData(
-				`http://localhost:3010/progressApi/user/${userId}/dateRange/${currentYear}${currentMonth + 1}01000000/${currentYear}${currentMonth + 1}${daysInCurrentMonth}235959/dailyCheckupResults`
+				`http://localhost:3010/progressApi/user/${userId}/dateRange/${currentYear}${
+					currentMonth + 1
+				}01000000/${currentYear}${currentMonth + 1}${daysInCurrentMonth}235959/dailyCheckupResults`
 			);
 
 			const dailyCheckupResultLinks = dailyCheckupResultLinksJSON.data;
@@ -108,21 +110,21 @@
 
 	async function fillCalendar() {
 		allDailyCheckupResultsFromDB = await getDailyCheckupResultsOfMonth();
-		allDailyCheckupResultsFromDB.forEach(result => {
+		allDailyCheckupResultsFromDB.forEach((result) => {
 			if (result.data.result <= 50) {
-				document.getElementById(result.data.date.substr(0, 8)).style.backgroundColor = "red";
+				document.getElementById(result.data.date.substr(0, 8)).style.backgroundColor = 'red';
 			} else {
-				document.getElementById(result.data.date.substr(0, 8)).style.backgroundColor = "green";
+				document.getElementById(result.data.date.substr(0, 8)).style.backgroundColor = 'green';
 			}
 		});
-		
+
 		console.log(allDailyCheckupResultsFromDB);
 	}
 
 	function emptyCalender() {
-		const days = document.getElementsByClassName("calendar-day");
-		for(let day of days) {
-			day.style.backgroundColor = "transparent";
+		const days = document.getElementsByClassName('calendar-day');
+		for (let day of days) {
+			day.style.backgroundColor = 'transparent';
 		}
 	}
 
@@ -132,34 +134,62 @@
 </script>
 
 <div id="initialContent">
-	<div class="nav-buttons">
-		<button class="flex-none" on:click={() => updateMonth(-1)}>Previous Month</button>
+	<div class="nav-buttons mt-2">
+		<button
+			class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium mr-3 rounded-3xl shadow col-span-2 bg-red-400 bg-opacity-70 text-white md:py-4 md:text-lg md:px-10"
+			on:click={() => updateMonth(-1)}>Previous Month</button
+		>
 
-		<button class="flex-none" on:click={() => updateMonth(1)}>Next Month</button>
+		<button
+			class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-3xl shadow col-span-2 bg-red-400 bg-opacity-70 text-white md:py-4 md:text-lg md:px-10"
+			on:click={() => updateMonth(1)}>Next Month</button
+		>
 	</div>
 	<div>
-		<h2 class="text-white">
-			{new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(currentDate)}
-		</h2>
+		<div class="flex justify-center">
+			<h2 class="text-l font-semibold text-stone-600">
+				{new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(currentDate)}
+			</h2>
+		</div>
 	</div>
 	<div class="calendar">
 		{#each range(getDaysInMonth(currentYear, currentMonth)) as day (day)}
 			{#if currentMonth + 1 < 10}
 				{#if day < 10}
-					<a href="#top" class="calendar-day" on:click={() => handleDateClick(day)} id="{String(currentYear)}0{String((currentMonth + 1))}0{String(day)}">
+					<a
+						href="#top"
+						class="calendar-day"
+						on:click={() => handleDateClick(day)}
+						id="{String(currentYear)}0{String(currentMonth + 1)}0{String(day)}"
+					>
 						{day}
 					</a>
 				{:else}
-					<a href="#top" class="calendar-day" on:click={() => handleDateClick(day)} id="{String(currentYear)}0{String((currentMonth + 1))}{String(day)}">
+					<a
+						href="#top"
+						class="calendar-day"
+						on:click={() => handleDateClick(day)}
+						id="{String(currentYear)}0{String(currentMonth + 1)}{String(day)}"
+					>
 						{day}
 					</a>
 				{/if}
 			{:else if day < 10}
-				<a href="#top" class="calendar-day" on:click={() => handleDateClick(day)} id="{String(currentYear)}{String((currentMonth + 1))}0{String(day)}">
+				<a
+					href="#top"
+					class="calendar-day"
+					on:click={() => handleDateClick(day)}
+					id="{String(currentYear)}{String(currentMonth + 1)}0{String(day)}"
+				>
 					{day}
 				</a>
 			{:else}
-				<a href="#top" class="calendar-day" on:click={() => handleDateClick(day)} id="{String(currentYear)}{String((currentMonth + 1))}{String(day)}">
+				<a
+					href="#top"
+					class="calendar-day"
+					on:click={() => handleDateClick(day)}
+					id="{String(currentYear)}{String(currentMonth + 1)}{String(day)}"
+				>
 					{day}
 				</a>
 			{/if}
@@ -175,32 +205,45 @@
 				<p class="text-white">{selectedDate ? selectedDate.toDateString() : 'No date selected'}</p>
 				<h3 class="text-white text">You rated your mood as:</h3>
 				{#if selectedResult.data.result <= 20}
-					<img class="w-5 h-5" src="/AngryEmoji.png" alt="Angry emoji"/>
+					<img class="w-5 h-5" src="/AngryEmoji.png" alt="Angry emoji" />
 				{:else if selectedResult.data.result <= 40}
-					<img class="w-5 h-5" src="/SemiAngryEmoji.png" alt="Semi angry emoji"/>
+					<img class="w-5 h-5" src="/SemiAngryEmoji.png" alt="Semi angry emoji" />
 				{:else if selectedResult.data.result <= 60}
-					<img class="w-5 h-5" src="/NeutralEmoji.png" alt="Neutral emoji"/>
+					<img class="w-5 h-5" src="/NeutralEmoji.png" alt="Neutral emoji" />
 				{:else if selectedResult.data.result <= 80}
-					<img class="w-5 h-5" src="/HappyEmoji.png" alt="Happy emoji"/>
+					<img class="w-5 h-5" src="/HappyEmoji.png" alt="Happy emoji" />
 				{:else if selectedResult.data.result <= 100}
-					<img class="w-5 h-5" src="/VeryHappyEmoji.png" alt="Very happy emoji"/>
+					<img class="w-5 h-5" src="/VeryHappyEmoji.png" alt="Very happy emoji" />
 				{/if}
 				<p class="text-white">{selectedResult.data.result}/100</p>
 				<h3 class="text-white text">Your description:</h3>
-				{#if selectedResult.data.description !== null && selectedResult.data.description !== undefined && selectedResult.data.description !== ""}
+				{#if selectedResult.data.description !== null && selectedResult.data.description !== undefined && selectedResult.data.description !== ''}
 					<p class="text-white">{selectedResult.data.description}</p>
 				{:else}
-					<p class="text-white">We haven't found a description. You might not have left a description.</p>
+					<p class="text-white">
+						We haven't found a description. You might not have left a description.
+					</p>
 				{/if}
 			{:else}
-				<p class="text-white">We weren't able to find any data for this date. You might not have done the daily description that day.</p>
+				<div class="flex justify-center">
+					<div class="m-4 bg-white bg-opacity-50 p-6">
+						<p class="text-stone-600">
+							We weren't able to find any data for this date. You might not have done the daily
+							description that day.
+						</p>
+					</div>
+				</div>
 			{/if}
 		{/if}
 	{/each}
-	<button
-		class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white button-color hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
-		on:click={() => refreshPage()}>Back</button
-	>
+	<div class="h-20 mt-12 space-y-6">
+		<div class="flex justify-center">
+			<button
+				class="btn w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-3xl mr-3 shadow col-span-2 bg-red-400 bg-opacity-70 text-white md:py-4 md:text-lg md:px-10"
+				on:click={() => refreshPage()}>Back</button
+			>
+		</div>
+	</div>
 </div>
 
 <style>
@@ -215,7 +258,7 @@
 
 	.calendar-day {
 		padding: 8px;
-		border: 1px solid #ddd;
+		border: 1px solid #f87171;
 		text-align: center;
 	}
 
@@ -225,34 +268,9 @@
 		margin-bottom: 10px;
 	}
 
-	button {
-		padding: 10px;
-		cursor: pointer;
-		background-color: #4caf50;
-		color: white;
-		border: none;
-		border-radius: 4px;
-		font-size: 14px;
-		transition: background-color 0.3s ease;
-		width: 48%;
-	}
-
-	button:hover {
-		background-color: #45a049;
-	}
-
 	.calendar {
 		grid-template-columns: repeat(7, 1fr);
 		gap: 4px;
 		max-width: 100%;
-	}
-
-	.nav-buttons {
-		align-items: center;
-		justify-content: space-between;
-	}
-
-	button {
-		margin-bottom: 8px;
 	}
 </style>

@@ -1,50 +1,34 @@
 <script>
 	import '../app.postcss';
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
-
-	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { storePopup } from '@skeletonlabs/skeleton';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 </script>
 
-<!-- App Shell -->
 <AppShell>
 	<svelte:fragment slot="footer">
-		<!-- App Bar -->
-		<AppBar background="bg-blue-300 bg-opacity-30">
+		<AppBar background="bg-orange-600 bg-opacity-20">
 			<svelte:fragment slot="trail">
-				<a
-					class="btn btn-sm variant-ghost-surface "
-					href="/"
-					rel="noreferrer"
-				>
-					<img class="max-h-12" src="/book-alt.png" alt="Book icon">
+				<a class="btn btn-sm variant-ghost-surface border-red-400" href="/" rel="noreferrer">
+					<img class="max-h-12" src="/book.png" alt="Book icon" />
 				</a>
-				<a
-					class="btn btn-sm variant-ghost-surface"
-					href="/dashboard"
-					rel="noreferrer"
-				>
-					<img class="max-h-12" src="/home-icon.png" alt="Home icon">
+				<a class="btn btn-sm variant-ghost-surface" href="/dashboard" rel="noreferrer">
+					<img class="max-h-12" src="/home.png" alt="Home icon" />
 				</a>
-				<!-- <a
-					class="btn btn-sm variant-ghost-surface"
-					href="/"
-					rel="noreferrer"
-				>
-					<img src="/user.png" alt="User icon">
-				</a>
-				<a
-				class="btn btn-sm variant-ghost-surface"
-				href="/"
-				rel="noreferrer"
-				>
-					<img src="/settings.png" alt="Settings icon">
-				</a>	 -->
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
-	<!-- Page Route Content -->
 	<slot />
 </AppShell>
+
+<style>
+	:global(html),
+	:global(body) {
+		background: #ffeadd;
+		background: -moz-linear-gradient(45deg, #ffeadd 0%, #fecaca 100%, #fef2f2 100%);
+		background: -webkit-linear-gradient(45deg, #ffeadd 0%, #fecaca 100%, #fef2f2 100%);
+		background: linear-gradient(45deg, #ffeadd 0%, #fecaca 100%, #fef2f2 100%);
+		height: 100%;
+	}
+</style>
