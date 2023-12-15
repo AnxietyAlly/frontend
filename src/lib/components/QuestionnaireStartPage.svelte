@@ -32,14 +32,20 @@
     }
 </script>
 
-<div>
-	<div class="bg-blue-400 text-black rounded-lg">
-		Begin your journey to anxiety management and inner peace by answering questions in our
-		questionnaire. Identify your anxiety, vent to our AI doctor, and connect with local
-		psychologists. Take the first steps toward a calmer, more serene you
+<div class="h-20 mt-4 space-y-6">
+	<div class="flex justify-center">
+		<div class="rounded-md w-3/4 md:w-1/2 lg:w-1/4 bg-white bg-opacity-50 p-4">
+			<p class="text-xs text-center text-stone-600 italic">
+				This quiz does not serve as a diagnostic tool. Only qualified mental health professionals
+				can diagnose mental health disorders. AnxietyAlly acknowledges that a quiz can represent an
+				important initial step towards receiving treatment. Frequently, individuals refrain from
+				seeking assistance due to worries that their issues may not be substantial or severe to
+				justify professional help.
+			</p>
+		</div>
 	</div>
-
+</div>
     <label for="startBtn" class="hidden" id="startBtnLabel"></label>
     <button name="startBtn" class="btn bg-blue-600 border-2" on:click={() => startQuestionnaire()}>Start quiz</button>
-
 </div>
+<!-- <button class="btn bg-blue-600 border-2" on:click={() => startQuestionnaire()}>Start quiz</button> -->

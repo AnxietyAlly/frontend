@@ -301,10 +301,30 @@
 
 	let currentPageNumber = 1;
 	let currentQuestionNumber = 1;
+	
 </script>
 
-<div class="min-h-screen bg-sky flex flex-col items-center">
-	<img class="w-40 h-100 z-10" src=".//anxietyAllyLogo.png" alt="Anxiety Ally Logo" />
+<div class="flex flex-col items-center">
+	<img class="w-40 h-100 mt-4" src=".//anxietyally.png" alt="Anxiety Ally Logo" />
+</div>
+
+{#key currentPageNumber}
+	{#if currentPageNumber == 1}
+		<QuestionnaireStartPage bind:currentPageNumber />
+	{:else if currentPageNumber == 2}
+		{#key currentQuestionNumber}
+			<QuestionnaireQuestionsPage
+				bind:currentPageNumber
+				bind:currentQuestionNumber
+				allQuestions={allQuestionsFromDB}
+			/>
+		{/key}
+	{:else if currentPageNumber == 3}
+		<QuestionnaireResultsPage bind:currentPageNumber bind:currentQuestionNumber />
+	{:else}
+		<QuestionnaireStartPage />
+	{/if}
+{/key}
 
 	{#key currentPageNumber}
 		{#if currentPageNumber == 1}
@@ -329,15 +349,4 @@
 	<!-- {#each questionsForQuestionnaireFromDB as question}
 			<p>{question.data.question}</p>
 		{/each} -->
-</div>
 
-<style>
-	.bg-sky {
-		background-image: url('.//background-sky.png');
-		background-position: center;
-	}
-
-	/* .app .quiz-screen .footer > div {
-		margin:0px 10px;
-	} */
-</style>

@@ -67,9 +67,19 @@
 		{/if}
 	</div>
 	<div>
-		{#if currentQuestionNumber > 1}
-			<button class="btn bg-blue-600 order-2" on:click={() => goToPreviousQuestion()}>Previous</button>
-		{/if}
-		<button class="btn bg-blue-600 border-2" on:click={() => goToNextQuestion()}>Next</button>
+		<div class="h-20 mt-4 space-y-6">
+			<div class="flex justify-center">
+				{#if currentQuestionNumber > 1}
+					<button
+						class="btn w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-3xl shadow col-span-2 bg-red-400 bg-opacity-70 text-white mr-3 md:py-4 md:text-lg md:px-10"
+						on:click={() => goToPreviousQuestion()}>Back</button
+					>
+				{/if}
+				<button
+					class="btn w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-3xl shadow col-span-2 bg-red-400 bg-opacity-70 text-white md:py-4 md:text-lg md:px-10"
+					on:click={() => goToNextQuestion()}>Next</button
+				>
+			</div>
+		</div>
 	</div>
 </div>
