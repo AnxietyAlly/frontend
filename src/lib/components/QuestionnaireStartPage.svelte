@@ -45,7 +45,17 @@
 		</div>
 	</div>
 </div>
-    <label for="startBtn" class="hidden" id="startBtnLabel"></label>
-    <button name="startBtn" class="btn bg-blue-600 border-2" on:click={() => startQuestionnaire()}>Start quiz</button>
+
+<div class="h-20 mt-32 space-y-6">
+    <div class="flex justify-center">
+        <label for="startBtn" class="hidden" id="startBtnLabel"></label>
+        <button
+            name="startBtn"
+            class="btn w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-3xl shadow col-span-2 bg-red-400 bg-opacity-70 text-white md:py-4 md:text-lg md:px-10"
+            on:click={() => startQuestionnaire()}
+        >
+            Start quiz
+        </button>
+    </div>
 </div>
 <!-- <button class="btn bg-blue-600 border-2" on:click={() => startQuestionnaire()}>Start quiz</button> -->

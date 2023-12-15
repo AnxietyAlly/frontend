@@ -308,24 +308,6 @@
 	<img class="w-40 h-100 mt-4" src=".//anxietyally.png" alt="Anxiety Ally Logo" />
 </div>
 
-{#key currentPageNumber}
-	{#if currentPageNumber == 1}
-		<QuestionnaireStartPage bind:currentPageNumber />
-	{:else if currentPageNumber == 2}
-		{#key currentQuestionNumber}
-			<QuestionnaireQuestionsPage
-				bind:currentPageNumber
-				bind:currentQuestionNumber
-				allQuestions={allQuestionsFromDB}
-			/>
-		{/key}
-	{:else if currentPageNumber == 3}
-		<QuestionnaireResultsPage bind:currentPageNumber bind:currentQuestionNumber />
-	{:else}
-		<QuestionnaireStartPage />
-	{/if}
-{/key}
-
 	{#key currentPageNumber}
 		{#if currentPageNumber == 1}
 			<QuestionnaireStartPage bind:currentPageNumber correctAndPossibleAnswersForQuestions={correctAndPossibleAnswersForQuestions} questionAnswerTemplates={questionAnswerTemplatesFromDB} />

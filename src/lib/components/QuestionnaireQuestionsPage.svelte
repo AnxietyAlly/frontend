@@ -53,7 +53,7 @@
 							>
 							<label
 								for="{answer.answerId}"
-								class="bg-blue-600 inline-flex items-center w-full p-2 m-2 justify-between cursor-pointer border-2 rounded-lg peer-checked:border-red-700"
+								class="bg-red-300 inline-flex items-center w-full p-3 mr-1 justify-center text-white cursor-pointer border-2 rounded-lg peer-checked:border-red-700"
 							>
 								<div class="block">
 									<div class="w-full">{answer.text}</div>
