@@ -89,7 +89,7 @@
 		let dailyCheckupResultsFromDatabase = [];
 		if (browser) {
 			const dailyCheckupResultLinksJSON = await getApiData(
-				`http://localhost:3010/progressApi/user/${userId}/dateRange/${currentYear}${
+				`https://aa-apigateway-sprint-2-2.onrender.com/progressApi/user/${userId}/dateRange/${currentYear}${
 					currentMonth + 1
 				}01000000/${currentYear}${currentMonth + 1}${daysInCurrentMonth}235959/dailyCheckupResults`
 			);
@@ -98,7 +98,7 @@
 
 			for (let i = 0; i < dailyCheckupResultLinks.length; i++) {
 				const question = await getApiData(
-					`http://localhost:3010/progressApi${dailyCheckupResultLinks[i]}`
+					`https://aa-apigateway-sprint-2-2.onrender.com/progressApi${dailyCheckupResultLinks[i]}`
 				);
 
 				dailyCheckupResultsFromDatabase.push(question);

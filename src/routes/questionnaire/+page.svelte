@@ -28,14 +28,14 @@
 		let questionsFromDatabase = [];
 		if (browser) {
 			const questionLinksJSON = await getApiData(
-				'http://localhost:3010/questionnaireApi/questionnaires/1/questions'
+				'https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi/questionnaires/1/questions'
 			);
 
 			const questionLinks = questionLinksJSON.data;
 
 			for (let i = 0; i < questionLinks.length; i++) {
 				const question = await getApiData(
-					`http://localhost:3010/questionnaireApi${questionLinks[i]}`
+					`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi${questionLinks[i]}`
 				);
 
 				questionsFromDatabase.push(question);
@@ -43,7 +43,7 @@
 			const allQuestionsPromise = await Promise.all(questionsFromDatabase);
 
 			// const questionPromises = questionLinks.map((link) =>
-			// 	getApiData(`http://localhost:3010/questionnaireApi${link}`)
+			// 	getApiData(`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi${link}`)
 			// );
 
 			return allQuestionsPromise;
@@ -64,7 +64,7 @@
 
 			for (let i = 0; i < relevantQuestionAnswerTemplateIDsFromDB.length; i++) {
 				const questionAnswerTemplate = await getApiData(
-					`http://localhost:3010/questionnaireApi/questionAnswerTemplates/${relevantQuestionAnswerTemplateIDsFromDB[i]}`
+					`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi/questionAnswerTemplates/${relevantQuestionAnswerTemplateIDsFromDB[i]}`
 				);
 
 				relevantQuestionAnswerTemplatesFromDB.push(questionAnswerTemplate);
@@ -79,14 +79,14 @@
 		let mentalProblemsFromDatabase = [];
 		if (browser) {
 			const mentalProblemLinksJSON = await getApiData(
-				'http://localhost:3010/questionnaireApi/mentalProblems'
+				'https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi/mentalProblems'
 			);
 
 			const mentalProblemLinks = mentalProblemLinksJSON.data;
 
 			for (let i = 0; i < mentalProblemLinks.length; i++) {
 				const mentalProblem = await getApiData(
-					`http://localhost:3010/questionnaireApi${mentalProblemLinks[i]}`
+					`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi${mentalProblemLinks[i]}`
 				);
 
 				mentalProblemsFromDatabase.push(mentalProblem);
@@ -94,7 +94,7 @@
 			const allMentalProblemsPromise = await Promise.all(mentalProblemsFromDatabase);
 
 			// const questionPromises = questionLinks.map((link) =>
-			// 	getApiData(`http://localhost:3010/questionnaireApi${link}`)
+			// 	getApiData(`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi${link}`)
 			// );
 
 			return allMentalProblemsPromise;
@@ -106,7 +106,7 @@
 		if (browser) {
 			for (let i = 0; i < questions.length; i++) {
 				const correctAnswers = await getApiData(
-					`http://localhost:3010/questionnaireApi/questions/${questions[i].data.id}/correctAnswers`
+					`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi/questions/${questions[i].data.id}/correctAnswers`
 				);
 
 				correctAnswersFromDatabase.push(correctAnswers);
@@ -152,7 +152,7 @@
 
 			for (let i = 0; i < questions.length; i++) {
 				const possibleAnswerLinksJSON = await getApiData(
-					`http://localhost:3010/questionnaireApi/questions/${questions[i].data.id}/possibleAnswers`
+					`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi/questions/${questions[i].data.id}/possibleAnswers`
 				);
 
 				const possibleAnswerLinks = possibleAnswerLinksJSON.data;
@@ -160,7 +160,7 @@
 				let possibleAnswersForQuestionPromises = [];
 				for (let j = 0; j < possibleAnswerLinks.length; j++) {
 					const possibleAnswer = await getApiData(
-						`http://localhost:3010/questionnaireApi${possibleAnswerLinks[j]}`
+						`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi${possibleAnswerLinks[j]}`
 					);
 					possibleAnswersForQuestionPromises.push(possibleAnswer);
 				}
