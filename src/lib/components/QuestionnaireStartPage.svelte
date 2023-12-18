@@ -19,7 +19,7 @@
 				!(questionAnswerTemplates.length == 0)
 			) {
 				currentPageNumber = 2;
-			} else if (amountOfLoops <= 100) {
+			} else if (amountOfLoops <= 400) {
 				startBtnLabel.innerHTML = 'Loading...';
 				startBtnLabel.classList = '';
 				amountOfLoops += 1;
