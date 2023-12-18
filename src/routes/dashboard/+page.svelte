@@ -1,5 +1,5 @@
 <div class="flex flex-col items-center mt-4">
-	<img class="w-40 h-100 mt-4" src=".//anxietyally.png" alt="Anxiety Ally Logo" />
+	<img class="w-40 h-100 mt-4" src="/anxietyally.png" alt="Anxiety Ally Logo" />
 </div>
 <div class="h-10 mt-2 flex justify-center">
 	<h1 class="text-3xl font-bold text-red-400 text-opacity-90">Welcome *user*</h1>

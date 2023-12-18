@@ -305,7 +305,7 @@
 </script>
 
 <div class="flex flex-col items-center">
-	<img class="w-40 h-100 mt-4" src=".//anxietyally.png" alt="Anxiety Ally Logo" />
+	<img class="w-40 h-100 mt-4" src="/anxietyally.png" alt="Anxiety Ally Logo" />
 </div>
 
 	{#key currentPageNumber}
