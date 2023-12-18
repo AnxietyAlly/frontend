@@ -61,7 +61,7 @@ export const actions = {
             description: description
         }
 
-        postData("https://aa-apigateway-sprint-2-2.onrender.com/progressApi/dailyCheckupResults", dataForPost).then((data) => {
+        postData("https://aa-apigateway-sprint-3.onrender.com/progressApi/dailyCheckupResults", dataForPost).then((data) => {
             console.log(data);
         });
 

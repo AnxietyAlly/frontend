@@ -19,7 +19,7 @@ async function getApiData(url) {
 
 async function checkUserCredentials(name, email, password) {
     const account = await getApiData(
-        `https://aa-apigateway-sprint-2-2.onrender.com/accountsApi/accounts/email/${email}`
+        `https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts/email/${email}`
     );
 
     if (account && account.data !== undefined && account.data !== null) {
@@ -73,7 +73,7 @@ export const actions = {
         }
 
         if (name && email && password) {
-            postData("https://aa-apigateway-sprint-2-2.onrender.com/accountsApi/accounts", dataForPost).then((data) => {
+            postData("https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts", dataForPost).then((data) => {
                 console.log(data);
             });
             throw redirect(307, '/');
