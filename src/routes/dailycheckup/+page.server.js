@@ -31,8 +31,6 @@ function now() {
 
 // Example POST method implementation:
 async function postData(url, data) {
-    console.log('test0');
-
     // Default options are marked with *
     const response = await fetch(url, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -63,7 +61,7 @@ export const actions = {
             description: description
         }
 
-        postData("http://127.0.0.1:3010/progressApi/dailyCheckupResults", dataForPost).then((data) => {
+        postData("https://aa-apigateway-sprint-2-2.onrender.com/progressApi/dailyCheckupResults", dataForPost).then((data) => {
             console.log(data);
         });
 
