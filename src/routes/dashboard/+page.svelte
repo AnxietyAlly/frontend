@@ -8,7 +8,7 @@
 	<div class="grid grid-cols-3 gap-4 my-2 mx-5 justify-center">
 		<a
 			href="/dailycheckup"
-			class="rounded-xl col-span-3 bg-gradient-to-r from-red-400 to-red-300 flex items-center justify-center h-16 m-2"
+			class="rounded-xl col-span-3 bg-gradient-to-r from-red-400 to-red-300 flex items-center justify-center h-20 m-2"
 		>
 			<h2
 				class="text-center text-2xl font-bold text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]"
@@ -20,7 +20,7 @@
 	<div class="grid grid-cols-3 gap-4 my-2 mx-5">
 		<a
 			href="/progress"
-			class="rounded-xl col-span-3 bg-gradient-to-r from-red-400 to-red-300 flex items-center justify-center h-16 m-2"
+			class="rounded-xl col-span-3 bg-gradient-to-r from-red-400 to-red-300 flex items-center justify-center h-20 m-2"
 		>
 			<h2
 				class="text-center text-2xl font-bold text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]"
@@ -32,7 +32,7 @@
 	<div class="grid grid-cols-3 gap-4 my-2 mx-5">
 		<a
 			href="/articles"
-			class="rounded-xl col-span-3 bg-gradient-to-r from-red-400 to-red-300 flex items-center justify-center h-16 m-2"
+			class="rounded-xl col-span-3 bg-gradient-to-r from-red-400 to-red-300 flex items-center justify-center h-20 m-2"
 		>
 			<h2
 				class="text-center text-2xl font-bold text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]"
