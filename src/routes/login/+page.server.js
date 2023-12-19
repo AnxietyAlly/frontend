@@ -76,6 +76,7 @@ export const actions = {
             postData("https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts", dataForPost).then((data) => {
                 console.log(data);
             });
+            performLogin(cookies, name);
             throw redirect(307, '/');
         } else {
             return fail(400, { errorMessage: 'Missing username or email or password' });
@@ -96,8 +97,17 @@ export const actions = {
 
             performLogin(cookies, name);
 
-            // redirect to home page
-            throw redirect(303, '/');
+            const originalUrl = cookies.get('originalUrl');
+
+            if (!(originalUrl == undefined || originalUrl == null)) {
+                // redirect to page you just tried to go to
+                cookies.delete('originalUrl');
+
+                throw redirect(303, originalUrl);
+            } else {
+                // redirect to home page
+                throw redirect(303, '/');
+            }
         } else {
             return fail(400, { errorMessage: 'Missing username or email or password' });
         }
