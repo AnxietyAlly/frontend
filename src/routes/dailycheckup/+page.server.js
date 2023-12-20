@@ -1,5 +1,21 @@
 import { redirect } from '@sveltejs/kit';
 
+function isLoggedIn(locals, cookies) {
+    if (!locals?.name) {
+        cookies.set('originalUrl', '/dailycheckup', {
+            path: '/',
+            httpOnly: true,
+            sameSite: 'lax',
+            maxAge: 60 * 60 * 24
+        });
+        throw redirect(307, '/login');
+    }
+};
+  
+export const load = (({ locals, cookies }) => {
+    isLoggedIn(locals, cookies);
+});
+
 function now() {
     const date = new Date();
     let seconds = date.getSeconds();

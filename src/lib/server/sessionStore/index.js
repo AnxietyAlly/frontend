@@ -17,6 +17,10 @@ function clean() {
     nextClean = Date.now() + 1000 * 60 * 60; // 1 hour
 }
 
+export function deleteSession(sid) {
+    sessionStore.delete(sid);
+}
+
 export function createSession(name, maxAge) {
     let sid = '';
 
