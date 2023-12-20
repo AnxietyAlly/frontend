@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 
-function IsLoggedIn(locals, cookies) {
+function isLoggedIn(locals, cookies) {
     if (!locals?.name) {
         cookies.set('originalUrl', '/dailycheckup', {
             path: '/',
@@ -13,7 +13,7 @@ function IsLoggedIn(locals, cookies) {
 };
   
 export const load = (({ locals, cookies }) => {
-    IsLoggedIn(locals, cookies);
+    isLoggedIn(locals, cookies);
 });
 
 function now() {
