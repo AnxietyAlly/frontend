@@ -1,4 +1,7 @@
-<div class="flex flex-col items-center mt-4">
+<div class="flex flex-col items-center">
+	<a href="/dashboard">
+	<img class="w-10 h-10 mt-2 ml-7  fixed top-5 left-0" src="/back.png" alt="back button" />
+</a>
 	<img class="w-40 h-100 mt-4" src="/anxietyally.png" alt="Anxiety Ally Logo" />
 </div>
 <div class="h-10 mt-2 flex justify-center">

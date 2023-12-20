@@ -45,6 +45,18 @@
 			</h2>
 		</a>
 	</div>
+  <div class="grid grid-cols-3 gap-4 my-2 mx-5">
+		<a
+			href="/dashboard"
+			class="rounded-xl col-span-3 bg-gradient-to-r from-red-400 to-red-300 flex items-center justify-center h-16 m-2"
+		>
+			<h2
+				class="text-center text-2xl font-bold text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]"
+			>
+				Robodoc
+			</h2>
+		</a>
+	</div>
 	<div class="grid grid-cols-3 gap-4 my-2 mx-5">
 		<a
 			href="/logout"

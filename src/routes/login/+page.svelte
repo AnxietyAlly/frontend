@@ -20,7 +20,7 @@
 					{/each}
 				{/if}
 				<div class="flex items-center">
-					<img class="w-10 h-10 mr-4" src="/circle-envelope.png" alt="Anxiety Ally Logo" />
+					<img class="w-10 h-10 mr-4" src="/circle-envelope.png" alt="envelope icon" />
 					<input
 						class="input my-2 border border-white rounded-lg"
 						type="text"
@@ -37,7 +37,7 @@
 					{/each}
 				{/if}
 				<div class="flex items-center">
-					<img class="w-10 h-10 mr-4" src="/user-lock.png" alt="Anxiety Ally Logo" />
+					<img class="w-10 h-10 mr-4" src="/user-lock.png" alt="lock icon" />
 					<input
 						class="input my-2 border border-white rounded-lg"
 						type="password"
