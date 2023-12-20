@@ -3,14 +3,14 @@ import bcrypt from "bcrypt";
 import { createSession } from '/src/lib/server/sessionStore';
 import { fail, redirect } from '@sveltejs/kit';
 
-function IsLoggedIn(locals) {
+function isLoggedIn(locals) {
     if (locals?.name) {
         throw redirect(307, '/dashboard');
     }
 };
   
 export const load = (({ locals }) => {
-    IsLoggedIn(locals);
+    isLoggedIn(locals);
 });
 
 /**
@@ -87,7 +87,7 @@ async function registerErrorHandling(name, email, password) {
     if (name && email && password && await possibleAccount) {
         if (!(name == "")) {
             if (!(email == "")) {
-                if ((! /^[@]+$/.test(email))) {
+                if ((! /[@]/.test(email))) {
                     emailErrorEncountered = true;
                     emailErrorMessages.push("Email must contain an '@'");
                 }
@@ -100,15 +100,15 @@ async function registerErrorHandling(name, email, password) {
                         passwordErrorEncountered = true;
                         passwordErrorMessages.push("Password must be at least 8 characters long");
                     }
-                    if ((! /^[a-z]+$/.test(password))) {
+                    if ((! /[abcdefghijklmnopqrstuvwxyz]/.test(password))) {
                         passwordErrorEncountered = true;
                         passwordErrorMessages.push("Password must contain at least 1 lowercase letter");
                     }
-                    if ((! /^[A-Z]+$/.test(password))) {
+                    if ((! /[ABCDEFGHIJKLMNOPQRSTUVWXYX]/.test(password))) {
                         passwordErrorEncountered = true;
                         passwordErrorMessages.push("Password must contain at least 1 uppercase letter");
                     }
-                    if ((! /^[0-9]+$/.test(password))) {
+                    if ((! /[0123456789]/.test(password))) {
                         passwordErrorEncountered = true;
                         passwordErrorMessages.push("Password must contain at least 1 number");
                     }
@@ -166,22 +166,20 @@ export const actions = {
         const email = formData.get('email')?.toString();
         const password = formData.get('password')?.toString();
 
-        //const dataForPost = {
-        //    name: name,
-        //    email: email,
-        //    password: password
-        //}
+        const dataForPost = {
+            name: name,
+            email: email,
+            password: password
+        }
 
         const registerErrorHandlingResults = await registerErrorHandling(name, email, password);
-        console.log(registerErrorHandlingResults);
         if (registerErrorHandlingResults.errorEncountered) {
             return fail(400, registerErrorHandlingResults);
         } else {
-            console.log(registerErrorHandlingResults);
-            //postData("https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts", dataForPost).then((data) => {
-            //    console.log(data);
-            //});
-            //performLogin(cookies, name);
+            postData("https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts", dataForPost).then((data) => {
+                console.log(data);
+            });
+            performLogin(cookies, name);
             throw redirect(307, '/');
         }
     },

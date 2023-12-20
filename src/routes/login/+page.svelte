@@ -13,8 +13,12 @@
 	<form class="h-10 mt-6" method="post" use:enhance>
 		<div class="flex justify-center">
 			<div class="w-5/6 md:w-1/2 lg:w-1/4 bg-white bg-opacity-50 p-4 rounded-md">
-				<label class="text-xl font-bold text-red-400">Username</label>
-
+				<label class="text-xl font-bold text-red-400" for="name">Username</label>
+				{#if form?.nameErrorEncountered}
+					{#each form.nameErrorMessages as errorMessage, index}
+						<label class="text-s text-red-600" for="password">{errorMessage}</label>
+					{/each}
+				{/if}
 				<div class="flex items-center">
 					<img class="w-10 h-10 mr-4" src="/circle-user.png" alt="Anxiety Ally Logo" />
 					<input
@@ -26,8 +30,12 @@
 					/>
 				</div>
 
-				<label class="text-xl font-bold text-red-400">E-mail</label>
-
+				<label class="text-xl font-bold text-red-400" for="email">E-mail</label>
+				{#if form?.emailErrorEncountered}
+					{#each form.emailErrorMessages as errorMessage, index}
+						<label class="text-s text-red-600" for="password">{errorMessage}</label>
+					{/each}
+				{/if}
 				<div class="flex items-center">
 					<img class="w-10 h-10 mr-4" src="/circle-envelope.png" alt="Anxiety Ally Logo" />
 					<input
@@ -39,8 +47,12 @@
 					/>
 				</div>
 
-				<label class="text-xl font-bold text-red-400">Password</label>
-
+				<label class="text-xl font-bold text-red-400" for="password">Password</label>
+				{#if form?.passwordErrorEncountered}
+					{#each form.passwordErrorMessages as errorMessage, index}
+						<label class="text-s text-red-600" for="password">{errorMessage}</label>
+					{/each}
+				{/if}
 				<div class="flex items-center">
 					<img class="w-10 h-10 mr-4" src="/user-lock.png" alt="Anxiety Ally Logo" />
 					<input
@@ -51,9 +63,6 @@
 						required
 					/>
 				</div>
-				{#if form?.errorMessage}
-					<div class="has-text-danger my-2">{form.errorMessage}</div>
-				{/if}
 			</div>
 		</div>
 		<div class="flex justify-center items-center mt-14">
