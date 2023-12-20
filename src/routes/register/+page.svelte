@@ -63,6 +63,9 @@
 						required
 					/>
 				</div>
+
+				<br>
+				<a href="/login">Already have an account? Click here to login!</a>
 			</div>
 		</div>
 		<div class="flex justify-center items-center mt-14">
