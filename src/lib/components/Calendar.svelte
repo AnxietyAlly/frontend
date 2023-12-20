@@ -134,6 +134,9 @@
 </script>
 
 <div id="initialContent">
+	<a href="/dashboard">
+		<img class="w-10 h-10 mt-2 ml-7  fixed top-5 left-0" src="/back.png" alt="back button" />
+	</a>
 	<div class="nav-buttons mt-2">
 		<button
 			class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium mr-3 rounded-3xl shadow col-span-2 bg-red-400 bg-opacity-70 text-white md:py-4 md:text-lg md:px-10"

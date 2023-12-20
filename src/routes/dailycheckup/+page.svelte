@@ -31,6 +31,9 @@
 	</div>
 
 	<div id="initialContent">
+		<a href="/dashboard">
+			<img class="w-10 h-10 mt-2 ml-7 fixed top-5 left-0" src="/back.png" alt="back button" />
+		</a>
 		<div class="h-10 mt-4 space-y-4">
 			<div class="flex justify-center">
 				<p class="text-xl font-semibold text-stone-600">How are you feeling today?</p>
@@ -73,12 +76,10 @@
 		<div class="h-20 mt-4 space-y-6">
 			<div class="flex justify-center">
 				<div class="w-3/4 md:w-1/2 lg:w-1/4 bg-white bg-opacity-50 p-4">
-					<p class="text-xs text-center text-stone-600 italic">
+					<p class="text-s text-center text-stone-600 italic">
 						To understand your emotions, start by pausing and tuning into your physical sensations.
 						Label the emotions you're experiencing (happy, sad, anxious, etc.) and consider what
-						triggered them. Reflect on these feelings, perhaps by journaling, seeking feedback, or
-						practicing mindfulness. This self-awareness can help you manage your emotions more
-						effectively and make positive choices in response to them.
+						triggered them. Reflect on these feelings, perhaps by journaling.
 					</p>
 				</div>
 			</div>
