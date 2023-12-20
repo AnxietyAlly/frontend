@@ -3,6 +3,16 @@ import bcrypt from "bcrypt";
 import { createSession } from '/src/lib/server/sessionStore';
 import { fail, redirect } from '@sveltejs/kit';
 
+function IsLoggedIn(locals) {
+    if (locals?.name) {
+        throw redirect(307, '/dashboard');
+    }
+};
+  
+export const load = (({ locals }) => {
+    IsLoggedIn(locals);
+});
+
 /**
 	 * Async function to get the data from the SWAPI api
 	 * @returns - returns a promise
@@ -59,6 +69,96 @@ async function postData(url, data) {
     return response.text(); // parses JSON response into native JavaScript objects
 }
 
+async function registerErrorHandling(name, email, password) {
+    let errorEncountered = false;
+
+    let nameErrorEncountered = false;
+    let emailErrorEncountered = false;
+    let passwordErrorEncountered = false;
+
+    let nameErrorMessages = [];
+    let emailErrorMessages = [];
+    let passwordErrorMessages = [];
+
+    const possibleAccount = await getApiData(
+        `https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts/email/${email}`
+    );
+
+    if (name && email && password && await possibleAccount) {
+        if (!(name == "")) {
+            if (!(email == "")) {
+                if ((! /^[@]+$/.test(email))) {
+                    emailErrorEncountered = true;
+                    emailErrorMessages.push("Email must contain an '@'");
+                }
+                if (possibleAccount.data !== undefined && possibleAccount.data !== null) {
+                    emailErrorEncountered = true;
+                    emailErrorMessages.push("Email has already been used for an account");
+                }
+                if (!(password == "")) {
+                    if (password.length < 8 ) {
+                        passwordErrorEncountered = true;
+                        passwordErrorMessages.push("Password must be at least 8 characters long");
+                    }
+                    if ((! /^[a-z]+$/.test(password))) {
+                        passwordErrorEncountered = true;
+                        passwordErrorMessages.push("Password must contain at least 1 lowercase letter");
+                    }
+                    if ((! /^[A-Z]+$/.test(password))) {
+                        passwordErrorEncountered = true;
+                        passwordErrorMessages.push("Password must contain at least 1 uppercase letter");
+                    }
+                    if ((! /^[0-9]+$/.test(password))) {
+                        passwordErrorEncountered = true;
+                        passwordErrorMessages.push("Password must contain at least 1 number");
+                    }
+                    if ((! /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(password))) {
+                        passwordErrorEncountered = true;
+                        passwordErrorMessages.push("Password must contain at least 1 symbol");
+                    }
+                } else {
+                    passwordErrorEncountered = true;
+                    passwordErrorMessages.push("Password cannot be empty");
+                }
+            } else {
+                emailErrorEncountered = true;
+                emailErrorMessages.push("Email cannot be empty");
+            }
+        } else {
+            nameErrorEncountered = true;
+            nameErrorMessages.push("Name cannot be empty");
+        }
+    } else {
+        if(!name) {
+            nameErrorEncountered = true;
+            nameErrorMessages.push("No name detected");
+        }
+        if (!email) {
+            emailErrorEncountered = true;
+            emailErrorMessages.push("No email detected");
+        }
+        if (!password) {
+            passwordErrorEncountered = true;
+            passwordErrorMessages.push("No password detected");
+        }
+    }
+    if (nameErrorEncountered || emailErrorEncountered || passwordErrorEncountered) {
+        errorEncountered = true;
+    }
+
+    const JSONToReturn = {
+        errorEncountered: errorEncountered,
+        nameErrorEncountered: nameErrorEncountered,
+        emailErrorEncountered: emailErrorEncountered,
+        passwordErrorEncountered: passwordErrorEncountered,
+        nameErrorMessages: nameErrorMessages,
+        emailErrorMessages: emailErrorMessages,
+        passwordErrorMessages: passwordErrorMessages,
+    }
+
+    return JSONToReturn;
+}
+
 export const actions = {
     register: async ({ request, cookies }) => {
         const formData = await request.formData();
@@ -66,19 +166,23 @@ export const actions = {
         const email = formData.get('email')?.toString();
         const password = formData.get('password')?.toString();
 
-        const dataForPost = {
-            name: name,
-            email: email,
-            password: password
-        }
+        //const dataForPost = {
+        //    name: name,
+        //    email: email,
+        //    password: password
+        //}
 
-        if (name && email && password) {
-            postData("https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts", dataForPost).then((data) => {
-                console.log(data);
-            });
-            throw redirect(307, '/');
+        const registerErrorHandlingResults = await registerErrorHandling(name, email, password);
+        console.log(registerErrorHandlingResults);
+        if (registerErrorHandlingResults.errorEncountered) {
+            return fail(400, registerErrorHandlingResults);
         } else {
-            return fail(400, { errorMessage: 'Missing username or email or password' });
+            console.log(registerErrorHandlingResults);
+            //postData("https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts", dataForPost).then((data) => {
+            //    console.log(data);
+            //});
+            //performLogin(cookies, name);
+            throw redirect(307, '/');
         }
     },
     login: async ({ request, cookies }) => {
@@ -96,8 +200,17 @@ export const actions = {
 
             performLogin(cookies, name);
 
-            // redirect to home page
-            throw redirect(303, '/');
+            const originalUrl = cookies.get('originalUrl');
+
+            if (!(originalUrl == undefined || originalUrl == null)) {
+                // redirect to page you just tried to go to
+                cookies.delete('originalUrl');
+
+                throw redirect(303, originalUrl);
+            } else {
+                // redirect to home page
+                throw redirect(303, '/');
+            }
         } else {
             return fail(400, { errorMessage: 'Missing username or email or password' });
         }
