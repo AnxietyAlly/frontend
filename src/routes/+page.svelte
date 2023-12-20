@@ -30,7 +30,7 @@
 			    Take the first steps {data.name}!
 			</a>
 	{:else}
-		<a href="/login" class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white button-color md:py-4 md:text-lg md:px-10">Log in</a>
+		<a href="/login" class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white button-color md:py-4 md:text-xl md:px-10">Log in</a>
 	{/if}
 </div>
 <!-- </div> -->
