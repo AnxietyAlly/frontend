@@ -27,7 +27,7 @@ async function getApiData(url) {
     }
 }
 
-async function checkUserCredentials(name, email, password) {
+async function checkUserCredentials(email, password) {
     const account = await getApiData(
         `https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts/email/${email}`
     );
@@ -49,168 +49,131 @@ function performLogin(cookies, name) {
     cookies.set('sid', sid, { maxAge });
 }
 
-// Example POST method implementation:
-async function postData(url, data) {
+// async function registerErrorHandling(name, email, password) {
+//     let errorEncountered = false;
 
-    // Default options are marked with *
-    const response = await fetch(url, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      mode: "cors", // no-cors, *cors, same-origin
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "same-origin", // include, *same-origin, omit
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: "manual", // manual, *follow, error
-      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: new URLSearchParams(data)
-    });
+//     let nameErrorEncountered = false;
+//     let emailErrorEncountered = false;
+//     let passwordErrorEncountered = false;
 
-    return response.text(); // parses JSON response into native JavaScript objects
-}
+//     let nameErrorMessages = [];
+//     let emailErrorMessages = [];
+//     let passwordErrorMessages = [];
 
-async function registerErrorHandling(name, email, password) {
-    let errorEncountered = false;
+//     const possibleAccount = await getApiData(
+//         `https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts/email/${email}`
+//     );
 
-    let nameErrorEncountered = false;
-    let emailErrorEncountered = false;
-    let passwordErrorEncountered = false;
+//     if (name && email && password && await possibleAccount) {
+//         if (!(name == "")) {
+//             if (!(email == "")) {
+//                 if ((! /[@]/.test(email))) {
+//                     emailErrorEncountered = true;
+//                     emailErrorMessages.push("Email must contain an '@'");
+//                 }
+//                 if (possibleAccount.data !== undefined && possibleAccount.data !== null) {
+//                     emailErrorEncountered = true;
+//                     emailErrorMessages.push("Email has already been used for an account");
+//                 }
+//                 if (!(password == "")) {
+//                     if (password.length < 8 ) {
+//                         passwordErrorEncountered = true;
+//                         passwordErrorMessages.push("Password must be at least 8 characters long");
+//                     }
+//                     if ((! /[abcdefghijklmnopqrstuvwxyz]/.test(password))) {
+//                         passwordErrorEncountered = true;
+//                         passwordErrorMessages.push("Password must contain at least 1 lowercase letter");
+//                     }
+//                     if ((! /[ABCDEFGHIJKLMNOPQRSTUVWXYX]/.test(password))) {
+//                         passwordErrorEncountered = true;
+//                         passwordErrorMessages.push("Password must contain at least 1 uppercase letter");
+//                     }
+//                     if ((! /[0123456789]/.test(password))) {
+//                         passwordErrorEncountered = true;
+//                         passwordErrorMessages.push("Password must contain at least 1 number");
+//                     }
+//                     if ((! /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(password))) {
+//                         passwordErrorEncountered = true;
+//                         passwordErrorMessages.push("Password must contain at least 1 symbol");
+//                     }
+//                 } else {
+//                     passwordErrorEncountered = true;
+//                     passwordErrorMessages.push("Password cannot be empty");
+//                 }
+//             } else {
+//                 emailErrorEncountered = true;
+//                 emailErrorMessages.push("Email cannot be empty");
+//             }
+//         } else {
+//             nameErrorEncountered = true;
+//             nameErrorMessages.push("Name cannot be empty");
+//         }
+//     } else {
+//         if(!name) {
+//             nameErrorEncountered = true;
+//             nameErrorMessages.push("No name detected");
+//         }
+//         if (!email) {
+//             emailErrorEncountered = true;
+//             emailErrorMessages.push("No email detected");
+//         }
+//         if (!password) {
+//             passwordErrorEncountered = true;
+//             passwordErrorMessages.push("No password detected");
+//         }
+//     }
+//     if (nameErrorEncountered || emailErrorEncountered || passwordErrorEncountered) {
+//         errorEncountered = true;
+//     }
 
-    let nameErrorMessages = [];
-    let emailErrorMessages = [];
-    let passwordErrorMessages = [];
+//     const JSONToReturn = {
+//         errorEncountered: errorEncountered,
+//         nameErrorEncountered: nameErrorEncountered,
+//         emailErrorEncountered: emailErrorEncountered,
+//         passwordErrorEncountered: passwordErrorEncountered,
+//         nameErrorMessages: nameErrorMessages,
+//         emailErrorMessages: emailErrorMessages,
+//         passwordErrorMessages: passwordErrorMessages,
+//     }
 
-    const possibleAccount = await getApiData(
-        `https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts/email/${email}`
-    );
-
-    if (name && email && password && await possibleAccount) {
-        if (!(name == "")) {
-            if (!(email == "")) {
-                if ((! /[@]/.test(email))) {
-                    emailErrorEncountered = true;
-                    emailErrorMessages.push("Email must contain an '@'");
-                }
-                if (possibleAccount.data !== undefined && possibleAccount.data !== null) {
-                    emailErrorEncountered = true;
-                    emailErrorMessages.push("Email has already been used for an account");
-                }
-                if (!(password == "")) {
-                    if (password.length < 8 ) {
-                        passwordErrorEncountered = true;
-                        passwordErrorMessages.push("Password must be at least 8 characters long");
-                    }
-                    if ((! /[abcdefghijklmnopqrstuvwxyz]/.test(password))) {
-                        passwordErrorEncountered = true;
-                        passwordErrorMessages.push("Password must contain at least 1 lowercase letter");
-                    }
-                    if ((! /[ABCDEFGHIJKLMNOPQRSTUVWXYX]/.test(password))) {
-                        passwordErrorEncountered = true;
-                        passwordErrorMessages.push("Password must contain at least 1 uppercase letter");
-                    }
-                    if ((! /[0123456789]/.test(password))) {
-                        passwordErrorEncountered = true;
-                        passwordErrorMessages.push("Password must contain at least 1 number");
-                    }
-                    if ((! /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(password))) {
-                        passwordErrorEncountered = true;
-                        passwordErrorMessages.push("Password must contain at least 1 symbol");
-                    }
-                } else {
-                    passwordErrorEncountered = true;
-                    passwordErrorMessages.push("Password cannot be empty");
-                }
-            } else {
-                emailErrorEncountered = true;
-                emailErrorMessages.push("Email cannot be empty");
-            }
-        } else {
-            nameErrorEncountered = true;
-            nameErrorMessages.push("Name cannot be empty");
-        }
-    } else {
-        if(!name) {
-            nameErrorEncountered = true;
-            nameErrorMessages.push("No name detected");
-        }
-        if (!email) {
-            emailErrorEncountered = true;
-            emailErrorMessages.push("No email detected");
-        }
-        if (!password) {
-            passwordErrorEncountered = true;
-            passwordErrorMessages.push("No password detected");
-        }
-    }
-    if (nameErrorEncountered || emailErrorEncountered || passwordErrorEncountered) {
-        errorEncountered = true;
-    }
-
-    const JSONToReturn = {
-        errorEncountered: errorEncountered,
-        nameErrorEncountered: nameErrorEncountered,
-        emailErrorEncountered: emailErrorEncountered,
-        passwordErrorEncountered: passwordErrorEncountered,
-        nameErrorMessages: nameErrorMessages,
-        emailErrorMessages: emailErrorMessages,
-        passwordErrorMessages: passwordErrorMessages,
-    }
-
-    return JSONToReturn;
-}
+//     return JSONToReturn;
+// }
 
 export const actions = {
-    register: async ({ request, cookies }) => {
-        const formData = await request.formData();
-        const name = formData.get('name')?.toString();
-        const email = formData.get('email')?.toString();
-        const password = formData.get('password')?.toString();
-
-        const dataForPost = {
-            name: name,
-            email: email,
-            password: password
-        }
-
-        const registerErrorHandlingResults = await registerErrorHandling(name, email, password);
-        if (registerErrorHandlingResults.errorEncountered) {
-            return fail(400, registerErrorHandlingResults);
-        } else {
-            postData("https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts", dataForPost).then((data) => {
-                console.log(data);
-            });
-            performLogin(cookies, name);
-            throw redirect(307, '/');
-        }
-    },
     login: async ({ request, cookies }) => {
+        console.log("test");
         const formData = await request.formData();
-        const name = formData.get('name')?.toString();
         const email = formData.get('email')?.toString();
         const password = formData.get('password')?.toString();
 
-        if (name && email && password) {
-            const res = await checkUserCredentials(name, email, password);
+        if (email && password) {
+            const res = await checkUserCredentials(email, password);
 
             if (!res) {
-                return fail(401, { errorMessage: 'Invalid username or email or password' });
+                return fail(401, { errorMessage: 'Invalid email or password' });
             }
 
-            performLogin(cookies, name);
+            const account = await getApiData(
+                `https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts/email/${email}`
+            );
 
-            const originalUrl = cookies.get('originalUrl');
+            if (await account) {
+                performLogin(cookies, account.data.name);
 
-            if (!(originalUrl == undefined || originalUrl == null)) {
-                // redirect to page you just tried to go to
-                cookies.delete('originalUrl');
+                const originalUrl = cookies.get('originalUrl');
 
-                throw redirect(303, originalUrl);
-            } else {
-                // redirect to home page
-                throw redirect(303, '/');
+                if (!(originalUrl == undefined || originalUrl == null)) {
+                    // redirect to page you just tried to go to
+                    cookies.delete('originalUrl');
+
+                    throw redirect(303, originalUrl);
+                } else {
+                    // redirect to home page
+                    throw redirect(303, '/');
+                }
             }
         } else {
-            return fail(400, { errorMessage: 'Missing username or email or password' });
+            return fail(400, { errorMessage: 'Missing email or password' });
         }
     },
 };
