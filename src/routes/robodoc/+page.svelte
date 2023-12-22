@@ -4,13 +4,17 @@
 		roboDocAvailableMessagesBadDay,
 		roboDocAvailableMessagesGoodDay
 	} from '../../stores/roboDocChatMessagesStore.js';
+
+	import { afterUpdate } from 'svelte';
+
 	let newText = '';
+	
 
 	const scrollToBottom = async (node) => {
 		node.scroll({ top: node.scrollHeight, behavior: 'smooth' });
 	};
 
-    let chatbox;
+	let chatbox;
 
 	async function sendNextRoboDocMessage(chatIndex, isBadDay) {
 		let newMessage = {};
@@ -26,13 +30,19 @@
 			};
 		}
 
+		const isTypingGif = document.createElement('img');
+		isTypingGif.src = 'istyping.gif';
+		isTypingGif.classList.add('w-16');
+		isTypingGif.classList.add('m-2');
+
 		setTimeout(() => {
+			chatbox.appendChild(isTypingGif);
+		}, 200);
+
+		setTimeout(() => {
+			chatbox.removeChild(isTypingGif);
 			$roboDocChatHistory = [...$roboDocChatHistory, newMessage];
 		}, 2500);
-
-        setTimeout(() => {
-            scrollToBottom(chatbox);
-		}, 500);
 
 		newText = '';
 		console.log($roboDocChatHistory);
@@ -47,9 +57,6 @@
 		};
 
 		$roboDocChatHistory = [...$roboDocChatHistory, newMessage];
-        setTimeout(() => {
-            scrollToBottom(chatbox);
-		}, 500);
 
 		newText = '';
 		console.log($roboDocChatHistory);
@@ -61,10 +68,15 @@
 			sendNextRoboDocMessage(i, true);
 		} else {
 			sendNextRoboDocMessage(i, false);
-    
 		}
 		i++;
 	};
+
+	afterUpdate(() => {
+		console.log('afterUpdate');
+		scrollToBottom(chatbox);
+	});
+
 </script>
 
 <div class="flex flex-col items-center mt-4">
@@ -76,7 +88,7 @@
 
 <div class="flex justify-center">
 	<div
-        bind:this={chatbox}
+		bind:this={chatbox}
 		class="flex flex-col w-11/12 h-96 rounded-md shadow bg-white bg-opacity-50 my-4 overflow-auto"
 	>
 		{#each $roboDocChatHistory as message}
