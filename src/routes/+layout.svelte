@@ -8,7 +8,9 @@
 
 <AppShell>
 	<svelte:fragment slot="footer">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<AppBar background="bg-orange-600 bg-opacity-20">
+
 			<svelte:fragment slot="trail">
 				<a class="btn btn-sm variant-ghost-surface" href="/dashboard" rel="noreferrer">
 					<img class="max-h-12" src="/home.png" alt="Home icon" />

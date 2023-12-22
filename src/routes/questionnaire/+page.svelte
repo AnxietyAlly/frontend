@@ -326,7 +326,7 @@
 	let currentQuestionNumber = 1;
 	
 </script>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div class="flex flex-col items-center">
 	<img class="w-40 h-100 mt-4" src="/anxietyally.png" alt="Anxiety Ally Logo" />
 </div>
