@@ -1,16 +1,17 @@
 <div class="flex flex-col items-center">
 	<img class="w-40 h-100 mt-4" src="/anxietyally.png" alt="Anxiety Ally Logo" />
 </div>
-<div class="h-10 mt-2 flex justify-center mb-2">
+<div class="h-10 mt-2 flex justify-center mb-2 lg:mb-11">
 	<h1 class="text-3xl font-bold text-red-400 text-opacity-90">Articles</h1>
 </div>
 
-<div class="ml-5">
-	<h2 class="text-xl font-bold text-red-400 text-opacity-90">Discover</h2>
-	<div class="flex flex-wrap">
-		<div class="w-80 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
+
+<div class="lg:justify-center ml-5 lg:flex">
+	<div class="flex flex-wrap lg:flex-col">
+		<h2 class="text-xl font-bold text-red-400 text-opacity-90">Discover</h2>
+		<div class="w-80 lg:w-full lg:h-52 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
 			<img
-				class="h-full object-cover"
+				class="h-full object-cover lg:h-52 lg:w-80"
 				src="https://geauxgirlmagazine.org/wp-new/wp-content/uploads/2023/05/gg15-my-social-anxiety.jpg"
 				alt="Artwork about a woman crying"
 			/>
@@ -26,9 +27,9 @@
 				</p>
 			</a>
 		</div>
-		<div class="w-80 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
+		<div class="w-80 lg:w-full lg:h-52 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
 			<img
-				class="h-full object-cover"
+				class="h-full object-cover lg:h-52 lg:w-80"
 				src="https://www.youngminds.org.uk/media/3p3hinx3/1832.png?anchor=center&mode=crop&width=1920&height=1080&rnd=Wide_1920_1080&format=webp&quality=67"
 				alt="Young man having anxiety"
 			/>
@@ -46,9 +47,9 @@
 				</p>
 			</a>
 		</div>
-		<div class="w-80 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
+		<div class="w-80 lg:w-full lg:h-52 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
 			<img
-				class="h-full object-cover"
+				class="h-full object-cover lg:h-52 lg:w-80"
 				src="https://pa.highfocuscenters.com/wp-content/uploads/angry-girl-waiting-for-a-mobile-phone-call-stockpack-istock-scaled-1-1536x1024.webp"
 				alt="Angry girl waiting for phone call"
 			/>
@@ -64,9 +65,9 @@
 				</p>
 			</a>
 		</div>
-		<div class="w-80 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
+		<div class="w-80 lg:w-full lg:h-52 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
 			<img
-				class="h-full object-cover"
+				class="h-full object-cover lg:h-52 lg:w-80"
 				src="https://www.youngminds.org.uk/media/mp2jef3f/young-people-loneliness.jpg?anchor=center&mode=crop&width=1920&height=1080&rnd=Wide_1920_1080&format=webp&quality=67"
 				alt="Angry girl waiting for phone call"
 			/>
