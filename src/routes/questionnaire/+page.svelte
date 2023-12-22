@@ -300,7 +300,6 @@
 	onMount(async () => {
 		questionsForQuestionnaireFromDB = await getQuestions();
 		questionsForQuestionnaireFromDBWithExtraInformation = await addExtraInformation(questionsForQuestionnaireFromDB);
-		console.log(questionsForQuestionnaireFromDBWithExtraInformation);
 		mentalProblemsFromDB = await getMentalProblems();
 		correctAndPossibleAnswersForQuestions = await getCorrectAndPossibleAnswers(questionsForQuestionnaireFromDB, mentalProblemsFromDB);
 		for (let i = 0; i < questionsForQuestionnaireFromDB.length; i++) {
