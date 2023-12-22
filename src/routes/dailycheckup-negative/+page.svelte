@@ -72,7 +72,7 @@
 					alt="Working out"
 				/>
 			</a>
-			<p class="text-center text-stone-600">Listening to music</p>
+			<p class="text-center text-stone-600">Working out</p>
 		</div>
 
 		<div class="place-self-auto">

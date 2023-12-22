@@ -12,11 +12,14 @@
 		<AppBar background="bg-orange-600 bg-opacity-20">
 
 			<svelte:fragment slot="trail">
-				<a class="btn btn-sm 2xl:flex xl:flex variant-ghost-surface border-red-400" href="/" rel="noreferrer">
+				<a class="btn btn-sm variant-ghost-surface" href="/dashboard" rel="noreferrer">
+					<img class="max-h-12" src="/home.png" alt="Home icon" />
+				</a>
+				<a class="btn btn-sm variant-ghost-surface border-red-400" href="/" rel="noreferrer">
 					<img class="max-h-12" src="/book.png" alt="Book icon" />
 				</a>
 				<a class="btn btn-sm variant-ghost-surface" href="/dashboard" rel="noreferrer">
-					<img class="max-h-12" src="/home.png" alt="Home icon" />
+					<img class="max-h-12" src="/settings.png" alt="Settings icon" />
 				</a>
 			</svelte:fragment>
 		</AppBar>

@@ -23,8 +23,6 @@
 
 <h1 class="hidden">AnxietyAlly</h1>
 <div class="rounded-3xl shadow col-span-2 bg-red-400 bg-opacity-70 flex items-center justify-center h-10 m-6 lg:h-14 lg:flex lg:items-center lg:justify-center lg:w-36 lg:m-auto">
-    <!-- Content goes here -->
-
 	{#if data?.name}
 		<a
 			href="/questionnaire"
@@ -38,6 +36,7 @@
 			class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white button-color md:py-4 md:text-lg md:px-10"
 			>Log in</a
 		>
+		<a href="/login" class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white button-color md:py-4 md:text-xl md:px-10">Log in</a>
 	{/if}
 </div>
 <!-- </div> -->
