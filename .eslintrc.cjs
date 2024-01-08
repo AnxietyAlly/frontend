@@ -37,7 +37,10 @@ module.exports = {
 		// Comments
 		'no-warning-comments': 'warn',
 		'spaced-comment': ['warn', 'always'],
-		
+
+		// Functions
+		// "func-call-spacing": ["error", "always"],
+
 		// Other
 		'no-var': 'error',
 		'prefer-const': 'error',
