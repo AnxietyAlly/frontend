@@ -11,7 +11,7 @@
 
 	<div class="h-20 mt-2 space-y-6">
 		<div class="flex justify-center">
-			<div class="w-3/4 md:w-1/2 lg:w-1/4 bg-white bg-opacity-50 p-4 rounded-md">
+			<div class="w-3/4 md:w-1/2 bg-white bg-opacity-50 p-4 rounded-md lg:w-52 lg:h-24">
 				<p class="text-l text-stone-600">
 					Here might be some activities that can help you feel more at ease.
 				</p>
@@ -20,7 +20,7 @@
 	</div>
 
 	<div class="grid grid-cols-3 gap-4 mb-5 mx-5 grid-rows-2 mt-6">
-		<div class="place-self-auto">
+		<div class="place-self-auto text-center lg:flex lg:flex-col lg:items-center">
 			<a href="https://www.youtube.com/watch?v=z6X5oEIg6Ak">
 				<img
 					class="w-28 h-28 rounded-full opacity-80 hover:opacity-100 transition duration-300 ease-in-out"
@@ -28,10 +28,10 @@
 					alt="Meditation"
 				/>
 			</a>
-			<p class="text-center text-stone-600">Meditation</p>
+			<p class="text-stone-600">Meditation</p>
 		</div>
-
-		<div class="place-self-auto">
+		
+		<div class="place-self-auto lg:flex lg:flex-col lg:items-center">
 			<a href="https://www.routeyou.com/en-nl/route/planner/2/walking-route-planner">
 				<img
 					class="w-28 h-28 rounded-full opacity-80 hover:opacity-100 transition duration-300 ease-in-out"

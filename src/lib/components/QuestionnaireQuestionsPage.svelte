@@ -23,36 +23,38 @@
 	}
 
 	function selectAnswer(answerId) {
-		selectedAnswers.find(element => {
-			return element.questionId == allQuestions[currentQuestionNumber - 1].data.id
+		selectedAnswers.find((element) => {
+			return element.questionId == allQuestions[currentQuestionNumber - 1].data.id;
 		}).selectedAnswerValue = Number(document.getElementById(answerId).value);
 	}
 </script>
+
 <div>
 	<div>
-		<h1>{allQuestions[currentQuestionNumber - 1].data.question}</h1>
-		<p>More information on this topic?</p>
+		<h1 class="text-stone-600 font-bold text-xl mt-10 text-center">
+			{allQuestions[currentQuestionNumber - 1].data.question}
+		</h1>
 
-		{#if questionAnswerTemplates.find(element => {
-			return element.data.id == allQuestions[currentQuestionNumber - 1].data.question_answer_template_id
+		{#if questionAnswerTemplates.find((element) => {
+			return element.data.id == allQuestions[currentQuestionNumber - 1].data.question_answer_template_id;
 		}).data.question_type_id == 1}
-			<div class="grid grid-rows-2 gap-4">
+			<div class="grid grid-rows-2 gap-4 mt-2">
 				<ul class="grid w-full gap-6 grid-cols-2">
-					{#each correctAndPossibleAnswersForQuestions.find(element => {
-						return element.questionId == allQuestions[currentQuestionNumber - 1].data.id
+					{#each correctAndPossibleAnswersForQuestions.find((element) => {
+						return element.questionId == allQuestions[currentQuestionNumber - 1].data.id;
 					}).answers as answer, i}
 						<li>
-							<input 
-								type="radio" 
-								id="{answer.answerId}"
-								name="answers" 
-								value="{answer.value}" 
-								class="hidden peer" 
-								required 
+							<input
+								type="radio"
+								id={answer.answerId}
+								name="answers"
+								value={answer.value}
+								class="hidden peer"
+								required
 								on:click={() => selectAnswer(answer.answerId)}
-							>
+							/>
 							<label
-								for="{answer.answerId}"
+								for={answer.answerId}
 								class="bg-red-300 inline-flex items-center w-full p-3 mr-1 justify-center text-white cursor-pointer border-2 rounded-lg peer-checked:border-red-700"
 							>
 								<div class="block">
@@ -62,6 +64,21 @@
 						</li>
 					{/each}
 				</ul>
+				<details>
+					<summary class="text-white font-bold">More information on this topic?</summary>
+					<div class="rounded-md w-3/4 md:w-1/2 lg:w-1/4 bg-white bg-opacity-50 p-4">
+						<div class="text-l text-stone-600">{allQuestions[currentQuestionNumber - 1].data.extraInformation.data.text}</div>
+						{#if 
+							!(allQuestions[currentQuestionNumber - 1].data.extraInformation.data.linkDescription == null || 
+							allQuestions[currentQuestionNumber - 1].data.extraInformation.data.linkDescription == undefined || 
+							allQuestions[currentQuestionNumber - 1].data.extraInformation.data.linkDescription == "")
+						}
+							<br>
+							<div class="text-l text-stone-600">Link: </div><a href="{allQuestions[currentQuestionNumber - 1].data.extraInformation.data.linkHref}">{allQuestions[currentQuestionNumber - 1].data.extraInformation.data.linkDescription}</a>
+						{/if}
+					</div>
+					
+				</details>
 			</div>
 		{/if}
 	</div>

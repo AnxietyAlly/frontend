@@ -6,7 +6,7 @@
 
 	<div class="h-20 mt-4 space-y-6">
 		<div class="flex justify-center">
-			<div class="w-3/4 md:w-1/2 lg:w-1/4 bg-white bg-opacity-50 p-4 rounded-md">
+			<div class="w-3/4 md:w-1/2 lg:w-2/3 bg-white bg-opacity-50 p-4 rounded-md">
 				<p class="text-l font-semibold text-stone-600">Glad to hear that! Keep it up!</p>
 			</div>
 		</div>
