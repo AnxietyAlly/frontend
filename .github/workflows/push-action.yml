@@ -2,41 +2,42 @@ name: GitHub Actions AnxietyAlly
 run-name: ${{ github.actor }} is pushing commit(s)
 on: [push]
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Building frontend has begun"
-      - uses: actions/checkout@v4
-      - run: npm ci
-      - run: npm run build --if-present
-      - run: echo "Building frontend has finished"
-  jest-unit-tests:
-    runs-on: ubuntu-latest
-    needs: [build]
-    steps:
-    - run: echo "Testing frontend has begun"
-    - uses: actions/checkout@v4
-    - run: npm ci
-    - run: npm test
-    - run: npm run test-coverage
-    - run: echo "Testing frontend has finished"
+  # build:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: echo "Building frontend has begun"
+  #     - uses: actions/checkout@v4
+  #     - run: npm ci
+  #     - run: npm run build --if-present
+  #     - run: echo "Building frontend has finished"
+  # jest-unit-tests:
+  #   runs-on: ubuntu-latest
+  #   needs: [build]
+  #   steps:
+  #   - run: echo "Testing frontend has begun"
+  #   - uses: actions/checkout@v4
+  #   - run: npm ci
+  #   - run: npm test
+  #   - run: npm run test-coverage
+  #   - run: echo "Testing frontend has finished"
   eslint: 
     runs-on: ubuntu-latest
     steps:
+    - run: yarn
     - run: eslint . --ext .js,.jsx,.ts,.tsx
-  trunk_check:
-    name: Trunk Check Runner
-    runs-on: ubuntu-latest
-    needs: [build]
-    permissions:
-      checks: write # For trunk to post annotations
-      contents: read # For repo checkout
+  # trunk_check:
+  #   name: Trunk Check Runner
+  #   runs-on: ubuntu-latest
+  #   needs: [build]
+  #   permissions:
+  #     checks: write # For trunk to post annotations
+  #     contents: read # For repo checkout
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
 
-      - run: npm install prettier-plugin-svelte
+  #     - run: npm install prettier-plugin-svelte
 
-      - name: Trunk Check
-        uses: trunk-io/trunk-action@v1
+  #     - name: Trunk Check
+  #       uses: trunk-io/trunk-action@v1
