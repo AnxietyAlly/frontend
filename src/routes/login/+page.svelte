@@ -48,7 +48,7 @@
 				</div>
 
 				<br>
-				<a href="/register">Don't have an account yet? Click here to register!</a>
+				<a href="/register">Don't have an account yet? Click <span class="text-blue-600 border-b border-blue-600">here</span> to register! </a>
 			</div>
 		</div>
 		<div class="flex justify-center items-center mt-14">

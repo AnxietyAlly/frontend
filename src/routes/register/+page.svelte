@@ -65,7 +65,7 @@
 				</div>
 
 				<br>
-				<a href="/login">Already have an account? Click here to login!</a>
+				<a href="/login">Already have an account? Click <span class="text-blue-600 border-b border-blue-600">here</span> to login!</a>
 			</div>
 		</div>
 		<div class="flex justify-center items-center mt-14">

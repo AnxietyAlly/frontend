@@ -64,8 +64,8 @@
 						</li>
 					{/each}
 				</ul>
-				<div class="lg:-ml-72">
-				<p class="text-white font-bold">More information on this topic?</p>
+				<div class="lg:-ml-72 lg:bg-red-600 lg:h-9 lg:w-64 lg:rounded">
+				<p class="text-white font-bold lg:text-center lg:mt-1">More information on this topic?</p>
 			</div>
 			</div>
 		{/if}
