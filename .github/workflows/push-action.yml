@@ -20,11 +20,20 @@ jobs:
   #   - run: npm test
   #   - run: npm run test-coverage
   #   - run: echo "Testing frontend has finished"
-  eslint: 
+  eslint:
     runs-on: ubuntu-latest
     steps:
-    - run: yarn
-    - run: eslint . --ext .js,.jsx,.ts,.tsx
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm ci # or yarn install
+      - uses: sibiraj-s/action-eslint@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} # optional
+          eslint-args: '--ignore-path=.gitignore --quiet'
+          extensions: 'js,jsx,ts,tsx'
+          annotations: true
   # trunk_check:
   #   name: Trunk Check Runner
   #   runs-on: ubuntu-latest
