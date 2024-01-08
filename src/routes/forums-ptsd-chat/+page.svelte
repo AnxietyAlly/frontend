@@ -1,40 +1,38 @@
 <script>
-    let comments = [
-      {
-        user: 'User123',
-        text: "I've found that gradual exposure to social situations has been helpful for me"
-      },
-      {
-        user: 'User456',
-        text: "I've been attending CBT sessions, and it's been enlightening to identify and challenge my negative thought patterns"
-      }
-    ];
-  
-    let newComment = '';
-  
-    const submitComment = () => {
-   
-        
-        // Add the new comment
-        comments = [...comments, { user: 'NewUser', text: newComment }];
-        
-        newComment = '';
-      }
-  </script>
+	let comments = [
+		{
+			user: 'User123',
+			text: "Reading others' stories here has given me hope during my darkest days. It's incredible how we can support each other through shared experiences."
+		},
+		{
+			user: 'User456',
+			text: "PTSD can be isolating, but finding this community has been a game-changer."
+		}
+	];
+
+	let newComment = '';
+
+	const submitComment = () => {
+		if (newComment.trim() !== '') {
+			comments = [...comments, { user: 'NewUser', text: newComment }];
+			newComment = '';
+		}
+	};
+</script>
 
 <div class="flex flex-col items-center">
-	<a href="/forums-socialanxiety">
+	<a href="/forums-ptsd">
 		<img class="w-10 h-10 mt-2 ml-7 fixed top-5 left-0" src="/back.png" alt="back button" />
 	</a>
 	<img class="w-40 h-100 mt-4" src="/anxietyally.png" alt="Anxiety Ally Logo" />
 </div>
 <div class="h-10 mt-8 flex justify-center items-center">
     <h1 class="text-3xl font-bold text-red-400 text-opacity-90 text-center">
-        Overcoming Social Anxiety Challenges
+        Personal Stories and Experiences
     </h1>
 </div>
 
-<div class="mb-30 ml-5 mr-5">
+<div class="mb-30  ml-5 mr-5">
 	<h3 class="text-lg font-bold mt-8 text-red-400">Comments</h3>
 	<ul>
 		{#each comments as comment (comment.text)}
@@ -45,7 +43,7 @@
 	</ul>
 </div>
 
-<div class="mt-4 ml-5 mr-5">
+<div class="mt-4  ml-5 mr-5">
 	<h3 class="text-lg font-bold mb-2 text-red-400">Add a Comment</h3>
 	<form on:submit|preventDefault={submitComment}>
 		<textarea
