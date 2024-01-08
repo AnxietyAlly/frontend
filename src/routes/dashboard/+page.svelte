@@ -9,6 +9,11 @@
     <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-red-400 text-opacity-90">Welcome *user*</h1>
 </div>
 
+<div class="bg-stone-400 h-28 w-64 flex items-center justify-center text-center mx-auto rounded mb-7">
+	<p class="text-white">You are amazing the way you are</p>
+	<button class="mt-20 h-8 w-28 bg-white rounded">new quote</button>
+	
+</div>
 <div class="text-center mx-auto mt-2"> <!-- Adjusted margin-top -->
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 my-1 justify-center lg:flex lg:items-center lg:justify-center">
         <a href="/dailycheckup" class="rounded-xl bg-gradient-to-r from-red-400 to-red-300 flex items-center justify-center h-16 m-1 lg:bg-gray-300 p-4 lg:w-1/2">
