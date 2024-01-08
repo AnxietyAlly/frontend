@@ -6,11 +6,11 @@
 </div>
 
 <div class="ml-5">
-	<h2 class="text-xl font-bold italic text-stone-600 text-opacity-90">Discover</h2>
-	<div class="flex flex-wrap">
+	<h2 class="text-xl font-bold italic text-stone-600 text-opacity-90 lg:text-2xl">Discover</h2>
+	<div class="flex flex-wrap lg:grid lg:grid-cols-2 lg:gap-6">
 		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
 			<img
-				class="h-full object-cover"
+				class="h-full object-cover lg:h-48 lg:w-72"
 				src="https://www.nami.org/NAMI/media/NAMI-Media/BlogImageArchive/2023/Agoraphobia_Blog.png"
 				alt="Girl sitting on a couch"
 			/>
@@ -26,7 +26,7 @@
 				</p>
 			</a>
 		</div>
-		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
+		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md lg:mr-4">
 			<img
 				class="h-full object-cover"
 				src="https://www.mind.org.uk/media-a/4101/escaping-my-agoraphobia-jumping.png?format=webp&quality=70"
@@ -48,7 +48,7 @@
 		</div>
 		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
 			<img
-				class="h-full object-cover"
+				class="h-full object-cover lg:h-48 lg:w-72"
 				src="https://s3-ap-southeast-2.amazonaws.com/media.anxiety.org.nz/production/3037/conversions/pexels-armin-rimoldi-5553640-medium.jpg"
 				alt="Young man reading something"
 			/>
@@ -64,7 +64,7 @@
 				</p>
 			</a>
 		</div>
-		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
+		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md lg:mr-4">
 			<img
 				class="h-full object-cover"
 				src="https://www.goodtherapy.org/blog/blog/wp-content/uploads/2017/02/looking-out-blinds-e1488222507717-300x200.jpg"

@@ -4,10 +4,10 @@
 </a>
 	<img class="w-40 h-100 mt-4" src="/anxietyally.png" alt="Anxiety Ally Logo" />
 </div>
-<div class="h-10 mt-2 flex justify-center">
-	<h1 class="text-3xl font-bold text-red-400 text-opacity-90">Articles</h1>
+<div class="h-10 mt-2 flex justify-center lg:mb-9">
+	<h1 class="text-3xl font-bold text-red-400 text-opacity-90 lg:text-4xl">Articles</h1>
 </div>
-<div class="flex mt-4 justify-center"> <h2 class="text-xl font-bold italic text-stone-600 text-opacity-90">Categories</h2> </div>
+<div class="flex mt-4 justify-center"> <h2 class="text-xl font-bold italic text-stone-600 text-opacity-90 lg:text-2xl">Categories</h2> </div>
 <div>
 	<div class="grid grid-cols-3 gap-4 my-2 mx-5 justify-center">
 		<a

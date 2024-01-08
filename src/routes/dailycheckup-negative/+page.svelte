@@ -45,7 +45,7 @@
 		<div class="place-self-auto">
 			<a href="/">
 				<img
-					class="w-28 h-28 rounded-full opacity-80 hover:opacity-100 transition duration-300 ease-in-out"
+					class="w-28 h-28 rounded-full opacity-80 hover:opacity-100 transition duration-300 ease-in-out lg:ml-4"
 					src="/talkingwithfriends.png"
 					alt="Talking with friends"
 				/>
@@ -56,7 +56,7 @@
 		<div class="place-self-auto">
 			<a href="/">
 				<img
-					class="w-28 h-28 rounded-full opacity-80 hover:opacity-100 transition duration-300 ease-in-out"
+					class="w-28 h-28 rounded-full opacity-80 hover:opacity-100 transition duration-300 ease-in-out lg:ml-8"
 					src="/listeningtomusic.png"
 					alt="Listening to music"
 				/>
@@ -67,7 +67,7 @@
 		<div class="place-self-auto">
 			<a href="/">
 				<img
-					class="w-28 h-28 rounded-full opacity-80 hover:opacity-100 transition duration-300 ease-in-out"
+					class="w-28 h-28 rounded-full opacity-80 hover:opacity-100 transition duration-300 ease-in-out lg:ml-7"
 					src="/workingout.png"
 					alt="Working out"
 				/>
@@ -78,12 +78,12 @@
 		<div class="place-self-auto">
 			<a href="/">
 				<img
-					class="w-28 h-28 rounded-full opacity-80 hover:opacity-100 transition duration-300 ease-in-out"
+					class="w-28 h-28 rounded-full opacity-80 hover:opacity-100 transition duration-300 ease-in-out lg:ml-4"
 					src="/reading.png"
 					alt="Reading a book"
 				/>
 			</a>
-			<p class="text-center text-stone-600">Reading a book</p>
+			<p class="text-center text-stone-600 lg:mr-4">Reading a book</p>
 		</div>
 	</div>
 	<div
