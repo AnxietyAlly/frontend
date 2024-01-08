@@ -1,6 +1,6 @@
-// function sum(a, b) {
-//     return a + b;
-// }
+function sum(a, b) {
+	return a + b;
+}
 
     function lintingtest
         ()       {
@@ -10,11 +10,10 @@
                 )
     
         }
-
-        //
+        
 
     lintingtest()
 
-// test('1 plus 2', () => {
-//     expect(sum(1, 2)).toBe(3);
-// });
+test('1 plus 2', () => {
+	expect(sum(1, 2)).toBe(3);
+});

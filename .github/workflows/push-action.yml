@@ -32,6 +32,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }} # optional
           eslint-args: '--ignore-path=.gitignore --quiet'
+          ignore-path: .eslintignore
           extensions: 'js,jsx,ts,tsx'
           annotations: true
   # trunk_check:
