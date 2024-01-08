@@ -8,7 +8,8 @@ function sum(a, b) {
 
                     "We testin'"
                 )
-    }
+    
+        }
 
     lintingtest()
 

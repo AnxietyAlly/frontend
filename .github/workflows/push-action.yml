@@ -20,6 +20,10 @@ jobs:
     - run: npm test
     - run: npm run test-coverage
     - run: echo "Testing frontend has finished"
+  eslint: 
+    runs-on: ubuntu-latest
+    steps:
+    - run: eslint . --ext .js,.jsx,.ts,.tsx
   trunk_check:
     name: Trunk Check Runner
     runs-on: ubuntu-latest
