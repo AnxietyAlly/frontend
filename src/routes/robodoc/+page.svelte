@@ -89,7 +89,7 @@
 <div class="flex justify-center">
 	<div
 		bind:this={chatbox}
-		class="flex flex-col w-11/12 h-96 rounded-md shadow bg-white bg-opacity-50 my-4 overflow-auto"
+		class="flex flex-col w-11/12 h-96 rounded-md shadow bg-white bg-opacity-50 my-4 overflow-auto lg:w-5/12"
 	>
 		{#each $roboDocChatHistory as message}
 			{#if message.sender == 'robodoc'}
@@ -123,13 +123,13 @@
 
 <form on:submit|preventDefault={sendMessage}>
 	<label for="chat" class="sr-only">Your message</label>
-	<div class="flex items-center px-3 py-2 rounded-lg">
+	<div class="flex items-center px-3 py-2 rounded-lg lg:justify-center">
 		<input
 			type="text"
 			id="chat"
 			bind:value={newText}
 			rows="1"
-			class="mx-4 w-5/6 h-12 rounded-3xl border-transparent shadow bg-white bg-opacity-50"
+			class="mx-4 w-5/6 lg:w-96 rounded-3xl border-transparent shadow bg-white bg-opacity-50 lg:mr-56"
 			placeholder="Your message..."
 		/>
 		<button
