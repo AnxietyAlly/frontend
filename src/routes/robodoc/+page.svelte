@@ -81,6 +81,9 @@
 
 <div class="flex flex-col items-center mt-4">
 	<img class="w-40 h-100" src="/anxietyally.png" alt="Anxiety Ally Logo" />
+	<a href="/dashboard">
+		<img class="w-10 h-10 mt-2 ml-7 fixed top-5 left-0" src="/back.png" alt="back button" />
+	</a>
 	<div class="h-10 mt-2 flex justify-center">
 		<h1 class="text-3xl font-bold text-red-400 text-opacity-90 mb-4">Chat with RoboDoc!</h1>
 	</div>
