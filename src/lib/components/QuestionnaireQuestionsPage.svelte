@@ -64,9 +64,21 @@
 						</li>
 					{/each}
 				</ul>
-				<div class="lg:-ml-72 lg:bg-red-600 lg:h-9 lg:w-64 lg:rounded">
-				<p class="text-white font-bold lg:text-center lg:mt-1">More information on this topic?</p>
-			</div>
+				<details>
+					<summary class="text-white font-bold">More information on this topic?</summary>
+					<div class="rounded-md w-3/4 md:w-1/2 lg:w-1/4 bg-white bg-opacity-50 p-4">
+						<div class="text-l text-stone-600">{allQuestions[currentQuestionNumber - 1].data.extraInformation.data.text}</div>
+						{#if 
+							!(allQuestions[currentQuestionNumber - 1].data.extraInformation.data.linkDescription == null || 
+							allQuestions[currentQuestionNumber - 1].data.extraInformation.data.linkDescription == undefined || 
+							allQuestions[currentQuestionNumber - 1].data.extraInformation.data.linkDescription == "")
+						}
+							<br>
+							<div class="text-l text-stone-600">Link: </div><a href="{allQuestions[currentQuestionNumber - 1].data.extraInformation.data.linkHref}">{allQuestions[currentQuestionNumber - 1].data.extraInformation.data.linkDescription}</a>
+						{/if}
+					</div>
+					
+				</details>
 			</div>
 		{/if}
 	</div>

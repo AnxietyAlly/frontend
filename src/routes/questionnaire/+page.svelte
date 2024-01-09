@@ -7,6 +7,7 @@
 	let questionAnswerTemplatesFromDB = [];
 	let mentalProblemsFromDB = [];
 	let questionsForQuestionnaireFromDB = [];
+	let questionsForQuestionnaireFromDBWithExtraInformation = [];
 	let correctAndPossibleAnswersForQuestions = [];
 	let selectedAnswers = [];
 
@@ -21,6 +22,26 @@
 			return returnedResponse;
 		} catch (err) {
 			console.error('Error: ', err);
+		}
+	}
+
+	async function addExtraInformation(questions) {
+		if (browser) {
+			for (let i = 0; i < questions.length; i++) {
+				const extraInformationForQuestion = await getApiData(
+					`https://aa-apigateway-sprint-3.onrender.com/questionnaireApi/extraInformation/${questions[i].data.extra_information_id}`
+				);
+
+				questions[i].data.extraInformation = extraInformationForQuestion;
+			}
+			
+			const allQuestionsPromise = await Promise.all(questions);
+
+			// const questionPromises = questionLinks.map((link) =>
+			// 	getApiData(`https://aa-apigateway-sprint-3.onrender.com/questionnaireApi${link}`)
+			// );
+
+			return allQuestionsPromise;
 		}
 	}
 
@@ -278,6 +299,7 @@
 
 	onMount(async () => {
 		questionsForQuestionnaireFromDB = await getQuestions();
+		questionsForQuestionnaireFromDBWithExtraInformation = await addExtraInformation(questionsForQuestionnaireFromDB);
 		mentalProblemsFromDB = await getMentalProblems();
 		correctAndPossibleAnswersForQuestions = await getCorrectAndPossibleAnswers(questionsForQuestionnaireFromDB, mentalProblemsFromDB);
 		for (let i = 0; i < questionsForQuestionnaireFromDB.length; i++) {
@@ -317,7 +339,7 @@
 					bind:currentPageNumber
 					bind:currentQuestionNumber
 					bind:selectedAnswers
-					allQuestions={questionsForQuestionnaireFromDB}
+					allQuestions={questionsForQuestionnaireFromDBWithExtraInformation}
 					correctAndPossibleAnswersForQuestions={correctAndPossibleAnswersForQuestions}
 					questionAnswerTemplates={questionAnswerTemplatesFromDB}
 				/>
@@ -328,7 +350,7 @@
 			<QuestionnaireStartPage correctAndPossibleAnswersForQuestions={correctAndPossibleAnswersForQuestions} questionAnswerTemplates={questionAnswerTemplatesFromDB} />
 		{/if}
 	{/key}
-	<!-- {#each questionsForQuestionnaireFromDB as question}
+	<!-- {#each questionsForQuestionnaireFromDBWithExtraInformation as question}
 			<p>{question.data.question}</p>
 		{/each} -->
 
