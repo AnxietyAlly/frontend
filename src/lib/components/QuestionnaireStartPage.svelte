@@ -48,7 +48,7 @@
 </div>
 
 <div class="h-30 mt-32 space-y-6">
-    <div class="flex justify-center mt-48">
+    <div class="flex justify-center mt-48 lg:mt-36">
         <label for="startBtn" class="hidden" id="startBtnLabel"></label>
         <button
             name="startBtn"

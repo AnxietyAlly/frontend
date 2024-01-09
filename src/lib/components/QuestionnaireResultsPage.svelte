@@ -26,7 +26,7 @@
 			<!-- {getScore()} -->
 		</div>
 	</div>
-	<div class="flex justify-center">
+	<div class="flex justify-center lg:mb-7">
 		<button>Show your answers</button>
 	</div>
 	<div class="hidden">

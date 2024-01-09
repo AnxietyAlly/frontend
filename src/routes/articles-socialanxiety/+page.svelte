@@ -6,11 +6,11 @@
 </div>
 
 <div class="ml-5">
-	<h2 class="text-xl font-bold italic text-stone-600 text-opacity-90">Discover</h2>
-	<div class="flex flex-wrap">
+	<h2 class="text-xl font-bold italic text-stone-600 text-opacity-90 lg:text-2xl">Discover</h2>
+	<div class="flex flex-wrap lg:grid lg:grid-cols-2 lg:gap-6">
 		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
 			<img
-				class="h-full object-cover"
+				class="h-full object-cover lg:h-48 lg:w-72"
 				src="https://geauxgirlmagazine.org/wp-new/wp-content/uploads/2023/05/gg15-my-social-anxiety.jpg"
 				alt="Artwork about a woman crying"
 			/>
@@ -26,9 +26,9 @@
 				</p>
 			</a>
 		</div>
-		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
+		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md lg:mr-4">
 			<img
-				class="h-full object-cover"
+				class="h-full object-cover lg:h-48 lg:w-72"
 				src="https://www.youngminds.org.uk/media/hxvh5etd/young-people-bullying.jpg?center=0.46629089837469651%2c0.4804978713314827&mode=crop&width=1920&height=1080&rnd=Wide_1920_1080&format=webp&quality=67"
 				alt="Young woman having anxiety"
 			/>
@@ -48,7 +48,7 @@
 		</div>
 		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
 			<img
-				class="h-full object-cover"
+				class="h-full object-cover lg:h-48 lg:w-72"
 				src="https://wise.com/imaginary-v2/2ece8184c2fd5704fd70d2138b433ba9.png?width=1200"
 				alt="Angry girl waiting for phone call"
 			/>
@@ -64,7 +64,7 @@
 				</p>
 			</a>
 		</div>
-		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
+		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md lg:mr-4">
 			<img
 				class="h-full object-cover"
 				src="https://www.youngminds.org.uk/media/mp2jef3f/young-people-loneliness.jpg?anchor=center&mode=crop&width=1920&height=1080&rnd=Wide_1920_1080&format=webp&quality=67"

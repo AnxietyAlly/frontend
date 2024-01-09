@@ -6,11 +6,11 @@
 </div>
 
 <div class="ml-5">
-	<h2 class="text-xl font-bold italic text-stone-600 text-opacity-90">Discover</h2>
-	<div class="flex flex-wrap">
+	<h2 class="text-xl font-bold italic text-stone-600 text-opacity-90 lg:text-2xl">Discover</h2>
+	<div class="flex flex-wrap lg:grid lg:grid-cols-2 lg:gap-6">
 		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
 			<img
-				class="h-full object-cover"
+				class="h-full object-cover lg:h-48 lg:w-72"
 				src="https://www.health.com/thmb/pO5RZbeb6a8GDQDGAYDLyQWFKSw=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Health-GettyImages-1661448665-f3acb2b8948f45aea875cf26eaca6b50.jpg"
 				alt="Woman talking with a doctor"
 			/> 
@@ -26,7 +26,7 @@
 				</p>
 			</a>
 		</div>
-		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
+		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md lg:mr-4">
 			<img
 				class="h-full object-cover"
 				src="https://static01.nyt.com/images/2018/06/19/well/19Sci-WELL-Brody-Hypochondria/19Sci-WELL-Brody-Hypochondria-superJumbo-v2.jpg"
@@ -48,7 +48,7 @@
 		</div>
 		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
 			<img
-				class="h-full object-cover"
+				class="h-full object-cover lg:h-48 lg:w-72"
 				src="https://s3-ap-southeast-2.amazonaws.com/media.anxiety.org.nz/production/3037/conversions/pexels-armin-rimoldi-5553640-medium.jpg"
 				alt="Young man reading something"
 			/>
@@ -64,9 +64,9 @@
 				</p>
 			</a>
 		</div>
-		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
+		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md lg:mr-4">
 			<img
-				class="h-full object-cover"
+				class="h-full object-cover lg:h-48 lg:w-72"
 				src="https://i.guim.co.uk/img/media/2cd93b6800c5c9479026ddebd3736122929ddbd5/0_0_3352_4208/master/3352.jpg?width=620&dpr=2&s=none"
 				alt="Artwork of a girl with a wave"
 			/>
@@ -78,7 +78,7 @@
 				<h3 class="font-bold text-stone-600">How I learned to tame my hypochondria</h3>
 				<p class="text-stone-600">
 					Surrounded, as I was growing up, by slightly health-hysterical women (“How are you?” I once asked an aunt 
-                    over the phone. “I’m on a mobile intravenous drip,” was the...<b>Read more</b>
+                    over the phone.) “I’m on a mobile intravenous drip,” was the...<b>Read more</b>
 				</p>
 			</a>
 		</div>
