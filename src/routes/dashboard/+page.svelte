@@ -6,7 +6,7 @@
     <img class="w-40 h-40 md:w-60 md:h-60 lg:w-52 lg:h-48 mt-4" src="/anxietyally.png" alt="Anxiety Ally Logo" />
 </div>
 <div class="h-10 mt-2 flex justify-center lg:mt-7">
-    <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-red-400 text-opacity-90">Welcome *user*</h1>
+    <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-red-400 text-opacity-90">Welcome {data.name}</h1>
 </div>
 
 <div class="text-center mx-auto mt-2"> <!-- Adjusted margin-top -->
@@ -33,7 +33,7 @@
     </div>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-1 justify-center lg:flex lg:items-center lg:justify-center">
 		<a
-			href="/dashboard"
+			href="/robodoc"
 			class="rounded-xl bg-gradient-to-r from-red-400 to-red-300 flex items-center justify-center h-16 m-1 lg:bg-gray-300 p-4 lg:w-1/2"
 		>
 			<h2
