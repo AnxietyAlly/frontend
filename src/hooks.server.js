@@ -7,6 +7,7 @@ export const handle = (async ({ event, resolve }) => {
       const session = getSession(sid);
       if (session) {
         event.locals.name = session.name;
+        event.locals.email = session.email;
       } else {
         // remove invalid/expired/unknown cookie
         cookies.delete('sid');
