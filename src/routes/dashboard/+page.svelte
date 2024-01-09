@@ -3,10 +3,10 @@
 </script>
 
 <div class="flex flex-col items-center mt-4">
-	<img class="w-40 h-100 mt-4" src="/anxietyally.png" alt="Anxiety Ally Logo" />
+    <img class="w-40 h-40 md:w-60 md:h-60 lg:w-52 mt-4" src="/anxietyally.png" alt="Anxiety Ally Logo" />
 </div>
 <div class="h-10 mt-2 flex justify-center">
-	<h1 class="text-3xl font-bold text-red-400 text-opacity-90">Welcome {data.name}</h1>
+    <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-red-400 text-opacity-90">Welcome *user*</h1>
 </div>
 <div>
 	<div class="grid grid-cols-3 gap-4 my-2 mx-5 justify-center">
@@ -85,3 +85,4 @@
 		</a>
 	</div>
 </div>
+
