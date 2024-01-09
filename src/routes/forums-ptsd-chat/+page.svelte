@@ -14,7 +14,7 @@
 
 	const submitComment = () => {
 		if (newComment.trim() !== '') {
-			comments = [...comments, { user: 'NewUser', text: newComment }];
+			comments = [...comments, { user: 'You', text: newComment }];
 			newComment = '';
 		}
 	};

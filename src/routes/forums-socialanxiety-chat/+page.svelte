@@ -16,7 +16,7 @@
    
         
         // Add the new comment
-        comments = [...comments, { user: 'NewUser', text: newComment }];
+        comments = [...comments, { user: 'You', text: newComment }];
         
         newComment = '';
       }
