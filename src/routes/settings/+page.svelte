@@ -3,6 +3,7 @@
 	export let data;
 
 	let isEditingInfo = false;
+	let isTryingToRemoveAccount = false;
 
 	let editButtonText = "Edit account details";
 	let editButtonWidth = "w-40";
@@ -16,6 +17,14 @@
 			isEditingInfo = false;
 			editButtonText = "Edit account details";
 			editButtonWidth = "w-40";
+		}
+	}
+
+	function toggleIsTryingToRemoveAccount() {
+		if (isTryingToRemoveAccount == false) {
+			isTryingToRemoveAccount = true;
+		} else {
+			isTryingToRemoveAccount = false;
 		}
 	}
 </script>
@@ -74,25 +83,30 @@
 	{/key}
 
 	<button on:click={toggleIsEditingInfo} class="rounded-xl h-7 {editButtonWidth} bg-red-300 m-2">{editButtonText}</button>
-
-	<!-- TODO: Properly add remove account button -->
-	<div class="rounded-xl h-7 w-72 bg-red-400 m-2 mt-10">
-		<p class="text-center">TEMP: REMOVE ACCOUNT GOES HERE</p>
-	</div>
     
-	<div class="grid grid-cols-3 gap-4 my-2 mx-5">
+	<div class="rounded-xl h-7 w-20 bg-red-400 m-2 mt-10">
 		<a
 			href="/logout"
-			class="rounded-xl col-span-3 bg-gradient-to-r from-red-400 to-red-300 flex items-center justify-center h-16 m-2"
+			class="rounded-xl bg-red-300"
 			data-sveltekit-preload-data="off"
     		data-sveltekit-reload
 		>
-			<h3
-				class="text-center text-2xl font-bold text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]"
-			>
-				Log out
-			</h3>
+			<h3 class="text-center">Log out</h3>
 		</a>
 	</div>
+
+	<button on:click={toggleIsTryingToRemoveAccount} class="rounded-xl h-7 w-40 bg-red-500 m-2 mt-20">Remove account</button>
+
+	{#key isTryingToRemoveAccount}
+		{#if isTryingToRemoveAccount}
+			<div>
+				<p class="text-center mt-4">Are you sure you want to remove your account?</p>
+				<div class="grid grid-cols-3 my-2">
+					<button class="rounded-xl h-7 w-48 bg-red-300 m-2 col-span-2">Yes, remove my account</button>
+					<button on:click={toggleIsTryingToRemoveAccount} class="rounded-xl h-7 w-20 bg-red-400 m-2">Cancel</button>
+				</div>
+			</div>
+		{/if}
+	{/key}
 </div>
 
