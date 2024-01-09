@@ -1,7 +1,6 @@
-const sessionStoreJavascript = require('../../src/lib/server/sessionStore/index');
-const createSession = sessionStoreJavascript.createSession;
-const deleteSession = sessionStoreJavascript.deleteSession;
-const getSession = sessionStoreJavascript.getSession;
+import { expect, test } from 'vitest';
+
+import { createSession, deleteSession, getSession } from '../../src/lib/server/sessionStore/index';
 
 const maxAge1 = 180;
 const testSession1 = createSession("testSession1", maxAge1);
