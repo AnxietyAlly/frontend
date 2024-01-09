@@ -6,7 +6,7 @@
 		},
 		{
 			user: 'User456',
-			text: "PTSD can be isolating, but finding this community has been a game-changer."
+			text: 'PTSD can be isolating, but finding this community has been a game-changer.'
 		}
 	];
 
@@ -27,12 +27,12 @@
 	<img class="w-40 h-100 mt-4" src="/anxietyally.png" alt="Anxiety Ally Logo" />
 </div>
 <div class="h-10 mt-8 flex justify-center items-center">
-    <h1 class="text-3xl font-bold text-red-400 text-opacity-90 text-center">
-        Personal Stories and Experiences
-    </h1>
+	<h1 class="text-3xl font-bold text-red-400 text-opacity-90 text-center">
+		Personal Stories and Experiences
+	</h1>
 </div>
 
-<div class="mb-30  ml-5 mr-5">
+<div class="mb-30 ml-5 mr-5">
 	<h3 class="text-lg font-bold mt-8 text-red-400">Comments</h3>
 	<ul>
 		{#each comments as comment (comment.text)}
@@ -43,7 +43,7 @@
 	</ul>
 </div>
 
-<div class="mt-4  ml-5 mr-5">
+<div class="mt-4 ml-5 mr-5">
 	<h3 class="text-lg font-bold mb-2 text-red-400">Add a Comment</h3>
 	<form on:submit|preventDefault={submitComment}>
 		<textarea

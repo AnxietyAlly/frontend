@@ -1,26 +1,24 @@
 <script>
-    let comments = [
-      {
-        user: 'User123',
-        text: "I've found that gradual exposure to social situations has been helpful for me"
-      },
-      {
-        user: 'User456',
-        text: "I've been attending CBT sessions, and it's been enlightening to identify and challenge my negative thought patterns"
-      }
-    ];
-  
-    let newComment = '';
-  
-    const submitComment = () => {
-   
-        
-        // Add the new comment
-        comments = [...comments, { user: 'You', text: newComment }];
-        
-        newComment = '';
-      }
-  </script>
+	let comments = [
+		{
+			user: 'User123',
+			text: "I've found that gradual exposure to social situations has been helpful for me"
+		},
+		{
+			user: 'User456',
+			text: "I've been attending CBT sessions, and it's been enlightening to identify and challenge my negative thought patterns"
+		}
+	];
+
+	let newComment = '';
+
+	const submitComment = () => {
+		// Add the new comment
+		comments = [...comments, { user: 'You', text: newComment }];
+
+		newComment = '';
+	};
+</script>
 
 <div class="flex flex-col items-center">
 	<a href="/forums-socialanxiety">
@@ -29,9 +27,9 @@
 	<img class="w-40 h-100 mt-4" src="/anxietyally.png" alt="Anxiety Ally Logo" />
 </div>
 <div class="h-10 mt-8 flex justify-center items-center">
-    <h1 class="text-3xl font-bold text-red-400 text-opacity-90 text-center">
-        Overcoming Social Anxiety Challenges
-    </h1>
+	<h1 class="text-3xl font-bold text-red-400 text-opacity-90 text-center">
+		Overcoming Social Anxiety Challenges
+	</h1>
 </div>
 
 <div class="mb-30 ml-5 mr-5">
