@@ -17,8 +17,7 @@ jobs:
     - run: echo "Testing frontend has begun"
     - uses: actions/checkout@v4
     - run: npm ci
-    - run: npm test
-    - run: npm run test-coverage
+    - run: npm run test
     - run: echo "Testing frontend has finished"
   eslint:
     runs-on: ubuntu-latest
@@ -46,7 +45,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '16'
+        node-version: '20'
 
     - name: Install Dependencies
       run: npm install
