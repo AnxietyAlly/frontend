@@ -73,7 +73,6 @@
 	};
 
 	afterUpdate(() => {
-		console.log('afterUpdate');
 		scrollToBottom(chatbox);
 	});
 
