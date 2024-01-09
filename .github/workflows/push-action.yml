@@ -52,7 +52,7 @@ jobs:
 
     # Run your tests and generate coverage file here
     - name: Run Tests and Generate Coverage
-      run: npm run coverage
+      run: npm run coverage1
 
     # Report test-coverage to DeepSource using CLI
     - name: Report test-coverage to DeepSource
