@@ -1,6 +1,6 @@
 name: GitHub Actions AnxietyAlly
 run-name: ${{ github.actor }} is pushing commit(s)
-on: [push]
+on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,6 +35,35 @@ jobs:
           ignore-path: .eslintignore
           extensions: 'js,jsx,ts,tsx'
           annotations: true
+  deepsource-coverage:
+    runs-on: ubuntu-latest
+    env:
+        DEEPSOURCE_DSN: https://cd414890ddd440b2b6d7d67d6517713e@app.deepsource.com
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install Dependencies
+      run: npm install
+
+    # Run your tests and generate coverage file here
+    - name: Run Tests and Generate Coverage
+      run: npm run coverage
+
+    # Report test-coverage to DeepSource using CLI
+    - name: Report test-coverage to DeepSource
+      run: |
+        # Install the CLI
+        curl https://deepsource.io/cli | sh
+
+        # Send the report to DeepSource
+        ./bin/deepsource report --analyzer test-coverage --key javascript --value-file ./coverage/cobertura-coverage.xml
+
   # trunk_check:
   #   name: Trunk Check Runner
   #   runs-on: ubuntu-latest
