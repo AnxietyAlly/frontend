@@ -15,18 +15,19 @@ jobs:
     needs: [build]
     steps:
     - run: echo "Testing frontend has begun"
-    - uses: actions/checkout@v4
-    - run: npm ci
+    # - uses: actions/checkout@v4
+    # - run: npm ci
     - run: npm run test
     - run: echo "Testing frontend has finished"
   eslint:
     runs-on: ubuntu-latest
+    needs: [build]
     steps:
-      - uses: actions/checkout@v4
+      # - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version: '20'
-      - run: npm ci # or yarn install
+      # - run: npm ci # or yarn install
       - uses: sibiraj-s/action-eslint@v3
         with:
           all-files: true
