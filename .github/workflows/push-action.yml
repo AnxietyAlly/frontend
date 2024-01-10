@@ -1,6 +1,6 @@
 name: GitHub Actions AnxietyAlly
 run-name: ${{ github.actor }} is pushing commit(s)
-on: [push, pull_request]
+on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
