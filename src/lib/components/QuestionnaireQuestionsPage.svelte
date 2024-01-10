@@ -1,4 +1,6 @@
 <script>
+	import { onMount } from 'svelte';
+
 	export let currentQuestionNumber;
 	export let selectedAnswers;
 	export let allQuestions;
@@ -7,6 +9,16 @@
 	let questionAmount = allQuestions.length;
 
 	export let currentPageNumber;
+
+	function alreadySelectedAnswer() {
+		const selectedAnswer = selectedAnswers.find((element) => {
+			return element.questionId == allQuestions[currentQuestionNumber - 1].data.id;
+		})
+		
+		if (selectedAnswer.selectedAnswerId !== undefined) {
+			document.getElementById(selectedAnswer.selectedAnswerId).click();
+		}
+	}
 
 	function goToNextQuestion() {
 		if (currentQuestionNumber < questionAmount) {
@@ -23,10 +35,17 @@
 	}
 
 	function selectAnswer(answerId) {
-		selectedAnswers.find((element) => {
+		const selectedAnswer = selectedAnswers.find((element) => {
 			return element.questionId == allQuestions[currentQuestionNumber - 1].data.id;
-		}).selectedAnswerValue = Number(document.getElementById(answerId).value);
+		})
+
+		selectedAnswer.selectedAnswerId = answerId;
+		selectedAnswer.selectedAnswerValue = Number(document.getElementById(answerId).value);
 	}
+
+	onMount(async () => {
+		alreadySelectedAnswer();
+	});
 </script>
 
 <div>
@@ -54,6 +73,7 @@
 								on:click={() => selectAnswer(answer.answerId)}
 							/>
 							<label
+								id={"labelFor" + answer.answerId}
 								for={answer.answerId}
 								class="bg-red-300 inline-flex items-center w-full p-3 mr-1 justify-center text-white cursor-pointer border-2 rounded-lg peer-checked:border-red-700 lg:w-48 lg:h-20"
 							>
