@@ -23,10 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Install modules
-      run: npm ci
-    - name: Run ESLint
-      run: eslint . --ext .js,.jsx,.ts,.tsx
+    - uses: stefanoeb/eslint-action@1.0.2
   deepsource-coverage:
     runs-on: ubuntu-latest
     env:
