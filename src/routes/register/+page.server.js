@@ -167,5 +167,3 @@ export const actions = {
         }
     },
 };
-
-// test
