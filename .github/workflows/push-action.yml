@@ -1,6 +1,6 @@
 name: GitHub Actions AnxietyAlly
 run-name: ${{ github.actor }} is merging branches
-on: [push, pull_request]
+on: [pull_request]
 jobs:
   build:
     runs-on: ubuntu-22.04
