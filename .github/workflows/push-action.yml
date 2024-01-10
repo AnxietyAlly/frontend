@@ -1,6 +1,6 @@
 name: GitHub Actions AnxietyAlly
-run-name: ${{ github.actor }} is pushing commit(s)
-on: [push]
+run-name: ${{ github.actor }} is merging branches
+on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,28 +22,21 @@ jobs:
   eslint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-      - run: npm ci # or yarn install
-      - uses: sibiraj-s/action-eslint@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }} # optional
-          eslint-args: '--ignore-path=.gitignore --quiet'
-          ignore-path: .eslintignore
-          extensions: 'js,jsx,ts,tsx'
-          annotations: true
+    - uses: actions/checkout@v4
+    - name: Install modules
+      run: npm ci
+    - name: Run ESLint
+      run: eslint . --ext .js,.jsx,.ts,.tsx
   deepsource-coverage:
     runs-on: ubuntu-latest
     env:
         DEEPSOURCE_DSN: https://cd414890ddd440b2b6d7d67d6517713e@app.deepsource.com
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Setup Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: '20'
 
