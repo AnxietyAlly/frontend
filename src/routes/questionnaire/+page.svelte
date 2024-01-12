@@ -141,7 +141,7 @@
 	}
 </script>
 <div class="min-h-screen bg-sky flex flex-col items-center">
-    <img class="w-40 h-100 z-10" src="/anxietyAllyLogo.png" alt="Anxiety Ally Logo">
+    <img class="w-40 h-100 z-10" src=".//anxietyAllyLogo.png" alt="Anxiety Ally Logo">
 <!--This is the start screen, probably not going to use it-->
 <div class="app top-0">
 	{#if questionPointer==-1}
@@ -209,7 +209,7 @@
 </div>
 <style>
       .bg-sky {
-      background-image: url("/background-sky.png");
+      background-image: url(".//background-sky.png");
       background-position: center;
     }
 
