@@ -305,6 +305,7 @@
 		for (let i = 0; i < questionsForQuestionnaireFromDB.length; i++) {
 			selectedAnswers.push({
 				questionId: questionsForQuestionnaireFromDB[i].data.id,
+				selectedAnswerId: undefined,
 				selectedAnswerValue: undefined
 			})
 		}
@@ -312,10 +313,12 @@
 		// [
 		//  {
 		//   questionId: 1
+		//   selectedAnswerId: 3
 		//   selectedAnswerValue: 3
-		//  }
+		//  },
 		//  {
 		//   questionId: 2
+		//   selectedAnswerId: 4
 		//   selectedAnswerValue: 4
 		//  }
 		// ]
@@ -345,7 +348,14 @@
 				/>
 			{/key}
 		{:else if currentPageNumber == 3}
-			<QuestionnaireResultsPage bind:currentPageNumber bind:currentQuestionNumber />
+			<QuestionnaireResultsPage 
+				bind:currentPageNumber
+				bind:currentQuestionNumber
+				bind:selectedAnswers
+				bind:mentalProblemsFromDB
+				allQuestions={questionsForQuestionnaireFromDBWithExtraInformation}
+				correctAndPossibleAnswersForQuestions={correctAndPossibleAnswersForQuestions}
+			/>
 		{:else}
 			<QuestionnaireStartPage correctAndPossibleAnswersForQuestions={correctAndPossibleAnswersForQuestions} questionAnswerTemplates={questionAnswerTemplatesFromDB} />
 		{/if}

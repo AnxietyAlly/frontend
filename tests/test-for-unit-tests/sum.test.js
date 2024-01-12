@@ -1,8 +1,5 @@
-const sumJavascript = require('./sum');
-const sum = sumJavascript.sum;
-const sub = sumJavascript.sub;
-
-
+import { expect, test } from 'vitest';
+import { sum, sub } from './sum'
 
 const a = Math.floor(Math.random() * (1000 - 0 + 1)) + 0;
 const b = Math.floor(Math.random() * (1000 - 0 + 1)) + 0;
