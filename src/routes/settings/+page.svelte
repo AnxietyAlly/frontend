@@ -134,7 +134,20 @@
 			<div>
 				<p class="text-center mt-4">Are you sure you want to remove your account?</p>
 				<div class="grid grid-cols-3 my-2">
-					<button class="rounded-xl h-7 w-48 bg-red-300 m-2 col-span-2">Yes, remove my account</button>
+					<form class="col-span-2" method="post" use:enhance>
+						<label class="hidden" for="hiddenEmailInput">Email</label>
+						<input
+							id="hiddenEmailInput"
+							class="hidden"
+							type="email"
+							placeholder=""
+							value={data.email}
+							name="email"
+							required
+						/>
+
+						<button type="submit" formaction="?/removeAccount" class="rounded-xl h-7 w-48 bg-red-300 m-2 col-span-2">Yes, remove my account</button>
+					</form>
 					<button on:click={toggleIsTryingToRemoveAccount} class="rounded-xl h-7 w-20 bg-red-400 m-2">Cancel</button>
 				</div>
 			</div>

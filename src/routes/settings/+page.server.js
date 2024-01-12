@@ -172,4 +172,17 @@ export const actions = {
           throw redirect(307, '/settings');
       }
   },
+  removeAccount: async ({ request }) => {
+    const formData = await request.formData();
+    const email = formData.get('email')?.toString();
+
+    const dataForPost = {
+        email: email
+    };
+
+    postData("https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts/delete", dataForPost).then((data) => {
+        console.log(data);
+    });
+    throw redirect(307, '/logout');
+  },
 };
