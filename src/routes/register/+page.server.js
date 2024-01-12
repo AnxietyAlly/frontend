@@ -13,7 +13,7 @@ export const load = (({ locals }) => {
 });
 
 /**
-	 * Async function to get the data from the SWAPI api
+	 * Async function to get the data from an API
 	 * @returns - returns a promise
 	 */
 async function getApiData(url) {

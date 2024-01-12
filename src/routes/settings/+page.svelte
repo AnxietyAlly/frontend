@@ -20,6 +20,12 @@
 		}
 	}
 
+	function handleSubmit() {
+		setTimeout(() => {
+			toggleIsEditingInfo();
+		}, 10);
+	}
+
 	function toggleIsTryingToRemoveAccount() {
 		if (isTryingToRemoveAccount == false) {
 			isTryingToRemoveAccount = true;
@@ -56,6 +62,19 @@
 						/>
 					</div>
 
+					<div class="hidden">
+						<label class="justify-self-end" for="hiddenOldEmailInput">Old email:</label>
+						<input
+							id="hiddenOldEmailInput"
+							class="input border border-white rounded-lg justify-self-start col-span-2"
+							type="email"
+							placeholder=""
+							value={data.email}
+							name="oldEmail"
+							required
+						/>
+					</div>
+
 					<div class="grid grid-cols-3 gap-x-6 m-2">
 						<label class="justify-self-end" for="emailInput">Email:</label>
 						<input
@@ -68,8 +87,21 @@
 							required
 						/>
 					</div>
+
+					<div class="grid grid-cols-3 gap-x-6 m-2">
+						<label class="justify-self-end" for="passwordInput">Password:</label>
+						<input
+							id="passwordInput"
+							class="input border border-white rounded-lg justify-self-start col-span-2"
+							type="password"
+							placeholder="Your new password here"
+							name="password"
+							required
+						/>
+					</div>
+					
+					<button on:click={handleSubmit} type="submit" formaction="?/updateAccount" class="rounded-xl h-7 w-20 bg-red-400 m-2">Submit</button>
 				</form>
-				<button type="submit" class="rounded-xl h-7 w-20 bg-red-400 m-2">Submit</button>
 			</div>
 		{:else}
 			<div class="grid grid-cols-3 gap-x-6 my-2">
