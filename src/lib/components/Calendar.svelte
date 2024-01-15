@@ -2,6 +2,8 @@
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
 
+	export let data;
+
 	let currentDate = new Date();
 	let currentMonth = currentDate.getMonth();
 	let currentYear = currentDate.getFullYear();
@@ -84,15 +86,28 @@
 	}
 	async function getDailyCheckupResultsOfMonth() {
 		const daysInCurrentMonth = getDaysInMonth(currentYear, currentMonth);
-		const userId = 1;
+
+		const userEmail = data.email;
+
+		const user = getApiData(`https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts/email/${userEmail}`);
+
+		const userId = 5;
+
+		let urlToSendRequestTo = '';
+
+		if (currentMonth < 9) {
+			urlToSendRequestTo = `https://aa-apigateway-sprint-3.onrender.com/progressApi/user/${userId}/dateRange/${currentYear}0${
+				currentMonth + 1
+			}01000000/${currentYear}0${currentMonth + 1}${daysInCurrentMonth}235959/dailyCheckupResults`
+		} else {
+			urlToSendRequestTo = `https://aa-apigateway-sprint-3.onrender.com/progressApi/user/${userId}/dateRange/${currentYear}${
+				currentMonth + 1
+			}01000000/${currentYear}${currentMonth + 1}${daysInCurrentMonth}235959/dailyCheckupResults`
+		}
 
 		let dailyCheckupResultsFromDatabase = [];
 		if (browser) {
-			const dailyCheckupResultLinksJSON = await getApiData(
-				`https://aa-apigateway-sprint-3.onrender.com/progressApi/user/${userId}/dateRange/${currentYear}${
-					currentMonth + 1
-				}01000000/${currentYear}${currentMonth + 1}${daysInCurrentMonth}235959/dailyCheckupResults`
-			);
+			const dailyCheckupResultLinksJSON = await getApiData(urlToSendRequestTo);
 
 			const dailyCheckupResultLinks = dailyCheckupResultLinksJSON.data;
 
