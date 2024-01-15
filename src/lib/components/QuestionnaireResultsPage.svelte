@@ -92,7 +92,7 @@
 		mentalProblems.forEach(mentalProblem => {
 			if (mentalProblem.totalNumberOfPossibleQuestions > 0) {
 				const paragraph = document.createElement("p");
-				paragraph.innerHTML = `${mentalProblem.name}: ${mentalProblem.numberOfCorrectAnswers}/${mentalProblem.totalNumberOfPossibleQuestions} answers you gave suggest you have this problem`;
+				paragraph.innerHTML = `${mentalProblem.name}: ${mentalProblem.numberOfCorrectAnswers}/${mentalProblem.totalNumberOfPossibleQuestions} answers you gave suggest you have this`;
 				document.getElementById("results").append(paragraph);
 			}
 		});
