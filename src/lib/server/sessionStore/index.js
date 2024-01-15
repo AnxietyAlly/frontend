@@ -1,60 +1,60 @@
-import { randomBytes } from 'node:crypto';
+import { randomBytes } from "node:crypto";
 
 const sessionStore = new Map();
 let nextClean = Date.now() + 1000 * 60 * 60; // 1 hour
 
 function getSid() {
-    return randomBytes(32).toString('hex');
+	return randomBytes(32).toString("hex");
 }
 
 function clean() {
-    const now = Date.now();
-    for (const [sid, session] of sessionStore) {
-        if (session.invalidAt < now) {
-            sessionStore.delete(sid);
-        }
-    }
-    nextClean = Date.now() + 1000 * 60 * 60; // 1 hour
+	const now = Date.now();
+	for (const [sid, session] of sessionStore) {
+		if (session.invalidAt < now) {
+			sessionStore.delete(sid);
+		}
+	}
+	nextClean = Date.now() + 1000 * 60 * 60; // 1 hour
 }
 
 export function deleteSession(sid) {
-    sessionStore.delete(sid);
+	sessionStore.delete(sid);
 }
 
 export function createSession(name, email, maxAge) {
-    let sid = '';
+	let sid = "";
 
-    do {
-        sid = getSid();
-    } while (sessionStore.has(sid));
+	do {
+		sid = getSid();
+	} while (sessionStore.has(sid));
 
-    sessionStore.set(sid, {
-        name,
-        email,
-        invalidAt: Date.now() + maxAge,
-    });
+	sessionStore.set(sid, {
+		name,
+		email,
+		invalidAt: Date.now() + maxAge,
+	});
 
-    return sid;
+	return sid;
 }
 
 if (Date.now() > nextClean) {
-    setTimeout(() => {
-        clean();
-    }, 5000);
+	setTimeout(() => {
+		clean();
+	}, 5000);
 }
 
 export function getSession(sid) {
-    const session = sessionStore.get(sid);
-    if (session) {
-        if (Date.now() > session.invalidAt) {
-            console.log('delete invalid session', sid);
-            sessionStore.delete(sid);
-            return undefined;
-        } else {
-            return session;
-        }
-    } else {
-        console.log('session not found', sid);
-        return undefined;
-    }
+	const session = sessionStore.get(sid);
+	if (session) {
+		if (Date.now() > session.invalidAt) {
+			console.log("delete invalid session", sid);
+			sessionStore.delete(sid);
+			return undefined;
+		} else {
+			return session;
+		}
+	} else {
+		console.log("session not found", sid);
+		return undefined;
+	}
 }
