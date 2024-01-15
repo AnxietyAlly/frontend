@@ -6,7 +6,7 @@
 	let isTryingToRemoveAccount = false;
 
 	let editButtonText = "Edit account details";
-	let editButtonWidth = "w-40";
+	let editButtonWidth = "w-48";
 
 	function toggleIsEditingInfo() {
 		if (isEditingInfo == false) {
@@ -16,7 +16,7 @@
 		} else {
 			isEditingInfo = false;
 			editButtonText = "Edit account details";
-			editButtonWidth = "w-40";
+			editButtonWidth = "w-48";
 		}
 	}
 
@@ -100,7 +100,7 @@
 						/>
 					</div>
 					
-					<button on:click={handleSubmit} type="submit" formaction="?/updateAccount" class="rounded-xl h-7 w-20 bg-red-400 m-2">Submit</button>
+					<button on:click={handleSubmit} type="submit" formaction="?/updateAccount" class="rounded-xl h-9 w-20 bg-red-400 m-2">Submit</button>
 				</form>
 			</div>
 		{:else}
@@ -114,20 +114,35 @@
 		{/if}
 	{/key}
 
-	<button on:click={toggleIsEditingInfo} class="rounded-xl h-7 {editButtonWidth} bg-red-300 m-2">{editButtonText}</button>
+	{#key isEditingInfo}
+		<button on:click={toggleIsEditingInfo} class="rounded-xl {editButtonWidth} bg-red-300 m-2">
+			{#if isEditingInfo}
+				<div class="m-1">
+					<p class="self-center justify-self-end">{editButtonText}</p>
+				</div>
+			{:else}
+				<div class="flex flex-auto m-1 gap-2">
+					<img src="/edit-account.png" alt="Account edit icon" class="w-8 h-8">
+					<p class="self-center justify-self-end">{editButtonText}</p>
+				</div>
+			{/if}
+		</button>
+	{/key}
     
-	<div class="rounded-xl h-7 w-20 bg-red-400 m-2 mt-10">
-		<a
-			href="/logout"
-			class="rounded-xl bg-red-300"
-			data-sveltekit-preload-data="off"
-    		data-sveltekit-reload
-		>
-			<h3 class="text-center">Log out</h3>
-		</a>
-	</div>
+	<a
+		href="/logout"
+		class="rounded-xl bg-red-400 m-2 mt-10 w-28 flex flex-auto gap-2"
+		data-sveltekit-preload-data="off"
+		data-sveltekit-reload
+	>
+		<img src="/logout.png" alt="Logout icon" class="w-7 h-7 my-2 ml-2">
+		<h3 class="self-center justify-self-end my-2">Log out</h3>
+	</a>
 
-	<button on:click={toggleIsTryingToRemoveAccount} class="rounded-xl h-7 w-40 bg-red-500 m-2 mt-20">Remove account</button>
+	<button on:click={toggleIsTryingToRemoveAccount} class="rounded-xl bg-red-500 m-2 mt-20 flex flex-auto gap-2">
+		<img src="/trash.png" alt="Trash can icon" class="w-8 h-8 my-2 ml-2">
+		<p class="my-2 mr-2 self-center justify-self-end">Remove account</p>
+	</button>
 
 	{#key isTryingToRemoveAccount}
 		{#if isTryingToRemoveAccount}
@@ -146,7 +161,13 @@
 							required
 						/>
 
-						<button type="submit" formaction="?/removeAccount" class="rounded-xl h-7 w-48 bg-red-300 m-2 col-span-2">Yes, remove my account</button>
+						<button 
+							type="submit" 
+							formaction="?/removeAccount" 
+							class="rounded-xl h-7 w-48 bg-red-300 m-2 col-span-2"
+						>
+							Yes, remove my account
+						</button>
 					</form>
 					<button on:click={toggleIsTryingToRemoveAccount} class="rounded-xl h-7 w-20 bg-red-400 m-2">Cancel</button>
 				</div>
