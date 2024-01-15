@@ -97,22 +97,32 @@
 			}
 		});
 
+		let answersAreShown = false;
+
 		document.getElementById("showAnswersBtn").addEventListener("click", () => {
-			document.getElementById("questionsAndAnswers").classList.remove("hidden");
-			document.getElementById("questionsAndAnswers").classList.add("grid");
-			document.getElementById("answerBtnsDiv").classList.remove("lg:mb-7");
-			document.getElementById("hideAnswersBtn").classList.remove("hidden");
-			document.getElementById("showAnswersBtn").classList.add("hidden");
+			if(!answersAreShown) {
+				answersAreShown = true;
+
+				document.getElementById("showAnswersBtn").innerHTML = "Hide your answers";
+				document.getElementById("questionsAndAnswers").classList.remove("hidden");
+				document.getElementById("questionsAndAnswers").classList.add("grid");
+				document.getElementById("answerBtnsDiv").classList.remove("lg:mb-7");
+			} else {
+				answersAreShown = false;
+
+				document.getElementById("showAnswersBtn").innerHTML = "Show your answers";
+				document.getElementById("questionsAndAnswers").classList.add("hidden");
+				document.getElementById("questionsAndAnswers").classList.remove("grid");
+				document.getElementById("answerBtnsDiv").classList.add("lg:mb-7");
+			}
 		});
-		document.getElementById("hideAnswersBtn").addEventListener("click", () => {
-			document.getElementById("questionsAndAnswers").classList.add("hidden");
-			document.getElementById("questionsAndAnswers").classList.remove("grid");
-			document.getElementById("answerBtnsDiv").classList.add("lg:mb-7");
-			document.getElementById("hideAnswersBtn").classList.add("hidden");
-			document.getElementById("showAnswersBtn").classList.remove("hidden");
-		});
-		console.log(correctAndPossibleAnswersForQuestions);
-		console.log(selectedAnswers);
+		// document.getElementById("hideAnswersBtn").addEventListener("click", () => {
+		// 	document.getElementById("questionsAndAnswers").classList.add("hidden");
+		// 	document.getElementById("questionsAndAnswers").classList.remove("grid");
+		// 	document.getElementById("answerBtnsDiv").classList.add("lg:mb-7");
+		// 	document.getElementById("hideAnswersBtn").classList.add("hidden");
+		// 	document.getElementById("showAnswersBtn").classList.remove("hidden");
+		// });
 
 		let allQuestionElements = [];
 		allQuestions.forEach(question => {
@@ -168,8 +178,8 @@
 		</div>
 	</div>
 	<div id="answerBtnsDiv" class="flex justify-center lg:mb-7">
-		<button id="showAnswersBtn">Show your answers</button>
-		<button id="hideAnswersBtn" class="hidden">Hide your answers</button>
+		<details><summary id="showAnswersBtn" class="text-white font-bold">Show your answers</summary></details>
+		<!-- <button id="hideAnswersBtn" class="hidden text-white font-bold">Hide your answers</button> -->
 	</div>
 	<div class="flex justify-center lg:mb-7">
 		<div id="questionsAndAnswers" class="hidden rounded-md m-4 grid-rows-1 grid-cols-2 gap-4 w-3/4 md:w-1/2 lg:w-1/2 bg-white bg-opacity-50 p-6">
