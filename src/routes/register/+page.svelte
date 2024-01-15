@@ -40,7 +40,7 @@
 					<img class="w-10 h-10 mr-4" src="/circle-envelope.png" alt="Anxiety Ally Logo" />
 					<input
 						class="input my-2 border border-white rounded-lg"
-						type="text"
+						type="email"
 						placeholder=""
 						name="email"
 						required

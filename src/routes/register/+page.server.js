@@ -13,7 +13,7 @@ export const load = (({ locals }) => {
 });
 
 /**
-	 * Async function to get the data from the SWAPI api
+	 * Async function to get the data from an API
 	 * @returns - returns a promise
 	 */
 async function getApiData(url) {
@@ -26,9 +26,9 @@ async function getApiData(url) {
     }
 }
 
-function performLogin(cookies, name) {
+function performLogin(cookies, name, email) {
     const maxAge = 1000 * 60 * 60 * 24 * 30; // 30 days
-    const sid = createSession(name, maxAge);
+    const sid = createSession(name, email, maxAge);
     cookies.set('sid', sid, { maxAge });
 }
 
@@ -162,7 +162,7 @@ export const actions = {
             postData("https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts", dataForPost).then((data) => {
                 console.log(data);
             });
-            performLogin(cookies, name);
+            performLogin(cookies, name, email);
             throw redirect(307, '/');
         }
     },
