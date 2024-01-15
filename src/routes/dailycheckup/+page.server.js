@@ -1,5 +1,15 @@
 import { redirect } from "@sveltejs/kit";
 
+async function getApiData(url) {
+	try {
+		const response = await fetch(url);
+		const returnedResponse = await response.json();
+		return returnedResponse;
+	} catch (err) {
+		console.error("Error: ", err);
+	}
+}
+
 function isLoggedIn(locals, cookies) {
 	if (!locals?.name) {
 		cookies.set("originalUrl", "/dailycheckup", {
@@ -65,14 +75,18 @@ async function postData(url, data) {
 }
 
 export const actions = {
-	default: async ({ request }) => {
+	default: async ({ locals, request }) => {
 		const formData = await request.formData();
 		const sliderValue = formData.get("slider");
 		const description = formData.get("description");
 
+		const userEmail = locals.email;
+
+		const user = await getApiData(`https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts/email/${userEmail}`);
+
 		const dataForPost = {
 			// eslint-disable-next-line camelcase
-			user_id: 1, 
+			user_id: user.data.id,
 			date: now(), 
 			result: sliderValue, 
 			description: description

@@ -168,7 +168,7 @@
 	>
 		<a
 			href="/forums"
-			class="rounded-xl col-span-3 bg-gradient-to-r from-red-400 to-red-300 flex items-center justify-center h-16 m-1"
+			class="rounded-xl bg-gradient-to-r from-red-400 to-red-300 flex items-center justify-center h-16 m-1 lg:bg-gray-300 p-4 lg:w-1/2"
 		>
 			<h2
 				class="text-center text-2xl font-bold text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]"
@@ -182,7 +182,7 @@
 	>
 		<a
 			href="/logout"
-			class="rounded-xl col-span-3 bg-gradient-to-r from-red-400 to-red-300 flex items-center justify-center h-16 m-1"
+			class="rounded-xl bg-gradient-to-r from-red-400 to-red-300 flex items-center justify-center h-16 m-1 lg:bg-gray-300 p-4 lg:w-1/2"
 			data-sveltekit-preload-data="off"
 			data-sveltekit-reload
 		>
