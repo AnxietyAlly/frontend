@@ -18,6 +18,9 @@
 				<a class="btn btn-sm variant-ghost-surface border-red-400" href="/articles" rel="noreferrer">
 					<img class="max-h-12" src="/book.png" alt="Book icon" />
 				</a>
+				<a class="btn btn-sm variant-ghost-surface" href="/robodoc" rel="noreferrer">
+					<img class="max-h-12" src="/robot.png" alt="Robot icon" />
+				</a>
 				<a class="btn btn-sm variant-ghost-surface" href="/settings" rel="noreferrer">
 					<img class="max-h-12" src="/settings.png" alt="Settings icon" />
 				</a>

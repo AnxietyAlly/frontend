@@ -137,7 +137,7 @@
 	<a href="/dashboard">
 		<img class="w-10 h-10 mt-2 ml-7  fixed top-5 left-0" src="/back.png" alt="back button" />
 	</a>
-	<div class="nav-buttons mt-2">
+	<div class="nav-buttons mt-2 lg:mt-4">
 		<button
 			class="w-30 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium mr-3 rounded-3xl shadow col-span-2 bg-red-400 bg-opacity-70 text-white md:py-4 md:text-lg md:px-10"
 			on:click={() => updateMonth(-1)}>Previous Month</button
@@ -149,7 +149,7 @@
 		>
 	</div>
 	<div>
-		<div class="flex justify-center">
+		<div class="flex justify-center lg:mt-6">
 			<h2 class="text-l font-semibold text-stone-600">
 				{new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(currentDate)}
 			</h2>

@@ -6,11 +6,11 @@
 </div>
 
 <div class="ml-5">
-	<h2 class="text-xl font-bold italic text-stone-600 text-opacity-90">Discover</h2>
-	<div class="flex flex-wrap">
+	<h2 class="text-xl font-bold italic text-stone-600 text-opacity-90 lg:text-2xl">Discover</h2>
+	<div class="flex flex-wrap lg:grid lg:grid-cols-2 lg:gap-6">
 		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
 			<img
-				class="h-full object-cover"
+				class="h-full object-cover lg:h-48 lg:w-72"
 				src="https://www.youngminds.org.uk/media/5kabk052/0007.png?anchor=center&mode=crop&width=1920&height=1080&rnd=Wide_1920_1080&format=webp&quality=67"
 				alt="Boy with panic disorder"
 			/>
@@ -27,7 +27,7 @@
 				</p>
 			</a>
 		</div>
-		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
+		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md lg:mr-4">
 			<img
 				class="h-full object-cover"
 				src="https://www.mentalhealth.org.uk/sites/default/files/styles/1296w/public/2023-05/how-to-anxiety-cover.webp?itok=YSXDvtOa"
@@ -49,7 +49,7 @@
 		</div>
 		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
 			<img
-				class="h-full object-cover"
+				class="h-full object-cover lg:h-48 lg:w-72"
 				src="https://www.anxietycanada.com/wp-content/uploads/2020/08/IMG-5988-2048x1536.jpg"
 				alt="Woman with panic disorder"
 			/>
@@ -65,7 +65,7 @@
 				</p>
 			</a>
 		</div>
-		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
+		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md lg:mr-4">
 			<img
 				class="h-full object-cover"
 				src="https://www.nami.org/NAMI/media/NAMI-Media/Personal%20Stories/christine2.jpg"

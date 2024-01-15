@@ -6,8 +6,8 @@
 </div>
 
 <div class="ml-5">
-	<h2 class="text-xl font-bold italic text-stone-600 text-opacity-90">Discover</h2>
-	<div class="flex flex-wrap">
+	<h2 class="text-xl font-bold italic text-stone-600 text-opacity-90 lg:text-2xl">Discover</h2>
+	<div class="flex flex-wrap lg:grid lg:grid-cols-2 lg:gap-6">
 		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
 			<img
 				class="h-full object-cover"
@@ -26,9 +26,9 @@
 				</p>
 			</a>
 		</div>
-		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
+		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md lg:mr-4">
 			<img
-				class="h-full object-cover"
+				class="h-full object-cover lg:h-48 lg:w-72"
 				src="https://calmerry.com/wp-content/uploads/2022/05/Separation-anxiety-in-adults-1.png"
 				alt="Artwork of girl with seperation anxiety"
 			/>
@@ -64,9 +64,9 @@
 				</p>
 			</a>
 		</div>
-		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md">
+		<div class="w-100 bg-white bg-opacity-50 my-2 grid grid-cols-3 gap-2 rounded-md lg:mr-4">
 			<img
-				class="h-full object-cover"
+				class="h-full object-cover lg:h-48 lg:w-72"
 				src="https://www.allohealth.care/wp-content/uploads/2023/06/AdobeStock_573845693-300x200.jpeg.webp?v=1687583617"
 				alt="Angry girl waiting for phone call"
 			/>
