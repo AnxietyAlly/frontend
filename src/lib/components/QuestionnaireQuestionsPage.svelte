@@ -57,8 +57,8 @@
 		{#if questionAnswerTemplates.find((element) => {
 			return element.data.id == allQuestions[currentQuestionNumber - 1].data.question_answer_template_id;
 		}).data.question_type_id == 1}
-			<div class="grid grid-rows-2 gap-4 mt-2 lg:justify-center">
-				<ul class="grid w-full gap-6 grid-cols-2 lg:w-96 lg:mt-5">
+			<div class="grid grid-rows-1 gap-4 mt-2 lg:justify-center">
+				<ul class="grid w-full gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-2 lg:w-96 lg:mt-5">
 					{#each correctAndPossibleAnswersForQuestions.find((element) => {
 						return element.questionId == allQuestions[currentQuestionNumber - 1].data.id;
 					}).answers as answer, i}
@@ -84,9 +84,9 @@
 						</li>
 					{/each}
 				</ul>
-				<details>
+				<details class="lg:w-96">
 					<summary class="text-white font-bold">More information on this topic?</summary>
-					<div class="rounded-md w-3/4 md:w-1/2 lg:w-1/4 bg-white bg-opacity-50 p-4">
+					<div class="rounded-md w-3/4 md:w-1/2 lg:w-full bg-white bg-opacity-50 p-4">
 						<div class="text-l text-stone-600">{allQuestions[currentQuestionNumber - 1].data.extraInformation.data.text}</div>
 						{#if 
 							!(allQuestions[currentQuestionNumber - 1].data.extraInformation.data.linkDescription == null || 
@@ -94,10 +94,9 @@
 							allQuestions[currentQuestionNumber - 1].data.extraInformation.data.linkDescription == "")
 						}
 							<br>
-							<div class="text-l text-stone-600">Link: </div><a href="{allQuestions[currentQuestionNumber - 1].data.extraInformation.data.linkHref}">{allQuestions[currentQuestionNumber - 1].data.extraInformation.data.linkDescription}</a>
+							<div class="text-l text-stone-600">Link: </div><a class="text-blue-600" href="{allQuestions[currentQuestionNumber - 1].data.extraInformation.data.linkHref}">{allQuestions[currentQuestionNumber - 1].data.extraInformation.data.linkDescription}</a>
 						{/if}
 					</div>
-					
 				</details>
 			</div>
 		{/if}
