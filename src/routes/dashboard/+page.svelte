@@ -1,5 +1,85 @@
 <script>
+	import { browser } from '$app/environment';
+	import { onMount } from 'svelte';
+
 	export let data;
+
+	async function getApiData(url) {
+		try {
+			let response = await fetch(url);
+			let returnedResponse = await response.json();
+			return returnedResponse;
+		} catch (err) {
+			console.error('Error: ', err);
+		}
+	}
+
+	async function getQuotes() {
+		let quotesFromDatabase = [];
+		if (browser) {
+			const quoteResponse = await getApiData(
+				"https://aa-apigateway-sprint-3.onrender.com/quotesApi/quotes"
+			);
+
+			const quoteLinks = quoteResponse.data;
+
+			for (let i = 0; i < quoteLinks.length; i++) {
+				const quote = await getApiData(
+					`https://aa-apigateway-sprint-3.onrender.com/quotesApi${quoteLinks[i]}`
+				);
+
+				quotesFromDatabase.push(quote);
+			}
+			const allQuotesPromise = await Promise.all(quotesFromDatabase);
+
+			// const questionPromises = questionLinks.map((link) =>
+			// 	getApiData(`https://aa-apigateway-sprint-3.onrender.com/questionnaireApi${link}`)
+			// );
+
+			return allQuotesPromise;
+		}
+	}
+
+	function getRandomInt(min, max) {
+		min = Math.ceil(min);
+		max = Math.floor(max);
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	async function getRandomQuote() {
+		let quotesFromDatabase = [];
+		if (browser) {
+			const quoteResponse = await getApiData(
+				"https://aa-apigateway-sprint-3.onrender.com/quotesApi/quotes"
+			);
+
+			const quoteLinks = quoteResponse.data;
+
+			const randomQuoteLink = quoteLinks[getRandomInt(0, quoteLinks.length - 1)]
+
+
+			const quote = await getApiData(
+				`https://aa-apigateway-sprint-3.onrender.com/quotesApi${randomQuoteLink}`
+			);
+
+			quotesFromDatabase.push(quote);
+
+			const allQuotesPromise = await Promise.all(quotesFromDatabase);
+
+			// const questionPromises = questionLinks.map((link) =>
+			// 	getApiData(`https://aa-apigateway-sprint-3.onrender.com/questionnaireApi${link}`)
+			// );
+
+			return allQuotesPromise[0];
+		}
+	}
+
+	onMount(async () => {
+		const randomQuote = await getRandomQuote();
+
+		const quoteParagraph = document.getElementById("quote");
+		quoteParagraph.innerHTML = `${randomQuote.data.quoteName}`
+	});	
 </script>
 
 <div class="flex flex-col items-center mt-4">
@@ -8,6 +88,16 @@
 		src="/anxietyally.png"
 		alt="Anxiety Ally Logo"
 	/>
+</div>
+
+<div class="h-4 mt-2 space-y-6">
+	<div class="flex justify-center lg:h-12">
+		<div class="w-2/3 md:w-1/2 lg:w-1/4">
+			<p class="text-xs text-center text-stone-600 italic lg:text-lg" id="quote">
+				
+			</p>
+		</div>
+	</div>
 </div>
 <div class="h-10 mt-2 flex justify-center lg:mt-7">
 	<h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-red-400 text-opacity-90">
