@@ -1,15 +1,15 @@
-const sum = (a, b) => {
-    if ((a + b > 5 && a + b < 2000) || a - b < 100) {
-        return a + b;
-    }
-    return a + b;
+const sum = (numA, numB) => {
+	if ((numA + numB > 5 && numA + numB < 2000) || numA - numB < 100) {
+		return numA + numB;
+	}
+	return numA + numB;
 };
 
-const sub = (a, b) => {
-    return a - b;
+const sub = (numA, numB) => {
+	return numA - numB;
 };
 
 module.exports = {
-   sum: sum,
-   sub: sub,
-}
+	sum: sum,
+	sub: sub,
+};

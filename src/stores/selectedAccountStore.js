@@ -1,9 +1,10 @@
-import { writable } from 'svelte/store';
+import { writable } from "svelte/store";
 
 export const selectedAccount = writable({
-  id: 'id number of the account',
-  name: 'name of the user who made the account',
-  email: 'email linked to the account',
+	// eslint-disable-next-line id-length
+	id: "id number of the account",
+	name: "name of the user who made the account",
+	email: "email linked to the account",
 });
 
 /**

@@ -1,21 +1,21 @@
-import adapter from '@sveltejs/adapter-node';
-import { vitePreprocess } from '@sveltejs/kit/vite';
+import adapter from "@sveltejs/adapter-node";
+import { vitePreprocess } from "@sveltejs/kit/vite";
 
 const config = {
-  extensions: ['.svelte'],
-  preprocess: [vitePreprocess()],
-  kit: {
-    // Specify the base path if necessary, for example:
-    // basePath: '/your-subdirectory',
+	extensions: [".svelte"],
+	preprocess: [vitePreprocess()],
+	kit: {
+		// Specify the base path if necessary, for example:
+		// basePath: '/your-subdirectory',
 
-    // Add the following `files` section to serve the "static" directory.
-    files: {
-      assets: 'static',
-    },
+		// Add the following `files` section to serve the "static" directory.
+		files: {
+			assets: "static",
+		},
 
-    // Specify the adapter as adapter-auto.
-    adapter: adapter(),
-  },
+		// Specify the adapter as adapter-auto.
+		adapter: adapter(),
+	},
 };
 
 export default config;
