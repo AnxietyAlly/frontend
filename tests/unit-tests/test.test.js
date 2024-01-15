@@ -3,11 +3,11 @@ import { expect, test } from 'vitest';
 import { createSession, deleteSession, getSession } from '../../src/lib/server/sessionStore/index';
 
 const maxAge1 = 180;
-const testSession1 = createSession("testSession1", maxAge1);
+const testSession1 = createSession("testSession1", "test", maxAge1);
 const invalidAt = Date.now() + maxAge1;
 
 const maxAge2 = 180;
-const testSession2 = createSession("sessionToBeDeleted", maxAge2);
+const testSession2 = createSession("sessionToBeDeleted", "test", maxAge2);
 
 test("createSession has made a session", () => {
     expect(testSession1).toBeDefined();
