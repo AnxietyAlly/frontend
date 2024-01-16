@@ -89,18 +89,16 @@
 
 		const userEmail = data.email;
 
-		const user = getApiData(`https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts/email/${userEmail}`);
-
-		const userId = 5;
+		const user = await getApiData(`https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts/email/${userEmail}`);
 
 		let urlToSendRequestTo = '';
 
 		if (currentMonth < 9) {
-			urlToSendRequestTo = `https://aa-apigateway-sprint-3.onrender.com/progressApi/user/${userId}/dateRange/${currentYear}0${
+			urlToSendRequestTo = `https://aa-apigateway-sprint-3.onrender.com/progressApi/user/${user.data.id}/dateRange/${currentYear}0${
 				currentMonth + 1
 			}01000000/${currentYear}0${currentMonth + 1}${daysInCurrentMonth}235959/dailyCheckupResults`
 		} else {
-			urlToSendRequestTo = `https://aa-apigateway-sprint-3.onrender.com/progressApi/user/${userId}/dateRange/${currentYear}${
+			urlToSendRequestTo = `https://aa-apigateway-sprint-3.onrender.com/progressApi/user/${user.data.id}/dateRange/${currentYear}${
 				currentMonth + 1
 			}01000000/${currentYear}${currentMonth + 1}${daysInCurrentMonth}235959/dailyCheckupResults`
 		}
@@ -150,7 +148,7 @@
 
 <div id="initialContent">
 	<a href="/dashboard">
-		<img class="w-10 h-10 mt-2 ml-7  fixed top-5 left-0" src="/back.png" alt="back button" />
+		<img class="w-10 h-10 mt-2 ml-7 fixed top-5 left-0" src="/back.png" alt="back button" />
 	</a>
 	<div class="nav-buttons mt-2 lg:mt-4">
 		<button
@@ -216,32 +214,43 @@
 </div>
 
 <div class="h-20 mt-8 space-y-6" id="information-section" style="display: none;">
+	<button
+		class="w-10 h-10 mt-2 ml-7 fixed top-5 left-0"
+		on:click={() => refreshPage()}><img class="w-10 h-10" src="/back.png" alt="back button" /></button
+	>
 	{#each range(getDaysInMonth(currentYear, currentMonth)) as day (day)}
 		{#if day == selectedDateNumber}
 			{#if selectedResult !== null && selectedResult !== undefined}
-				<h3 class="text-white text">Selected Date:</h3>
-				<p class="text-white">{selectedDate ? selectedDate.toDateString() : 'No date selected'}</p>
-				<h3 class="text-white text">You rated your mood as:</h3>
-				{#if selectedResult.data.result <= 20}
-					<img class="w-5 h-5" src="/AngryEmoji.png" alt="Angry emoji" />
-				{:else if selectedResult.data.result <= 40}
-					<img class="w-5 h-5" src="/SemiAngryEmoji.png" alt="Semi angry emoji" />
-				{:else if selectedResult.data.result <= 60}
-					<img class="w-5 h-5" src="/NeutralEmoji.png" alt="Neutral emoji" />
-				{:else if selectedResult.data.result <= 80}
-					<img class="w-5 h-5" src="/HappyEmoji.png" alt="Happy emoji" />
-				{:else if selectedResult.data.result <= 100}
-					<img class="w-5 h-5" src="/VeryHappyEmoji.png" alt="Very happy emoji" />
-				{/if}
-				<p class="text-white">{selectedResult.data.result}/100</p>
-				<h3 class="text-white text">Your description:</h3>
-				{#if selectedResult.data.description !== null && selectedResult.data.description !== undefined && selectedResult.data.description !== ''}
-					<p class="text-white">{selectedResult.data.description}</p>
-				{:else}
-					<p class="text-white">
-						We haven't found a description. You might not have left a description.
-					</p>
-				{/if}
+				<div class="flex justify-center">
+					<div class="m-4 bg-white bg-opacity-50 p-6">
+						<h3 class="text-stone-600 text">Selected Date:</h3>
+						<p class="text-stone-600">{selectedDate ? selectedDate.toDateString() : 'No date selected'}</p>
+						
+						<h3 class="text-stone-600 text mt-4">You rated your mood as:</h3>
+						<div class="flex gap-2">
+							{#if selectedResult.data.result <= 20}
+								<img class="w-5 h-5" src="/AngryEmoji.png" alt="Angry emoji" />
+							{:else if selectedResult.data.result <= 40}
+								<img class="w-5 h-5" src="/SemiAngryEmoji.png" alt="Semi angry emoji" />
+							{:else if selectedResult.data.result <= 60}
+								<img class="w-5 h-5" src="/NeutralEmoji.png" alt="Neutral emoji" />
+							{:else if selectedResult.data.result <= 80}
+								<img class="w-5 h-5" src="/HappyEmoji.png" alt="Happy emoji" />
+							{:else if selectedResult.data.result <= 100}
+								<img class="w-5 h-5" src="/VeryHappyEmoji.png" alt="Very happy emoji" />
+							{/if}
+							<p class="text-stone-600">{selectedResult.data.result}/100</p>
+						</div>
+						<h3 class="text-stone-600 text mt-4">Your description:</h3>
+						{#if selectedResult.data.description !== null && selectedResult.data.description !== undefined && selectedResult.data.description !== ''}
+							<p class="text-stone-600">{selectedResult.data.description}</p>
+						{:else}
+							<p class="text-stone-600">
+								We haven't found a description. You might not have left a description.
+							</p>
+						{/if}
+					</div>
+				</div>
 			{:else}
 				<div class="flex justify-center">
 					<div class="m-4 bg-white bg-opacity-50 p-6">
