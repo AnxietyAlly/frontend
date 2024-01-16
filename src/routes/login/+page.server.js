@@ -109,7 +109,6 @@ async function loginErrorHandling(email, password) {
 
 export const actions = {
 	login: async ({ request, cookies }) => {
-		console.log("test");
 		const formData = await request.formData();
 		const email = formData.get("email")?.toString();
 		const password = formData.get("password")?.toString();
