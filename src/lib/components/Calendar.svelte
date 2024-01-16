@@ -89,18 +89,16 @@
 
 		const userEmail = data.email;
 
-		const user = getApiData(`https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts/email/${userEmail}`);
-
-		const userId = 5;
+		const user = await getApiData(`https://aa-apigateway-sprint-3.onrender.com/accountsApi/accounts/email/${userEmail}`);
 
 		let urlToSendRequestTo = '';
 
 		if (currentMonth < 9) {
-			urlToSendRequestTo = `https://aa-apigateway-sprint-3.onrender.com/progressApi/user/${userId}/dateRange/${currentYear}0${
+			urlToSendRequestTo = `https://aa-apigateway-sprint-3.onrender.com/progressApi/user/${user.data.id}/dateRange/${currentYear}0${
 				currentMonth + 1
 			}01000000/${currentYear}0${currentMonth + 1}${daysInCurrentMonth}235959/dailyCheckupResults`
 		} else {
-			urlToSendRequestTo = `https://aa-apigateway-sprint-3.onrender.com/progressApi/user/${userId}/dateRange/${currentYear}${
+			urlToSendRequestTo = `https://aa-apigateway-sprint-3.onrender.com/progressApi/user/${user.data.id}/dateRange/${currentYear}${
 				currentMonth + 1
 			}01000000/${currentYear}${currentMonth + 1}${daysInCurrentMonth}235959/dailyCheckupResults`
 		}
