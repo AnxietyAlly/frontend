@@ -45,7 +45,6 @@
 		}, 2500);
 
 		newText = '';
-		console.log($roboDocChatHistory);
 	}
 
 	let i = 0;
@@ -59,7 +58,6 @@
 		$roboDocChatHistory = [...$roboDocChatHistory, newMessage];
 
 		newText = '';
-		console.log($roboDocChatHistory);
 		if (
 			newMessage.text.includes('bad') ||
 			newMessage.text.includes('overwhelmed') ||
