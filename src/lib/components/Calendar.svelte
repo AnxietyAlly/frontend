@@ -130,8 +130,6 @@
 				document.getElementById(result.data.date.substr(0, 8)).style.backgroundColor = 'green';
 			}
 		});
-
-		console.log(allDailyCheckupResultsFromDB);
 	}
 
 	function emptyCalender() {
