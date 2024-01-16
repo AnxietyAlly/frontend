@@ -360,6 +360,7 @@
 			<QuestionnaireStartPage correctAndPossibleAnswersForQuestions={correctAndPossibleAnswersForQuestions} questionAnswerTemplates={questionAnswerTemplatesFromDB} />
 		{/if}
 	{/key}
+
 	<!-- {#each questionsForQuestionnaireFromDBWithExtraInformation as question}
 			<p>{question.data.question}</p>
 		{/each} -->

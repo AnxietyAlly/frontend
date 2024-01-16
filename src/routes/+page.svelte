@@ -13,7 +13,7 @@
 <div class="h-12 mt-2 space-y-6">
 	<div class="flex justify-center lg:h-20">
 		<div class="w-2/3 md:w-1/2 lg:w-1/4">
-			<p class="text-xs text-center text-stone-600 italic lg:text-2xl">
+			<p class="text-m text-center text-stone-600 italic lg:text-2xl">
 				"AnxietyAlly: Your Complete Anxiety Companion. Identify and track your daily progress. Your
 				trusted ally on the path to serenity."
 			</p>
@@ -22,7 +22,7 @@
 </div>
 
 <h1 class="hidden">AnxietyAlly</h1>
-<div class="rounded-3xl shadow col-span-2 bg-red-400 bg-opacity-70 flex items-center justify-center h-10 m-6 lg:h-14 lg:flex lg:items-center lg:justify-center lg:w-80 lg:m-auto lg:mt-24">
+<div class="rounded-3xl shadow col-span-2 mt-14 bg-red-400 bg-opacity-70 flex items-center justify-center h-10 m-6 lg:h-14 lg:flex lg:items-center lg:justify-center lg:w-80 lg:m-auto lg:mt-24">
 	{#if data?.name}
 		<a
 			href="/questionnaire"
