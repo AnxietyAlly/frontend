@@ -55,6 +55,23 @@ function now() {
 	return currentDate;
 }
 
+function today() {
+	const date = new Date();
+	let day = date.getDate();
+	let month = date.getMonth() + 1;
+	const year = date.getFullYear();
+
+	if(day < 10) {
+		day = `0${day}`;
+	}
+	if(month < 10) {
+		month = `0${month}`;
+	}
+	// This arrangement can be altered based on how we want the date's format to appear.
+	const currentDate = `${year}${month}${day}000000`; // 20240116000000
+	return currentDate;
+}
+
 // Example POST method implementation:
 async function postData(url, data) {
 	// Default options are marked with *
@@ -87,7 +104,8 @@ export const actions = {
 		const dataForPost = {
 			// eslint-disable-next-line camelcase
 			user_id: user.data.id,
-			date: now(), 
+			date: now(),
+			today: today(),
 			result: sliderValue, 
 			description: description
 		};
