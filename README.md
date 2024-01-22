@@ -4,13 +4,13 @@ This repository primarily focuses on the frontend of our application. For this p
 
 This repository is also connected to other repositories. For instance, there is a backend repository responsible for the backend of this application. You can find these applications within this project.
 
-Sprint 1
+#Sprint 1
 In the first sprint, there were a few microservices that we wanted to release for the first release. This includes the microservices Questionnaire and Apigateway. The Questionnaire microservice is the most important microservice that we wanted to release. This is because our application is about the user findig out if he or she has a form of anxiety and might need to look for help like a psychologist. 
 
-Sprint 2
+#Sprint 2
 For the second sprint we worked on the microservices Accounts, Daily-Checkup and Articles. The user needed to log in first before it's possible to acces the rest of the application. After the quiz, the user can continue their journey with monitoring their moods with the microservice Daily-Checkup. To let the user find out more about the different kinds anxiety has and young adults' experiences, we added the Articles microservice. 
 
-Sprint 3
+#Sprint 3
 The last sprint was in the light of the eye catching microservice RoboDoc and the chat microservice Forums. Not only can the user write down their feelings, they can but release the feelings in the form of venting. The user is able to vent with both RoboDoc and Forums.
 
 Looking forward, the development team will continue to iterate on the application, addressing user feedback and introduce new features to further enhance the platform's effectiveness in promoting mental health awareness and support for young adults.
