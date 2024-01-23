@@ -18,6 +18,23 @@ jobs:
         run: echo "The time the build started was ${{ steps.build.outputs.beginTime }}"
       - name: Building show endtime
         run: echo "The time the build finished was ${{ steps.build.outputs.endTime }}"
+  test-unit-tests:
+    runs-on: ubuntu-22.04
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Building frontend
+        id: build
+        uses: AnxietyAlly/build-action@v12
+        with:
+          input: 'Building the frontend'
+      - name: Building show begintime
+        run: echo "The time the build started was ${{ steps.build.outputs.beginTime }}"
+      - name: Building show endtime
+        run: echo "The time the build finished was ${{ steps.build.outputs.endTime }}"
+      - name: Run unit tests
+        id: tests
+        uses: AnxietyAlly/unit-tests-action@v1
   unit-tests:
     runs-on: ubuntu-22.04
     needs: [build]
