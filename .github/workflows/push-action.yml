@@ -67,7 +67,7 @@ jobs:
           annotations: true
   test-deepsource-coverage:
     runs-on: ubuntu-22.04
-    # needs: [build]
+    needs: [build]
     env:
       DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
     steps:
