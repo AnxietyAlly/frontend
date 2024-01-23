@@ -84,7 +84,7 @@ jobs:
 
       - name: Run test coverage
         id: coverage
-        uses: AnxietyAlly/deepsource-coverage-action@v5
+        uses: AnxietyAlly/deepsource-coverage-action@v6
         with:
           DEEPSOURCE_DSN: "${{ env.DEEPSOURCE_DSN }}"
   deepsource-coverage:
