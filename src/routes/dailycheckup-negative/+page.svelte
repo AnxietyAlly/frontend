@@ -11,7 +11,7 @@
 
 	<div class="h-20 mt-2 space-y-6">
 		<div class="flex justify-center">
-			<div class="w-3/4 md:w-1/2 lg:w-1/4 bg-white bg-opacity-50 p-4 rounded-md">
+			<div class="w-3/4 md:w-1/2 bg-white bg-opacity-50 p-4 rounded-md lg:w-52 lg:h-24">
 				<p class="text-l text-stone-600">
 					Here might be some activities that can help you feel more at ease.
 				</p>
@@ -20,19 +20,19 @@
 	</div>
 
 	<div class="grid grid-cols-3 gap-4 mb-5 mx-5 grid-rows-2 mt-6">
-		<div class="place-self-auto">
-			<a href="/">
+		<div class="place-self-auto text-center lg:flex lg:flex-col lg:items-center">
+			<a href="https://www.youtube.com/watch?v=z6X5oEIg6Ak">
 				<img
 					class="w-28 h-28 rounded-full opacity-80 hover:opacity-100 transition duration-300 ease-in-out"
 					src="/meditation.png"
 					alt="Meditation"
 				/>
 			</a>
-			<p class="text-center text-stone-600">Meditation</p>
+			<p class="text-stone-600">Meditation</p>
 		</div>
-
-		<div class="place-self-auto">
-			<a href="/">
+		
+		<div class="place-self-auto lg:flex lg:flex-col lg:items-center">
+			<a href="https://www.routeyou.com/en-nl/route/planner/2/walking-route-planner">
 				<img
 					class="w-28 h-28 rounded-full opacity-80 hover:opacity-100 transition duration-300 ease-in-out"
 					src="/walkingoutside.png"
@@ -43,9 +43,9 @@
 		</div>
 
 		<div class="place-self-auto">
-			<a href="/">
+			<a href="https://www.supportiv.com/anxiety/yes-i-have-anxiety-how-to-talk-about-it-with-others">
 				<img
-					class="w-28 h-28 rounded-full opacity-80 hover:opacity-100 transition duration-300 ease-in-out"
+					class="w-28 h-28 rounded-full opacity-80 hover:opacity-100 transition duration-300 ease-in-out lg:ml-4"
 					src="/talkingwithfriends.png"
 					alt="Talking with friends"
 				/>
@@ -54,9 +54,9 @@
 		</div>
 
 		<div class="place-self-auto">
-			<a href="/">
+			<a href="https://open.spotify.com/playlist/2zYv04WPTCV10YzDwk2Yxb">
 				<img
-					class="w-28 h-28 rounded-full opacity-80 hover:opacity-100 transition duration-300 ease-in-out"
+					class="w-28 h-28 rounded-full opacity-80 hover:opacity-100 transition duration-300 ease-in-out lg:ml-8"
 					src="/listeningtomusic.png"
 					alt="Listening to music"
 				/>
@@ -65,25 +65,25 @@
 		</div>
 
 		<div class="place-self-auto">
-			<a href="/">
+			<a href="https://www.byrdie.com/exercise-relaxation-techniques">
 				<img
-					class="w-28 h-28 rounded-full opacity-80 hover:opacity-100 transition duration-300 ease-in-out"
+					class="w-28 h-28 rounded-full opacity-80 hover:opacity-100 transition duration-300 ease-in-out lg:ml-7"
 					src="/workingout.png"
 					alt="Working out"
 				/>
 			</a>
-			<p class="text-center text-stone-600">Listening to music</p>
+			<p class="text-center text-stone-600">Working out</p>
 		</div>
 
 		<div class="place-self-auto">
-			<a href="/">
+			<a href="https://www.verywellhealth.com/best-books-for-anxiety-7373428">
 				<img
-					class="w-28 h-28 rounded-full opacity-80 hover:opacity-100 transition duration-300 ease-in-out"
+					class="w-28 h-28 rounded-full opacity-80 hover:opacity-100 transition duration-300 ease-in-out lg:ml-4"
 					src="/reading.png"
 					alt="Reading a book"
 				/>
 			</a>
-			<p class="text-center text-stone-600">Reading a book</p>
+			<p class="text-center text-stone-600 lg:mr-4">Reading a book</p>
 		</div>
 	</div>
 	<div

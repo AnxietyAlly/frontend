@@ -1,5 +1,5 @@
 export const load = (async ({ locals }) => {
-    const { name } = locals;
+	const { name, email } = locals;
   
-    return { name };
-})
+	return { name, email };
+});

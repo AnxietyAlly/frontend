@@ -7,6 +7,7 @@
 	let questionAnswerTemplatesFromDB = [];
 	let mentalProblemsFromDB = [];
 	let questionsForQuestionnaireFromDB = [];
+	let questionsForQuestionnaireFromDBWithExtraInformation = [];
 	let correctAndPossibleAnswersForQuestions = [];
 	let selectedAnswers = [];
 
@@ -24,18 +25,38 @@
 		}
 	}
 
+	async function addExtraInformation(questions) {
+		if (browser) {
+			for (let i = 0; i < questions.length; i++) {
+				const extraInformationForQuestion = await getApiData(
+					`https://aa-apigateway-sprint-3.onrender.com/questionnaireApi/extraInformation/${questions[i].data.extra_information_id}`
+				);
+
+				questions[i].data.extraInformation = extraInformationForQuestion;
+			}
+			
+			const allQuestionsPromise = await Promise.all(questions);
+
+			// const questionPromises = questionLinks.map((link) =>
+			// 	getApiData(`https://aa-apigateway-sprint-3.onrender.com/questionnaireApi${link}`)
+			// );
+
+			return allQuestionsPromise;
+		}
+	}
+
 	async function getQuestions() {
 		let questionsFromDatabase = [];
 		if (browser) {
 			const questionLinksJSON = await getApiData(
-				'https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi/questionnaires/1/questions'
+				'https://aa-apigateway-sprint-3.onrender.com/questionnaireApi/questionnaires/1/questions'
 			);
 
 			const questionLinks = questionLinksJSON.data;
 
 			for (let i = 0; i < questionLinks.length; i++) {
 				const question = await getApiData(
-					`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi${questionLinks[i]}`
+					`https://aa-apigateway-sprint-3.onrender.com/questionnaireApi${questionLinks[i]}`
 				);
 
 				questionsFromDatabase.push(question);
@@ -43,7 +64,7 @@
 			const allQuestionsPromise = await Promise.all(questionsFromDatabase);
 
 			// const questionPromises = questionLinks.map((link) =>
-			// 	getApiData(`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi${link}`)
+			// 	getApiData(`https://aa-apigateway-sprint-3.onrender.com/questionnaireApi${link}`)
 			// );
 
 			return allQuestionsPromise;
@@ -64,7 +85,7 @@
 
 			for (let i = 0; i < relevantQuestionAnswerTemplateIDsFromDB.length; i++) {
 				const questionAnswerTemplate = await getApiData(
-					`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi/questionAnswerTemplates/${relevantQuestionAnswerTemplateIDsFromDB[i]}`
+					`https://aa-apigateway-sprint-3.onrender.com/questionnaireApi/questionAnswerTemplates/${relevantQuestionAnswerTemplateIDsFromDB[i]}`
 				);
 
 				relevantQuestionAnswerTemplatesFromDB.push(questionAnswerTemplate);
@@ -80,14 +101,14 @@
 		let mentalProblemsFromDatabase = [];
 		if (browser) {
 			const mentalProblemLinksJSON = await getApiData(
-				'https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi/mentalProblems'
+				'https://aa-apigateway-sprint-3.onrender.com/questionnaireApi/mentalProblems'
 			);
 
 			const mentalProblemLinks = mentalProblemLinksJSON.data;
 
 			for (let i = 0; i < mentalProblemLinks.length; i++) {
 				const mentalProblem = await getApiData(
-					`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi${mentalProblemLinks[i]}`
+					`https://aa-apigateway-sprint-3.onrender.com/questionnaireApi${mentalProblemLinks[i]}`
 				);
 
 				mentalProblemsFromDatabase.push(mentalProblem);
@@ -95,7 +116,7 @@
 			const allMentalProblemsPromise = await Promise.all(mentalProblemsFromDatabase);
 
 			// const questionPromises = questionLinks.map((link) =>
-			// 	getApiData(`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi${link}`)
+			// 	getApiData(`https://aa-apigateway-sprint-3.onrender.com/questionnaireApi${link}`)
 			// );
 
 			return allMentalProblemsPromise;
@@ -107,7 +128,7 @@
 		if (browser) {
 			for (let i = 0; i < questions.length; i++) {
 				const correctAnswers = await getApiData(
-					`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi/questions/${questions[i].data.id}/correctAnswers`
+					`https://aa-apigateway-sprint-3.onrender.com/questionnaireApi/questions/${questions[i].data.id}/correctAnswers`
 				);
 
 				correctAnswersFromDatabase.push(correctAnswers);
@@ -153,7 +174,7 @@
 
 			for (let i = 0; i < questions.length; i++) {
 				const possibleAnswerLinksJSON = await getApiData(
-					`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi/questions/${questions[i].data.id}/possibleAnswers`
+					`https://aa-apigateway-sprint-3.onrender.com/questionnaireApi/questions/${questions[i].data.id}/possibleAnswers`
 				);
 
 				const possibleAnswerLinks = possibleAnswerLinksJSON.data;
@@ -161,7 +182,7 @@
 				let possibleAnswersForQuestionPromises = [];
 				for (let j = 0; j < possibleAnswerLinks.length; j++) {
 					const possibleAnswer = await getApiData(
-						`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi${possibleAnswerLinks[j]}`
+						`https://aa-apigateway-sprint-3.onrender.com/questionnaireApi${possibleAnswerLinks[j]}`
 					);
 					possibleAnswersForQuestionPromises.push(possibleAnswer);
 				}
@@ -270,7 +291,7 @@
 			// ]
 
 			// const questionPromises = questionLinks.map((link) =>
-			// 	getApiData(`http://localhost:3010/questionnaireApi${link}`)
+			// 	getApiData(`https://aa-apigateway-sprint-3.onrender.com/questionnaireApi${link}`)
 			// );
 
 			return allCorrectAndPossibleAnswersToReturnPromise;
@@ -279,11 +300,13 @@
 
 	onMount(async () => {
 		questionsForQuestionnaireFromDB = await getQuestions();
+		questionsForQuestionnaireFromDBWithExtraInformation = await addExtraInformation(questionsForQuestionnaireFromDB);
 		mentalProblemsFromDB = await getMentalProblems();
 		correctAndPossibleAnswersForQuestions = await getCorrectAndPossibleAnswers(questionsForQuestionnaireFromDB, mentalProblemsFromDB);
 		for (let i = 0; i < questionsForQuestionnaireFromDB.length; i++) {
 			selectedAnswers.push({
 				questionId: questionsForQuestionnaireFromDB[i].data.id,
+				selectedAnswerId: undefined,
 				selectedAnswerValue: undefined
 			})
 		}
@@ -291,10 +314,12 @@
 		// [
 		//  {
 		//   questionId: 1
+		//   selectedAnswerId: 3
 		//   selectedAnswerValue: 3
-		//  }
+		//  },
 		//  {
 		//   questionId: 2
+		//   selectedAnswerId: 4
 		//   selectedAnswerValue: 4
 		//  }
 		// ]
@@ -304,7 +329,7 @@
 	let currentQuestionNumber = 1;
 	
 </script>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div class="flex flex-col items-center">
 	<img class="w-40 h-100 mt-4" src="/anxietyally.png" alt="Anxiety Ally Logo" />
 </div>
@@ -318,18 +343,26 @@
 					bind:currentPageNumber
 					bind:currentQuestionNumber
 					bind:selectedAnswers
-					allQuestions={questionsForQuestionnaireFromDB}
+					allQuestions={questionsForQuestionnaireFromDBWithExtraInformation}
 					correctAndPossibleAnswersForQuestions={correctAndPossibleAnswersForQuestions}
 					questionAnswerTemplates={questionAnswerTemplatesFromDB}
 				/>
 			{/key}
 		{:else if currentPageNumber == 3}
-			<QuestionnaireResultsPage bind:currentPageNumber bind:currentQuestionNumber />
+			<QuestionnaireResultsPage 
+				bind:currentPageNumber
+				bind:currentQuestionNumber
+				bind:selectedAnswers
+				bind:mentalProblemsFromDB
+				allQuestions={questionsForQuestionnaireFromDBWithExtraInformation}
+				correctAndPossibleAnswersForQuestions={correctAndPossibleAnswersForQuestions}
+			/>
 		{:else}
 			<QuestionnaireStartPage correctAndPossibleAnswersForQuestions={correctAndPossibleAnswersForQuestions} questionAnswerTemplates={questionAnswerTemplatesFromDB} />
 		{/if}
 	{/key}
-	<!-- {#each questionsForQuestionnaireFromDB as question}
+
+	<!-- {#each questionsForQuestionnaireFromDBWithExtraInformation as question}
 			<p>{question.data.question}</p>
 		{/each} -->
 

@@ -8,13 +8,21 @@
 
 <AppShell>
 	<svelte:fragment slot="footer">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<AppBar background="bg-orange-600 bg-opacity-20">
+
 			<svelte:fragment slot="trail">
-				<a class="btn btn-sm variant-ghost-surface border-red-400" href="/" rel="noreferrer">
-					<img class="max-h-12" src="/book.png" alt="Book icon" />
-				</a>
 				<a class="btn btn-sm variant-ghost-surface" href="/dashboard" rel="noreferrer">
 					<img class="max-h-12" src="/home.png" alt="Home icon" />
+				</a>
+				<a class="btn btn-sm variant-ghost-surface border-red-400" href="/articles" rel="noreferrer">
+					<img class="max-h-12" src="/book.png" alt="Book icon" />
+				</a>
+				<a class="btn btn-sm variant-ghost-surface" href="/progress" rel="noreferrer">
+					<img class="max-h-12" src="/agenda.png" alt="progress icon" />
+				</a>
+				<a class="btn btn-sm variant-ghost-surface" href="/settings" rel="noreferrer">
+					<img class="max-h-12" src="/settings.png" alt="Settings icon" />
 				</a>
 			</svelte:fragment>
 		</AppBar>
