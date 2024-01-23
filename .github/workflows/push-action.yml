@@ -65,7 +65,7 @@ jobs:
           ignore-path: .eslintignore
           extensions: 'js,jsx,ts,tsx'
           annotations: true
-  test-deepsource-coverage:
+  deepsource-coverage:
     runs-on: ubuntu-22.04
     needs: [build]
     env:
@@ -87,35 +87,6 @@ jobs:
         uses: AnxietyAlly/deepsource-coverage-action@v20
         with:
           DEEPSOURCE_DSN: "${{ env.DEEPSOURCE_DSN }}"
-  deepsource-coverage:
-    runs-on: ubuntu-22.04
-    needs: [build]
-    env:
-        DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      - name: Install Dependencies
-        run: npm ci
-
-      # Run your tests and generate coverage file here
-      - name: Run Tests and Generate Coverage
-        run: npm run coverage
-
-      # Report test-coverage to DeepSource using CLI
-      - name: Report test-coverage to DeepSource
-        run: |
-          # Install the CLI
-          curl https://deepsource.io/cli | sh
-
-          # Send the report to DeepSource
-          ./bin/deepsource report --analyzer test-coverage --key javascript --value-file ./coverage/cobertura-coverage.xml
 
   # trunk_check:
   #   name: Trunk Check Runner
