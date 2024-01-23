@@ -1,6 +1,9 @@
 name: GitHub Actions AnxietyAlly
-run-name: ${{ github.actor }} is merging branches
-on: [pull_request]
+run-name: ${{ github.actor }} is merging branches or pushing to main
+on: 
+  pull_request:
+  push:
+    branches: [main]
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -10,7 +13,7 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - run: echo "Building frontend has finished"
-  jest-unit-tests:
+  unit-tests:
     runs-on: ubuntu-22.04
     needs: [build]
     steps:
@@ -19,6 +22,17 @@ jobs:
     - run: npm ci
     - run: npm run test
     - run: echo "Testing frontend has finished"
+  deploy-to-render:
+    runs-on: ubuntu-22.04
+    needs: [unit-tests]
+    steps:
+    - name: Deploy
+      # Only run this step if the branch is main
+      if: github.ref == 'refs/heads/main'
+      env:
+        deploy_url: ${{ secrets.RENDER_DEPLOY_MAIN_HOOK_URL }}
+      run: |
+        curl "$deploy_url"
   eslint:
     runs-on: ubuntu-22.04
     needs: [build]
