@@ -15,8 +15,9 @@ jobs:
         uses: AnxietyAlly/build-action@v11
         with:
           input: 'Building the frontend'
-      - name: Getting output
+      - name: Building show begintime
         run: echo "The time the build started was ${{ steps.hello.outputs.beginTime }}"
+      - name: Building show endtime
         run: echo "The time the build finished was ${{ steps.hello.outputs.endTime }}"
   build:
     runs-on: ubuntu-22.04
