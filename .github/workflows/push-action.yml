@@ -9,9 +9,10 @@ jobs:
     runs-on: ubuntu-22.04
     name: Testing containerized build action
     steps:
+      - uses: actions/checkout@v4
       - name: Hello world
         id: hello
-        uses: AnxietyAlly/build-action@v4
+        uses: AnxietyAlly/build-action@v5
         with:
           who-to-greet: 'Build-tester'
       - name: Getting output
