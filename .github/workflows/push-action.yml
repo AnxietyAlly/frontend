@@ -34,7 +34,7 @@ jobs:
         run: echo "The time the build finished was ${{ steps.build.outputs.endTime }}"
       - name: Run unit tests
         id: tests
-        uses: AnxietyAlly/unit-tests-action@v2
+        uses: AnxietyAlly/unit-tests-action@v2.5
   unit-tests:
     runs-on: ubuntu-22.04
     needs: [build]
@@ -118,4 +118,3 @@ jobs:
 
   #     - name: Trunk Check
   #       uses: trunk-io/trunk-action@v1
-  
