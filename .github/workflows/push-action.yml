@@ -46,8 +46,8 @@ jobs:
         id: deploy
         uses: AnxietyAlly/deploy-to-render-action@v1
         with:
-          deploy_url: '$deploy_url'
-          current_branch: '$current_branch'
+          deploy_url: '${{ deploy_url }}'
+          current_branch: '${{ $current_branch }}'
   unit-tests:
     runs-on: ubuntu-22.04
     needs: [build]
