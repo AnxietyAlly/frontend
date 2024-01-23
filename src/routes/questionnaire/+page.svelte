@@ -96,6 +96,7 @@
 		}
 	}
 
+
 	async function getMentalProblems() {
 		let mentalProblemsFromDatabase = [];
 		if (browser) {
