@@ -10,16 +10,14 @@ jobs:
     name: Testing containerized build action
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - name: Building frontend
+        id: build
+        uses: AnxietyAlly/build-action@v11
         with:
-          node-version: '20'
-      - name: Hello world
-        id: hello
-        uses: AnxietyAlly/build-action@v9
-        with:
-          who-to-greet: 'Build-tester'
+          input: 'Building the frontend'
       - name: Getting output
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+        run: echo "The time the build started was ${{ steps.hello.outputs.beginTime }}"
+        run: echo "The time the build finished was ${{ steps.hello.outputs.endTime }}"
   build:
     runs-on: ubuntu-22.04
     steps:
