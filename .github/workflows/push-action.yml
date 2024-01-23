@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Hello world
         id: hello
-        uses: AnxietyAlly/build-action
+        uses: AnxietyAlly/build-action@v1
         with:
           who-to-greet: 'Build-tester'
       - name: Getting output
