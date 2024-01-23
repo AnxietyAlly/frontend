@@ -18,7 +18,7 @@ jobs:
         run: echo "The time the build started was ${{ steps.build.outputs.beginTime }}"
       - name: Building show endtime
         run: echo "The time the build finished was ${{ steps.build.outputs.endTime }}"
-  test-unit-tests:
+  unit-tests:
     runs-on: ubuntu-22.04
     needs: [build]
     steps:
@@ -35,39 +35,19 @@ jobs:
       - name: Run unit tests
         id: tests
         uses: AnxietyAlly/unit-tests-action@v3
-  test-deploy-to-render:
+  deploy-to-render:
     runs-on: ubuntu-22.04
-    # needs: [test-unit-tests]
+    needs: [unit-tests]
     env:
         deploy_url: ${{ secrets.RENDER_DEPLOY_MAIN_HOOK_URL }}
         current_branch: ${{ github.ref }}
     steps:
       - name: Deploy
         id: deploy
-        uses: AnxietyAlly/deploy-to-render-action@v4
+        uses: AnxietyAlly/deploy-to-render-action@v5
         with:
           deploy_url: "${{ env.deploy_url }}"
           current_branch: "${{ env.current_branch }}"
-  unit-tests:
-    runs-on: ubuntu-22.04
-    needs: [build]
-    steps:
-    - run: echo "Testing frontend has begun"
-    - uses: actions/checkout@v4
-    - run: npm ci
-    - run: npm run test
-    - run: echo "Testing frontend has finished"
-  deploy-to-render:
-    runs-on: ubuntu-22.04
-    needs: [unit-tests]
-    env:
-        deploy_url: ${{ secrets.RENDER_DEPLOY_MAIN_HOOK_URL }}
-    steps:
-    - name: Deploy
-      # Only run this step if the branch is main
-      if: github.ref == 'refs/heads/main'
-      run: |
-        curl "$deploy_url"
   eslint:
     runs-on: ubuntu-22.04
     needs: [build]
@@ -85,35 +65,57 @@ jobs:
           ignore-path: .eslintignore
           extensions: 'js,jsx,ts,tsx'
           annotations: true
+  test-deepsource-coverage:
+    runs-on: ubuntu-22.04
+    # needs: [build]
+    env:
+        DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Building frontend
+        id: build
+        uses: AnxietyAlly/build-action@v12
+        with:
+          input: 'Building the frontend'
+      - name: Building show begintime
+        run: echo "The time the build started was ${{ steps.build.outputs.beginTime }}"
+      - name: Building show endtime
+        run: echo "The time the build finished was ${{ steps.build.outputs.endTime }}"
+
+    - name: Run test coverage
+        id: coverage
+        uses: AnxietyAlly/deepsource-coverage-action@v2
+        with:
+          DEEPSOURCE_DSN: "${{ env.DEEPSOURCE_DSN }}"
   deepsource-coverage:
     runs-on: ubuntu-22.04
     needs: [build]
     env:
         DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
 
-    - name: Install Dependencies
-      run: npm ci
+      - name: Install Dependencies
+        run: npm ci
 
-    # Run your tests and generate coverage file here
-    - name: Run Tests and Generate Coverage
-      run: npm run coverage
+      # Run your tests and generate coverage file here
+      - name: Run Tests and Generate Coverage
+        run: npm run coverage
 
-    # Report test-coverage to DeepSource using CLI
-    - name: Report test-coverage to DeepSource
-      run: |
-        # Install the CLI
-        curl https://deepsource.io/cli | sh
+      # Report test-coverage to DeepSource using CLI
+      - name: Report test-coverage to DeepSource
+        run: |
+          # Install the CLI
+          curl https://deepsource.io/cli | sh
 
-        # Send the report to DeepSource
-        ./bin/deepsource report --analyzer test-coverage --key javascript --value-file ./coverage/cobertura-coverage.xml
+          # Send the report to DeepSource
+          ./bin/deepsource report --analyzer test-coverage --key javascript --value-file ./coverage/cobertura-coverage.xml
 
   # trunk_check:
   #   name: Trunk Check Runner
