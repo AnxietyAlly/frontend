@@ -1,4 +1,4 @@
-
+/* eslint-disable */
 import type { CustomThemeConfig } from '@skeletonlabs/tw-plugin';
 
 export const myCustomTheme: CustomThemeConfig = {
