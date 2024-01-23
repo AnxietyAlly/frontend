@@ -15,7 +15,7 @@ jobs:
           node-version: '20'
       - name: Hello world
         id: hello
-        uses: AnxietyAlly/build-action@v7.5
+        uses: AnxietyAlly/build-action@v8.5
         with:
           who-to-greet: 'Build-tester'
       - name: Getting output
