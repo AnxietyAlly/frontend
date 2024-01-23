@@ -39,8 +39,8 @@ jobs:
     runs-on: ubuntu-22.04
     needs: [unit-tests]
     env:
-        deploy_url: ${{ secrets.RENDER_DEPLOY_MAIN_HOOK_URL }}
-        current_branch: ${{ github.ref }}
+      deploy_url: ${{ secrets.RENDER_DEPLOY_MAIN_HOOK_URL }}
+      current_branch: ${{ github.ref }}
     steps:
       - name: Deploy
         id: deploy
@@ -69,7 +69,7 @@ jobs:
     runs-on: ubuntu-22.04
     # needs: [build]
     env:
-        DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
+      DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
     steps:
       - uses: actions/checkout@v4
       - name: Building frontend
@@ -82,7 +82,7 @@ jobs:
       - name: Building show endtime
         run: echo "The time the build finished was ${{ steps.build.outputs.endTime }}"
 
-    - name: Run test coverage
+      - name: Run test coverage
         id: coverage
         uses: AnxietyAlly/deepsource-coverage-action@v2
         with:
