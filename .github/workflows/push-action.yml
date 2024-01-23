@@ -44,7 +44,7 @@ jobs:
     steps:
       - name: Deploy
         id: deploy
-        uses: AnxietyAlly/deploy-to-render-action@v2
+        uses: AnxietyAlly/deploy-to-render-action@v4
         with:
           deploy_url: "${{ env.deploy_url }}"
           current_branch: "${{ env.current_branch }}"
