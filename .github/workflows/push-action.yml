@@ -40,7 +40,7 @@ jobs:
     # needs: [test-unit-tests]
     env:
         deploy_url: ${{ secrets.RENDER_DEPLOY_MAIN_HOOK_URL }}
-        current_branch: $github.ref
+        current_branch: ${{ github.ref }}
     steps:
       - name: Deploy
         id: deploy
