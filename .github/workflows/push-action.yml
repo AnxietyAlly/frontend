@@ -38,16 +38,16 @@ jobs:
   test-deploy-to-render:
     runs-on: ubuntu-22.04
     # needs: [test-unit-tests]
-    # env:
-        # deploy_url: ${{ secrets.RENDER_DEPLOY_MAIN_HOOK_URL }}
-        # current_branch: github.ref
+    env:
+        deploy_url: ${{ secrets.RENDER_DEPLOY_MAIN_HOOK_URL }}
+        current_branch: github.ref
     steps:
       - name: Deploy
         id: deploy
-        uses: AnxietyAlly/deploy-to-render-action@v3
+        uses: AnxietyAlly/deploy-to-render-action@v4
         with:
-          deploy_url: "${{ secrets.RENDER_DEPLOY_MAIN_HOOK_URL }}"
-          current_branch: "${{ github.ref }}"
+          deploy_url: "${{ env.deploy_url }}"
+          current_branch: "${{ env.current_branch }}"
   unit-tests:
     runs-on: ubuntu-22.04
     needs: [build]
