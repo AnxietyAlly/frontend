@@ -1,5 +1,14 @@
 <script>
 	import { browser } from '$app/environment';
+	import { onMount } from 'svelte';
+	import QuestionnaireQuestionsPage from '$lib/components/QuestionnaireQuestionsPage.svelte';
+	import QuestionnaireStartPage from '../../lib/components/QuestionnaireStartPage.svelte';
+	import QuestionnaireResultsPage from '../../lib/components/QuestionnaireResultsPage.svelte';
+	let questionAnswerTemplatesFromDB = [];
+	let mentalProblemsFromDB = [];
+	let questionsForQuestionnaireFromDB = [];
+	let correctAndPossibleAnswersForQuestions = [];
+	let selectedAnswers = [];
 
 	/**
 	 * Async function to get the data from the SWAPI api
@@ -11,220 +20,316 @@
 			let returnedResponse = await response.json();
 			return returnedResponse;
 		} catch (err) {
-			console.error("Error: ", err);
+			console.error('Error: ', err);
 		}
 	}
 
-	
-	let questionsFromDatabase = [];
-	if (browser) {
-		window.addEventListener('load', function () {
-			getApiData('http://localhost:3010/questionnaireApi/questionnaire/questions') //
-			.then((questionLinksJSON) => {
-				const questionLinks = questionLinksJSON.data
-				for (let i = 0; i < questionLinks.length; i++) {
-					getApiData(`http://localhost:3010/questionnaireApi${questionLinks[i]}`) //
-					.then((question) => {
-						questionsFromDatabase.push(question);
-					});
-				};
-			});
-		});
+	async function getQuestions() {
+		let questionsFromDatabase = [];
+		if (browser) {
+			const questionLinksJSON = await getApiData(
+				'https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi/questionnaires/1/questions'
+			);
+
+			const questionLinks = questionLinksJSON.data;
+
+			for (let i = 0; i < questionLinks.length; i++) {
+				const question = await getApiData(
+					`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi${questionLinks[i]}`
+				);
+
+				questionsFromDatabase.push(question);
+			}
+			const allQuestionsPromise = await Promise.all(questionsFromDatabase);
+
+			// const questionPromises = questionLinks.map((link) =>
+			// 	getApiData(`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi${link}`)
+			// );
+
+			return allQuestionsPromise;
+		}
 	}
 
-	let questions = [
-		{
-			"question": "Question 1: How often do you feel a sense of excessive worry or fear without a specific cause.",
-			"options": [
-				"Frequently",
-				"Never",
-				"Not Often",
-				"Sometimes"
-			],
-			"correctIndex": 3
-		},
-		{
-			"question": "Question 2: Do you often feel tense or anxious? For example, during a specific situation or when you're about to go to sleep.",
-			"options": [
-				"Frequently",
-				"Never",
-				"Not often",
-				"Sometimes"
-			],
-			"correctIndex": 3
-		},
-		{
-			"question": "Question 3: Do you avoid certain situations because of your fears? ",
-			"options": [
-				"Frequently",
-				"Never",
-				"Not often",
-				"Sometimes"
-			],
-			"correctIndex": 1
-		},
-		{
-			"question": "Question 4: Do you worry? For example, about what others think of you in certain situations?",
-			"options": [
-				"Frequently",
-				"Never",
-				"Not often",
-				"Sometimes"
-			],
-			"correctIndex": 1
-		},
-		{
-			"question": "Question 5: Do you avoid social gatherings because of fear, anxiety, or nervousness?",
-			"options": [
-				"Frequently",
-				"Never",
-				"Not often",
-				"Sometimes"
-			],
-			"correctIndex": 2
-		},
-		{
-			"question": "Question 6: How often have you had a panic attack in the past month?",
-			"options": [
-				"Frequently",
-				"Never",
-				"Not often",
-				"Sometimes"
-			],
-			"correctIndex": 1
-		},
-		{
-			"question": "Question 7: How often have you had a panic attack in the past month?",
-			"options": [
-				"Frequently",
-				"Never",
-				"Not often",
-				"Sometimes"
-			],
-			"correctIndex": 3
-		},
-		{
-			"question": "Question 8: Do you experience physical symptoms such as shortness of breath, sweating, restlessness, tingling, or nausea?",
-			"options": [
-				"Frequently",
-				"Never",
-				"Not often",
-				"Sometimes"
-			],
-			"correctIndex": 1
-		},
-		{
-			"question": "Question 9: Do you have episodes of anxiety and fear that you can't seem to control?",
-			"options": [
-				"Frequently",
-				"Never",
-				"Not often",
-				"Sometimes"
-			],
-			"correctIndex": 0
-		}	
-	];
-	let answers = new Array(questions.length).fill(null);
-	let questionPointer = -1;
-	function getScore() {
-    let score = answers.reduce((acc, val, index) => {
-        if (questions[index].correctIndex === val) {
-            return acc + 1;
-        }
-        return acc;
-    }, 0);
-    return ((score / questions.length) * 100).toFixed(2) + "%";
-}
-	function restartQuiz(){
-		answers = new Array(questions.length).fill(null);
-		questionPointer = 0;
+	async function getRelevantQuestionAnwerTemplates(questions) {
+		let relevantQuestionAnswerTemplateIDsFromDB = [];
+		let relevantQuestionAnswerTemplatesFromDB = [];
+		if (browser) {
+			for (let i = 0; i < questions.length; i++) {
+				if (relevantQuestionAnswerTemplateIDsFromDB.find(element => {
+					return element == questions[i].data.question_answer_template_id
+				}) == undefined) {
+					relevantQuestionAnswerTemplateIDsFromDB.push(questions[i].data.question_answer_template_id);
+				}
+			}
+
+			for (let i = 0; i < relevantQuestionAnswerTemplateIDsFromDB.length; i++) {
+				const questionAnswerTemplate = await getApiData(
+					`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi/questionAnswerTemplates/${relevantQuestionAnswerTemplateIDsFromDB[i]}`
+				);
+
+				relevantQuestionAnswerTemplatesFromDB.push(questionAnswerTemplate);
+			}
+			const relevantQuestionAnswerTemplatesPromise = await Promise.all(relevantQuestionAnswerTemplatesFromDB);
+
+			return relevantQuestionAnswerTemplatesPromise;
+		}
 	}
+
+
+	async function getMentalProblems() {
+		let mentalProblemsFromDatabase = [];
+		if (browser) {
+			const mentalProblemLinksJSON = await getApiData(
+				'https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi/mentalProblems'
+			);
+
+			const mentalProblemLinks = mentalProblemLinksJSON.data;
+
+			for (let i = 0; i < mentalProblemLinks.length; i++) {
+				const mentalProblem = await getApiData(
+					`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi${mentalProblemLinks[i]}`
+				);
+
+				mentalProblemsFromDatabase.push(mentalProblem);
+			}
+			const allMentalProblemsPromise = await Promise.all(mentalProblemsFromDatabase);
+
+			// const questionPromises = questionLinks.map((link) =>
+			// 	getApiData(`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi${link}`)
+			// );
+
+			return allMentalProblemsPromise;
+		}
+	}
+
+	async function getCorrectAndPossibleAnswers(questions, mentalProblems) {
+		let correctAnswersFromDatabase = [];
+		if (browser) {
+			for (let i = 0; i < questions.length; i++) {
+				const correctAnswers = await getApiData(
+					`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi/questions/${questions[i].data.id}/correctAnswers`
+				);
+
+				correctAnswersFromDatabase.push(correctAnswers);
+			}
+
+			const allCorrectAnswersPromise = await Promise.all(correctAnswersFromDatabase);
+
+			const allCorrectAndPossibleAnswersToReturn = [];
+			for (let i = 0; i < questions.length; i++) {
+				allCorrectAndPossibleAnswersToReturn.push(
+					{
+						questionId: questions[i].data.id,
+						mentalProblems: [],
+						answers: []
+					}
+				);
+				for (let j = 0; j < mentalProblems.length; j++) {
+					allCorrectAndPossibleAnswersToReturn[i].mentalProblems.push(
+						{
+							mentalProblemId: mentalProblems[j].data.id,
+							values: undefined,
+							ranges: undefined
+						}
+					)
+				}
+				
+			}
+			for (let i = 0; i < allCorrectAnswersPromise.length; i++) {
+				for (let j = 0; j < allCorrectAnswersPromise[i].data.length; j++) {
+					allCorrectAndPossibleAnswersToReturn.find(element => {
+						return element.questionId == allCorrectAnswersPromise[i].data[j].question_id
+					}).mentalProblems.find(element => {
+						return element.mentalProblemId == allCorrectAnswersPromise[i].data[j].mental_problem_id
+					}).values = allCorrectAnswersPromise[i].data[j].values;
+
+					allCorrectAndPossibleAnswersToReturn.find(element => {
+						return element.questionId == allCorrectAnswersPromise[i].data[j].question_id
+					}).mentalProblems.find(element => {
+						return element.mentalProblemId == allCorrectAnswersPromise[i].data[j].mental_problem_id
+					}).ranges = allCorrectAnswersPromise[i].data[j].ranges;
+				}
+			}
+
+			for (let i = 0; i < questions.length; i++) {
+				const possibleAnswerLinksJSON = await getApiData(
+					`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi/questions/${questions[i].data.id}/possibleAnswers`
+				);
+
+				const possibleAnswerLinks = possibleAnswerLinksJSON.data;
+
+				let possibleAnswersForQuestionPromises = [];
+				for (let j = 0; j < possibleAnswerLinks.length; j++) {
+					const possibleAnswer = await getApiData(
+						`https://aa-apigateway-sprint-2-2.onrender.com/questionnaireApi${possibleAnswerLinks[j]}`
+					);
+					possibleAnswersForQuestionPromises.push(possibleAnswer);
+				}
+
+				const possibleAnswersForQuestion = await Promise.all(possibleAnswersForQuestionPromises);
+
+				for (let j = 0; j < possibleAnswersForQuestion.length; j++) {
+					allCorrectAndPossibleAnswersToReturn.find(element => {
+						return element.questionId == questions[i].data.id
+					}).answers.push(
+						{
+							answerId: possibleAnswersForQuestion[j].data.id,
+							questionAnswerTemplateId: possibleAnswersForQuestion[j].data.question_answer_template_id,
+							value: possibleAnswersForQuestion[j].data.value,
+							text: possibleAnswersForQuestion[j].data.text
+						}
+					)
+				}
+			}
+
+			const allCorrectAndPossibleAnswersToReturnPromise = await Promise.all(allCorrectAndPossibleAnswersToReturn);
+
+			// [
+			//  {
+			//   questionId: 1
+			//   mentalProblems: [
+			//    {
+			//     mentalProblemId: 1
+			//     values: 4
+			//     ranges: 1,0
+			//    },
+			//    {
+			//     mentalProblemId: 2
+			//     values: 4
+			//     ranges: 2,0
+			//    }
+			//   ],
+			//   answers: [
+			//	  {
+			//	   id: 1
+			//	   question_answer_template_id: 1
+			//     value: 1
+			//     text: "Never"
+			//    },
+			//	  {
+			//	   id: 2
+			//	   question_answer_template_id: 1
+			//     value: 2
+			//     text: "Sometimes"   
+			//    },
+			//	  {
+			//	   id: 3
+			//	   question_answer_template_id: 1
+			//     value: 3
+			//     text: "Regularly"  
+			//    },
+			//	  {
+			//	   id: 4
+			//	   question_answer_template_id: 1
+			//     value: 4
+			//     text: "Very often"  
+			//    },
+			//   ]
+			//  }
+			//  {
+			//   questionId: 2
+			//   mentalProblems: [
+			//    {
+			//     mentalProblemId: 1
+			//     values: 2|4
+			//     ranges: 0,1|0,0
+			//    },
+			//    {
+			//     mentalProblemId: 2
+			//     values: undefined
+			//     ranges: undefined
+			//    }
+			//   ],
+			//   answers: [
+			//	  {
+			//	   id: 1
+			//	   question_answer_template_id: 1
+			//     value: 1
+			//     text: "Never"
+			//    },
+			//	  {
+			//	   id: 2
+			//	   question_answer_template_id: 1
+			//     value: 2
+			//     text: "Sometimes"   
+			//    },
+			//	  {
+			//	   id: 3
+			//	   question_answer_template_id: 1
+			//     value: 3
+			//     text: "Regularly"  
+			//    },
+			//	  {
+			//	   id: 4
+			//	   question_answer_template_id: 1
+			//     value: 4
+			//     text: "Very often"  
+			//    },
+			//   ]
+			//  }
+			// ]
+
+			// const questionPromises = questionLinks.map((link) =>
+			// 	getApiData(`http://localhost:3010/questionnaireApi${link}`)
+			// );
+
+			return allCorrectAndPossibleAnswersToReturnPromise;
+		}
+	}
+
+	onMount(async () => {
+		questionsForQuestionnaireFromDB = await getQuestions();
+		mentalProblemsFromDB = await getMentalProblems();
+		correctAndPossibleAnswersForQuestions = await getCorrectAndPossibleAnswers(questionsForQuestionnaireFromDB, mentalProblemsFromDB);
+		for (let i = 0; i < questionsForQuestionnaireFromDB.length; i++) {
+			selectedAnswers.push({
+				questionId: questionsForQuestionnaireFromDB[i].data.id,
+				selectedAnswerValue: undefined
+			})
+		}
+		questionAnswerTemplatesFromDB = await getRelevantQuestionAnwerTemplates(questionsForQuestionnaireFromDB);
+		// [
+		//  {
+		//   questionId: 1
+		//   selectedAnswerValue: 3
+		//  }
+		//  {
+		//   questionId: 2
+		//   selectedAnswerValue: 4
+		//  }
+		// ]
+	});
+
+	let currentPageNumber = 1;
+	let currentQuestionNumber = 1;
+	
 </script>
-<div class="min-h-screen bg-sky flex flex-col items-center">
-    <img class="w-40 h-100 z-10" src="/anxietyAllyLogo.png" alt="Anxiety Ally Logo">
-<!--This is the start screen, probably not going to use it-->
-<div class="app top-0">
-	{#if questionPointer==-1}
-			
-	<div class="bg-blue-400 text-black rounded-lg w-20">
-		Begin your journey to anxiety management and inner peace by answering questions in our questionnaire.
-		Identify your anxiety, vent to our AI doctor, and connect with local psychologists. Take the first steps toward a calmer, more serene you
-	</div>
-	
-<button class="bg-blue-500 text-white rounded-full focus:outline-none w-45 border-radius-20 ml-36 h-14 w-24 mt-36" on:click={()=>{questionPointer=0}}>
-	Start Quiz
-</button>
-		
-<!--These are the quiz screens with the questions-->
-	{:else if !(questionPointer > answers.length-1)}
-		<div class="quiz-screen p-50 bg-sky flex-wrap w-45 border-radius-20 my-10 bg-blue-400 text-black fixed bottom-0 left-0 w-full flex justify-between items-center w-150 h-10 rounded-10 overflow-hidden">
-			
-			<div class="main p-4 flex justify-between flex-wrap mx-auto rounded-lg mt-12 bg-blue-400 text-black h-56 absolute">		
-					
-				<h2>
-					{questions[questionPointer].question}
-				</h2>
-				<div class="options flex justify-between flex-wrap w-45 border-radius-20 my-10 bg-blue-400 text-black">
-					{#each questions[questionPointer].options as opt,i}
-						<button class="{answers[questionPointer]==i?'selected':''} px-10 py-2 bg-blue-500 text-black rounded-full focus:outline-none w-45 border-radius-20 my-10" on:click={()=>{answers[questionPointer]=i}}>
-							{opt}	
-						</button>
-					{/each}
-				</div>
-				<h1>More information on this topic?</h1>
-			</div>
-<!--this is the footer with back and forward button-->
-			<div class="footer bg-blue-400 fixed bottom-0 left-0 w-full h-16 flex justify-between items-center w-150 rounded-10 overflow-hidden">
-				<div class="progress-bar w-150 bg--400 rounded-10 overflow-hidden h-full bg-purple-200">
-					<div style="width:{questionPointer/questions.length *100}%">
-					</div>
-				</div>
-				<div class="buttons">
-					<button class="px-10 py-2 bg-blue-500 text-white rounded-full focus:outline-none w-45 border-radius-20 my-10" disabled={questionPointer==0} on:click={()=>{questionPointer--}}>
-						&lt;
-					</button>
-					<button class="px-10 py-2 bg-blue-500 text-white rounded-full focus:outline-none w-45 border-radius-20 my-10" on:click={()=>{questionPointer++}}>
-						&gt;
-					</button>
-				</div>
-			</div>
-		</div>
-		<!-- this is the score page -->
+
+<div class="flex flex-col items-center">
+	<img class="w-40 h-100 mt-4" src="/anxietyally.png" alt="Anxiety Ally Logo" />
+</div>
+
+	{#key currentPageNumber}
+		{#if currentPageNumber == 1}
+			<QuestionnaireStartPage bind:currentPageNumber correctAndPossibleAnswersForQuestions={correctAndPossibleAnswersForQuestions} questionAnswerTemplates={questionAnswerTemplatesFromDB} />
+		{:else if currentPageNumber == 2}
+			{#key currentQuestionNumber}
+				<QuestionnaireQuestionsPage
+					bind:currentPageNumber
+					bind:currentQuestionNumber
+					bind:selectedAnswers
+					allQuestions={questionsForQuestionnaireFromDB}
+					correctAndPossibleAnswersForQuestions={correctAndPossibleAnswersForQuestions}
+					questionAnswerTemplates={questionAnswerTemplatesFromDB}
+				/>
+			{/key}
+		{:else if currentPageNumber == 3}
+			<QuestionnaireResultsPage bind:currentPageNumber bind:currentQuestionNumber />
 		{:else}
-		<div class="score-screen bg-blue-400 text-black rounded-lg w-20 mt-10">
-			After completing this test, it seems you might have some symptoms related to:
-		</div>
-	
-		<div class="score-container flex flex-col items-center mt-4">
-			<div class="score bg-blue-500 text-white rounded-full flex items-center justify-center">
-				Social Anxiety with a score of: {getScore()}
-			</div>
-			<button class="bg-blue-500 text-white rounded-full focus:outline-none w-45 border-radius-20 ml-7 h-14 w-24 mt-36" on:click={restartQuiz}>
-				Restart Quiz
-			</button>
-		</div>
-	{/if}
-	
-</div>
-</div>
-<style>
-      .bg-sky {
-      background-image: url("/background-sky.png");
-      background-position: center;
-    }
+			<QuestionnaireStartPage correctAndPossibleAnswersForQuestions={correctAndPossibleAnswersForQuestions} questionAnswerTemplates={questionAnswerTemplatesFromDB} />
+		{/if}
+	{/key}
+	<!-- {#each questionsForQuestionnaireFromDB as question}
+			<p>{question.data.question}</p>
+		{/each} -->
 
-    .app > div {
-		width:100%;
-		height:100%;
-	}
-
-    button.selected{
-        background:aliceblue;
-		color: black;
-    }
-
-    /* .app .quiz-screen .footer > div {
-		margin:0px 10px;
-	} */
-
-</style>

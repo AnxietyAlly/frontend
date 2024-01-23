@@ -11,7 +11,7 @@
 
 <script>
   async function getAllAccounts() {
-    const res = await fetch(`http://localhost:3010/accounts`);
+    const res = await fetch(`https://aa-apigateway-sprint-2-2.onrender.com/accountsApi/accounts`);
     const values = await res.json();
     return values;
   }
