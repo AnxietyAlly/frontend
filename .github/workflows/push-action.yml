@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is merging branches or pushing to main
 on: 
   pull_request:
   push:
-    #branches: [main]
+    branches: [main]
 jobs:
   build:
     runs-on: ubuntu-22.04
